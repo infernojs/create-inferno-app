@@ -952,7 +952,7 @@ When you encounter bugs caused by changing components, you will gain a deeper in
 If you’d like to test components in isolation from the child components they render, we recommend using [`shallow()` rendering API](http://airbnb.io/enzyme/docs/api/shallow.html) from [Enzyme](http://airbnb.io/enzyme/). You can write a smoke test with it too:
 
 ```sh
-npm install --save-dev enzyme Inferno-addons-test-utils
+npm install --save-dev enzyme inferno-test-utils
 ```
 
 ```js
