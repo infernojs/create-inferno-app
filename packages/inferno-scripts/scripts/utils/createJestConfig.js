@@ -42,6 +42,8 @@ module.exports = (resolve, rootDir, isEjecting) => {
     transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
     moduleNameMapper: {
       '^inferno-native$': 'inferno-native-web',
+      '^react$': 'inferno-compat',
+      '^react-dom$': 'inferno-compat',
     },
     moduleFileExtensions: ['web.js', 'js', 'json', 'web.jsx', 'jsx'],
   };
