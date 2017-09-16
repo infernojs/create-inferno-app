@@ -1,5 +1,5 @@
 {
-  "lerna": "2.0.0-rc.5",
+  "lerna": "2.0.0",
   "version": "independent",
   "changelog": {
     "repo": "infernojs/create-inferno-app",

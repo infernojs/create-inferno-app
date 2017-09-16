@@ -9,7 +9,6 @@
 
 import Inferno from 'inferno';
 
-export default () =>
-  <span id="feature-public-url">
-    {process.env.PUBLIC_URL}.
-  </span>;
+export default () => (
+  <span id="feature-public-url">{process.env.PUBLIC_URL}.</span>
+);

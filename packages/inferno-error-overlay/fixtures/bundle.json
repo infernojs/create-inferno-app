@@ -240,7 +240,7 @@
     ]
   },
   {
-    "functionName": "Object.batchedUpdates",
+    "functionName": "batchedUpdates",
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 33900,
     "columnNumber": 26,
@@ -264,7 +264,7 @@
     ]
   },
   {
-    "functionName": "Object.batchedUpdates",
+    "functionName": "batchedUpdates",
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 2181,
     "columnNumber": 27,
@@ -288,7 +288,7 @@
     ]
   },
   {
-    "functionName": "Object._renderNewRootComponent",
+    "functionName": "_renderNewRootComponent",
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 14398,
     "columnNumber": 18,
@@ -312,7 +312,7 @@
     ]
   },
   {
-    "functionName": "Object._renderSubtreeIntoContainer",
+    "functionName": "_renderSubtreeIntoContainer",
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 14479,
     "columnNumber": 32,
@@ -336,7 +336,7 @@
     ]
   },
   {
-    "functionName": "Object.render",
+    "functionName": "render",
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 14500,
     "columnNumber": 23,
@@ -360,7 +360,7 @@
     ]
   },
   {
-    "functionName": "Object.friendlySyntaxErrorLabel",
+    "functionName": null,
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 17287,
     "columnNumber": 20,
@@ -432,11 +432,11 @@
     ]
   },
   {
-    "functionName": "Object.<anonymous>",
+    "functionName": null,
     "fileName": "http://localhost:3000/static/js/bundle.js",
     "lineNumber": 41219,
     "columnNumber": 18,
-    "_originalFunctionName": "Object.<anonymous>",
+    "_originalFunctionName": null,
     "_originalFileName": null,
     "_originalLineNumber": null,
     "_originalColumnNumber": null,

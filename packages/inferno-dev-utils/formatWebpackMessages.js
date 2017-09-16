@@ -98,7 +98,7 @@ function formatMessage(message, isError) {
   // https://github.com/facebookincubator/create-inferno-app/pull/1050
   /* eslint-disable */
   message = message.replace(
-    /^\s*at\s((?!webpack:).)*:\d+:\d+[\s\)]*(\n|$)/gm,
+    /^\s*at\s((?!webpack:).)*:\d+:\d+[\s)]*(\n|$)/gm,
     ''
   ); // at ... ...:x:y
   /* eslint-enable */
@@ -122,11 +122,6 @@ function formatWebpackMessages(json) {
     // This prevents a confusing ESLint parsing error
     // preceding a much more useful Babel syntax error.
     result.errors = result.errors.filter(isLikelyASyntaxError);
-  }
-  // Only keep the first error. Others are often indicative
-  // of the same problem, but confuse the reader with noise.
-  if (result.errors.length > 1) {
-    result.errors.length = 1;
   }
   return result;
 }

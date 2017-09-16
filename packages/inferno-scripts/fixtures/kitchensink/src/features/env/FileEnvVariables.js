@@ -9,7 +9,7 @@
 
 import Inferno from 'inferno';
 
-export default () =>
+export default () => (
   <span>
     <span id="feature-file-env-original-1">
       {process.env.INFERNO_APP_ORIGINAL_1}
@@ -24,4 +24,5 @@ export default () =>
     <span id="feature-file-env-x">
       {process.env.INFERNO_APP_X}
     </span>
-  </span>;
+  </span>
+);

@@ -185,6 +185,7 @@ module.exports = {
       {
         allowShortCircuit: true,
         allowTernary: true,
+        allowTaggedTemplates: true,
       },
     ],
     'no-unused-labels': 'warn',
@@ -285,8 +286,7 @@ module.exports = {
 
     // https://github.com/gajus/eslint-plugin-flowtype
     'flowtype/define-flow-type': 'warn',
-    // TODO: Reenable once https://github.com/gajus/eslint-plugin-flowtype/issues/165 is fixed
-    //'flowtype/require-valid-file-annotation': 'warn',
+    'flowtype/require-valid-file-annotation': 'warn',
     'flowtype/use-flow-type': 'warn',
   },
 };
