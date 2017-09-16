@@ -21,6 +21,7 @@
 var SockJS = require('sockjs-client');
 var stripAnsi = require('strip-ansi');
 var url = require('url');
+var launchEditorEndpoint = require('./launchEditorEndpoint');
 var formatWebpackMessages = require('./formatWebpackMessages');
 var Entities = require('html-entities').AllHtmlEntities;
 var ansiHTML = require('./ansiHTML');
@@ -146,18 +147,28 @@ function showErrorOverlay(message) {
       'This error occurred during the build time and cannot be dismissed.</div>';
   });
 }
+var ErrorOverlay = require('react-error-overlay');
 
-function destroyErrorOverlay() {
-  if (!overlayDiv) {
-    // It is not there in the first place.
-    return;
-  }
+// We need to keep track of if there has been a runtime error.
+// Essentially, we cannot guarantee application state was not corrupted by the
+// runtime error. To prevent confusing behavior, we forcibly reload the entire
+// application. This is handled below when we are notified of a compile (code
+// change).
+// See https://github.com/facebookincubator/create-react-app/issues/3096
+var hadRuntimeError = false;
+ErrorOverlay.startReportingRuntimeErrors({
+  launchEditorEndpoint: launchEditorEndpoint,
+  onError: function() {
+    hadRuntimeError = true;
+  },
+  filename: '/static/js/bundle.js',
+});
 
-  // Clean up and reset internal state.
-  document.body.removeChild(overlayIframe);
-  overlayDiv = null;
-  overlayIframe = null;
-  lastOnOverlayDivReady = null;
+if (module.hot && typeof module.hot.dispose === 'function') {
+  module.hot.dispose(function() {
+    // TODO: why do we need this?
+    ErrorOverlay.stopReportingRuntimeErrors();
+  });
 }
 
 // Connect to WebpackDevServer via a socket.
@@ -207,9 +218,9 @@ function handleSuccess() {
   // Attempt to apply hot updates or reload.
   if (isHotUpdate) {
     tryApplyUpdates(function onHotUpdateSuccess() {
-      // Only destroy it when we're sure it's a hot update.
+      // Only dismiss it when we're sure it's a hot update.
       // Otherwise it would flicker right before the reload.
-      destroyErrorOverlay();
+      ErrorOverlay.dismissBuildError();
     });
   }
 }
@@ -249,9 +260,9 @@ function handleWarnings(warnings) {
       // Only print warnings if we aren't refreshing the page.
       // Otherwise they'll disappear right away anyway.
       printWarnings();
-      // Only destroy it when we're sure it's a hot update.
+      // Only dismiss it when we're sure it's a hot update.
       // Otherwise it would flicker right before the reload.
-      destroyErrorOverlay();
+      ErrorOverlay.dismissBuildError();
     });
   } else {
     // Print initial warnings immediately.
@@ -273,7 +284,7 @@ function handleErrors(errors) {
   });
 
   // Only show the first error.
-  showErrorOverlay(formatted.errors[0]);
+  ErrorOverlay.reportBuildError(formatted.errors[0]);
 
   // Also log them to the console.
   if (typeof console !== 'undefined' && typeof console.error === 'function') {
@@ -344,7 +355,7 @@ function tryApplyUpdates(onHotUpdateSuccess) {
   }
 
   function handleApplyUpdates(err, updatedModules) {
-    if (err || !updatedModules) {
+    if (err || !updatedModules || hadRuntimeError) {
       window.location.reload();
       return;
     }

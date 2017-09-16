@@ -43,6 +43,8 @@ module.exports = {
   // This means they will be the "root" imports that are included in JS bundle.
   // The first two entry points enable "hot" CSS and auto-refreshes for JS.
   entry: [
+    // We ship a few polyfills by default:
+    require.resolve('./polyfills'),
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
     // When you save a file, the client will either apply hot updates (in case
@@ -116,7 +118,7 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc),
+      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
     ],
   },
   module: {
@@ -135,6 +137,7 @@ module.exports = {
           {
             options: {
               formatter: eslintFormatter,
+              eslintPath: require.resolve('eslint'),
               // @remove-on-eject-begin
               baseConfig: {
                 extends: ['inferno-app'],
@@ -190,6 +193,7 @@ module.exports = {
         include: paths.appSrc,
         loader: require.resolve('babel-loader'),
         options: {
+
           // @remove-on-eject-begin
           babelrc: false,
           presets: [require.resolve('babel-preset-inferno-app')],
@@ -228,7 +232,7 @@ module.exports = {
                     '>1%',
                     'last 4 versions',
                     'Firefox ESR',
-                    'not ie < 11',
+                    'not ie < 9', // React doesn't support IE8 anyway
                   ],
                   flexbox: 'no-2009',
                 }),
@@ -237,8 +241,24 @@ module.exports = {
           },
         ],
       },
+      // "file" loader makes sure those assets get served by WebpackDevServer.
+      // When you `import` an asset, you get its (virtual) filename.
+      // In production, they would get copied to the `build` folder.
+      // This loader don't uses a "test" so it will catch all modules
+      // that fall through the other loaders.
+      {
+        // Exclude `js` files to keep "css" loader working as it injects
+        // it's runtime that would otherwise processed through "file" loader.
+        // Also exclude `html` and `json` extensions so they get processed
+        // by webpacks internal loaders.
+        exclude: [/\.js$/, /\.html$/, /\.json$/],
+        loader: require.resolve('file-loader'),
+        options: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      }
       // ** STOP ** Are you adding a new loader?
-      // Remember to add the new extension(s) to the "file" loader exclusion list.
+      // Make sure to add the new loader(s) before the "file" loader.
     ],
   },
   plugins: [
@@ -282,6 +302,7 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+    child_process: 'empty',
   },
   // Turn off performance hints during development because we don't do any
   // splitting or minification in interest of speed. These warnings become
