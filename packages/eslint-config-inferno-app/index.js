@@ -255,6 +255,7 @@ module.exports = {
         ignore: [],
       },
     ],
+    'inferno/jsx-uses-inferno': 'warn',
     'inferno/jsx-uses-vars': 'warn',
     'inferno/no-danger-with-children': 'warn',
     'inferno/no-direct-mutation-state': 'warn',
