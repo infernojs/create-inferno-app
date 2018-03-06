@@ -847,14 +847,14 @@ Note that [you may need to configure your production server to support client-si
 
 Your project can consume variables declared in your environment as if they were declared locally in your JS files. By
 default you will have `NODE_ENV` defined for you, and any other environment variables starting with
-`REACT_APP_`.
+`INFERNO_APP_`.
 
 **The environment variables are embedded during the build time**. Since Create React App produces a static HTML/CSS/JS bundle, it can’t possibly read them at runtime. To read them at runtime, you would need to load HTML into memory on the server and replace placeholders in runtime, just like [described here](#injecting-data-from-the-server-into-the-page). Alternatively you can rebuild the app on the server anytime you change them.
 
->Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid accidentally [exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+>Note: You must create custom environment variables beginning with `INFERNO_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid accidentally [exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
 
 These environment variables will be defined for you on `process.env`. For example, having an environment
-variable named `REACT_APP_SECRET_CODE` will be exposed in your JS as `process.env.REACT_APP_SECRET_CODE`.
+variable named `INFERNO_APP_SECRET_CODE` will be exposed in your JS as `process.env.INFERNO_APP_SECRET_CODE`.
 
 There is also a special built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`. When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
@@ -870,14 +870,14 @@ render() {
     <div>
       <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
       <form>
-        <input type="hidden" defaultValue={process.env.REACT_APP_SECRET_CODE} />
+        <input type="hidden" defaultValue={process.env.INFERNO_APP_SECRET_CODE} />
       </form>
     </div>
   );
 }
 ```
 
-During the build, `process.env.REACT_APP_SECRET_CODE` will be replaced with the current value of the `REACT_APP_SECRET_CODE` environment variable. Remember that the `NODE_ENV` variable will be set for you automatically.
+During the build, `process.env.INFERNO_APP_SECRET_CODE` will be replaced with the current value of the `INFERNO_APP_SECRET_CODE` environment variable. Remember that the `NODE_ENV` variable will be set for you automatically.
 
 When you load the app in the browser and inspect the `<input>`, you will see its value set to `abcdef`, and the bold text will show the environment provided when using `npm start`:
 
@@ -890,7 +890,7 @@ When you load the app in the browser and inspect the `<input>`, you will see its
 </div>
 ```
 
-The above form is looking for a variable called `REACT_APP_SECRET_CODE` from the environment. In order to consume this
+The above form is looking for a variable called `INFERNO_APP_SECRET_CODE` from the environment. In order to consume this
 value, we need to have it defined in the environment. This can be done using two ways: either in your shell or in
 a `.env` file. Both of these ways are described in the next few sections.
 
@@ -908,15 +908,15 @@ When you compile the app with `npm run build`, the minification step will strip 
 
 >Note: this feature is available with `react-scripts@0.9.0` and higher.
 
-You can also access the environment variables starting with `REACT_APP_` in the `public/index.html`. For example:
+You can also access the environment variables starting with `INFERNO_APP_` in the `public/index.html`. For example:
 
 ```html
-<title>%REACT_APP_WEBSITE_NAME%</title>
+<title>%INFERNO_APP_WEBSITE_NAME%</title>
 ```
 
 Note that the caveats from the above section apply:
 
-* Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must start with `REACT_APP_` to work.
+* Apart from a few built-in variables (`NODE_ENV` and `PUBLIC_URL`), variable names must start with `INFERNO_APP_` to work.
 * The environment variables are injected at build time. If you need to inject them at runtime, [follow this approach instead](#generating-dynamic-meta-tags-on-the-server).
 
 ### Adding Temporary Environment Variables In Your Shell
@@ -927,7 +927,7 @@ life of the shell session.
 #### Windows (cmd.exe)
 
 ```cmd
-set "REACT_APP_SECRET_CODE=abcdef" && npm start
+set "INFERNO_APP_SECRET_CODE=abcdef" && npm start
 ```
 
 (Note: Quotes around the variable assignment are required to avoid a trailing whitespace.)
@@ -935,13 +935,13 @@ set "REACT_APP_SECRET_CODE=abcdef" && npm start
 #### Windows (Powershell)
 
 ```Powershell
-($env:REACT_APP_SECRET_CODE = "abcdef") -and (npm start)
+($env:INFERNO_APP_SECRET_CODE = "abcdef") -and (npm start)
 ```
 
 #### Linux, macOS (Bash)
 
 ```bash
-REACT_APP_SECRET_CODE=abcdef npm start
+INFERNO_APP_SECRET_CODE=abcdef npm start
 ```
 
 ### Adding Development Environment Variables In `.env`
@@ -951,9 +951,9 @@ REACT_APP_SECRET_CODE=abcdef npm start
 To define permanent environment variables, create a file called `.env` in the root of your project:
 
 ```
-REACT_APP_SECRET_CODE=abcdef
+INFERNO_APP_SECRET_CODE=abcdef
 ```
->Note: You must create custom environment variables beginning with `REACT_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
+>Note: You must create custom environment variables beginning with `INFERNO_APP_`. Any other variables except `NODE_ENV` will be ignored to avoid [accidentally exposing a private key on the machine that could have the same name](https://github.com/facebookincubator/create-react-app/issues/865#issuecomment-252199527). Changing any environment variables will require you to restart the development server if it is running.
 
 `.env` files **should be** checked into source control (with the exclusion of `.env*.local`).
 
@@ -987,17 +987,17 @@ Expand variables already on your machine for use in your `.env` file (using [dot
 For example, to get the environment variable `npm_package_version`:
 
 ```
-REACT_APP_VERSION=$npm_package_version
+INFERNO_APP_VERSION=$npm_package_version
 # also works:
-# REACT_APP_VERSION=${npm_package_version}
+# INFERNO_APP_VERSION=${npm_package_version}
 ```
 
 Or expand variables local to the current `.env` file:
 
 ```
 DOMAIN=www.example.com
-REACT_APP_FOO=$DOMAIN/foo
-REACT_APP_BAR=$DOMAIN/bar
+INFERNO_APP_FOO=$DOMAIN/foo
+INFERNO_APP_BAR=$DOMAIN/bar
 ```
 
 ## Can I Use Decorators?
