@@ -101,7 +101,7 @@ Builds the app for production to the `build` folder.<br>
 It correctly bundles Inferno in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.<br>
-By default, it also [includes a service worker](https://github.com/facebookincubator/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#making-a-progressive-web-app) so that your app loads from local cache on future visits.
+By default, it also [includes a service worker](https://github.com/infernojs/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#making-a-progressive-web-app) so that your app loads from local cache on future visits.
 
 Your app is ready to be deployed.
 

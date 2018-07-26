@@ -226,17 +226,17 @@ module.exports = {
     'no-restricted-properties': [
       'error',
       // TODO: reenable once import() is no longer slow.
-      // https://github.com/facebookincubator/create-inferno-app/issues/2176
+      // https://github.com/facebookincubator/create-react-app/issues/2176
       // {
       //   object: 'require',
       //   property: 'ensure',
-      //   message: 'Please use import() instead. More info: https://github.com/facebookincubator/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#code-splitting',
+      //   message: 'Please use import() instead. More info: https://github.com/infernojs/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#code-splitting',
       // },
       {
         object: 'System',
         property: 'import',
         message:
-          'Please use import() instead. More info: https://github.com/facebookincubator/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#code-splitting',
+          'Please use import() instead. More info: https://github.com/infernojs/create-inferno-app/blob/master/packages/inferno-scripts/template/README.md#code-splitting',
       },
     ],
 

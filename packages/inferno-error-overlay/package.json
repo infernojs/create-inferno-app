@@ -10,10 +10,10 @@
     "build": "cross-env NODE_ENV=development node build.js",
     "build:prod": "cross-env NODE_ENV=production node build.js"
   },
-  "repository": "facebookincubator/create-inferno-app",
+  "repository": "infernojs/create-inferno-app",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/facebookincubator/create-inferno-app/issues"
+    "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "keywords": [
     "overlay",
