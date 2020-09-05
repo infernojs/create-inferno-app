@@ -64,12 +64,9 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
   .map(folder => path.resolve(appDirectory, folder))
   .join(path.delimiter);
 
-// injected into the application via DefinePlugin in Webpack configuration.
-const INFERNO_APP = /^INFERNO_APP_/i;
 
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
-    .filter(key => INFERNO_APP.test(key))
     .reduce(
       (env, key) => {
         env[key] = process.env[key];
