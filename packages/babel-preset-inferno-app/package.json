@@ -5,7 +5,7 @@
   "repository": "infernojs/create-inferno-app",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/facebook/create-inferno-app/issues"
+    "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "files": [
     "create.js",
