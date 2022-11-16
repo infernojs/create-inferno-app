@@ -109,11 +109,19 @@ function formatMessage(message, isError) {
   return message.trim();
 }
 
+function getMessage(message) {
+  if (typeof message === "string") {
+   return message; // for older versions of webpack 
+  } else if (message instanceof Object) {
+    return message.message; // for webpack 5.x 
+  }
+}
+
 function formatWebpackMessages(json) {
-  const formattedErrors = json.errors.map(function(message) {
+  const formattedErrors = json.errors.map(getMessage).map(function(message) {
     return formatMessage(message, true);
   });
-  const formattedWarnings = json.warnings.map(function(message) {
+  const formattedWarnings = json.warnings.map(getMessage).map(function(message) {
     return formatMessage(message, false);
   });
   const result = { errors: formattedErrors, warnings: formattedWarnings };
