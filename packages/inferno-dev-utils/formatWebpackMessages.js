@@ -112,7 +112,7 @@ function formatMessage(message, isError) {
 function getMessage(message) {
   if (typeof message === "string") {
    return message; // for older versions of webpack 
-  } else if (message instanceof Object) {
+  } else if (typeof message === "object") {
     return message.message; // for webpack 5.x 
   }
 }
