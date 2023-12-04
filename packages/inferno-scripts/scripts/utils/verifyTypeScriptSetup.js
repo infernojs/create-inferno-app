@@ -8,15 +8,15 @@
 
 'use strict';
 
-const chalk = require('react-dev-utils/chalk');
+const chalk = require('inferno-dev-utils/chalk');
 const fs = require('fs');
 const resolve = require('resolve');
 const path = require('path');
 const paths = require('../../config/paths');
 const os = require('os');
 const semver = require('semver');
-const immer = require('react-dev-utils/immer').produce;
-const globby = require('react-dev-utils/globby').sync;
+const immer = require('inferno-dev-utils/immer').produce;
+const globby = require('inferno-dev-utils/globby').sync;
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {

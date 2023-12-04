@@ -11,7 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const paths = require('./paths');
-const chalk = require('react-dev-utils/chalk');
+const chalk = require('inferno-dev-utils/chalk');
 const resolve = require('resolve');
 
 /**

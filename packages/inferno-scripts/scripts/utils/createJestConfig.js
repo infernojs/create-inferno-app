@@ -8,7 +8,7 @@
 'use strict';
 
 const fs = require('fs');
-const chalk = require('react-dev-utils/chalk');
+const chalk = require('inferno-dev-utils/chalk');
 const paths = require('../../config/paths');
 const modules = require('../../config/modules');
 

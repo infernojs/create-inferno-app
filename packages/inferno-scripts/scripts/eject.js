@@ -18,10 +18,10 @@ const fs = require('fs-extra');
 const path = require('path');
 const prompts = require('prompts');
 const execSync = require('child_process').execSync;
-const chalk = require('react-dev-utils/chalk');
+const chalk = require('inferno-dev-utils/chalk');
 const paths = require('../config/paths');
 const createJestConfig = require('./utils/createJestConfig');
-const spawnSync = require('react-dev-utils/crossSpawn').sync;
+const spawnSync = require('inferno-dev-utils/crossSpawn').sync;
 const os = require('os');
 
 const green = chalk.green;
