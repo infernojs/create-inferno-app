@@ -19,7 +19,7 @@
   },
   "files": [
     "index.js",
-    "createReactApp.js"
+    "createInfernoApp.js"
   ],
   "bin": {
     "create-inferno-app": "./index.js"

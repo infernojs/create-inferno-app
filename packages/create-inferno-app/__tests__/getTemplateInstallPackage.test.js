@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { getTemplateInstallPackage } = require('../createReactApp');
+const { getTemplateInstallPackage } = require('../createInfernoApp');
 
 describe('getTemplateInstallPackage', () => {
   it('no options gives cra-inferno-template', async () => {

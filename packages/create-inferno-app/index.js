@@ -51,6 +51,6 @@ if (major < 18) {
   process.exit(1);
 }
 
-const { init } = require('./createReactApp');
+const { init } = require('./createInfernoApp');
 
 init();
