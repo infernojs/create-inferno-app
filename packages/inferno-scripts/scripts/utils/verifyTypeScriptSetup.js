@@ -14,22 +14,8 @@ const resolve = require('resolve');
 const path = require('path');
 const paths = require('../../config/paths');
 const os = require('os');
-const semver = require('semver');
 const immer = require('inferno-dev-utils/immer').produce;
 const globby = require('inferno-dev-utils/globby').sync;
-
-const hasJsxRuntime = (() => {
-  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
-    return false;
-  }
-
-  try {
-    require.resolve('react/jsx-runtime', { paths: [paths.appPath] });
-    return true;
-  } catch (e) {
-    return false;
-  }
-})();
 
 function writeJson(fileName, object) {
   fs.writeFileSync(

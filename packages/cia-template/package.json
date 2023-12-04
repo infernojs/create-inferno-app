@@ -10,7 +10,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/infernojs/create-inferno-app.git",
-    "directory": "packages/cra-inferno-template"
+    "directory": "packages/cia-template"
   },
   "license": "MIT",
   "engines": {

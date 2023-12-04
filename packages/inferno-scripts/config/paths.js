@@ -107,7 +107,7 @@ module.exports = {
   ownPath: resolveOwn('.'),
   ownNodeModules: resolveOwn('node_modules'), // This is empty on npm 3
   appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
-  ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
+  ownTypeDeclarations: resolveOwn('lib/inferno-app.d.ts'),
 };
 
 const ownPackageJson = require('../package.json');
@@ -121,7 +121,7 @@ if (
   !infernoScriptsLinked &&
   __dirname.indexOf(path.join('packages', 'inferno-scripts', 'config')) !== -1
 ) {
-  const templatePath = '../cra-inferno-template/template';
+  const templatePath = '../cia-template/template';
   module.exports = {
     dotenv: resolveOwn(`${templatePath}/.env`),
     appPath: resolveApp('.'),
@@ -145,7 +145,7 @@ if (
     ownPath: resolveOwn('.'),
     ownNodeModules: resolveOwn('node_modules'),
     appTypeDeclarations: resolveOwn(`${templatePath}/src/react-app-env.d.ts`),
-    ownTypeDeclarations: resolveOwn('lib/react-app.d.ts'),
+    ownTypeDeclarations: resolveOwn('lib/inferno-app.d.ts'),
   };
 }
 // @remove-on-eject-end

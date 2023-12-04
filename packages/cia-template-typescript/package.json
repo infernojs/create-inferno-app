@@ -11,7 +11,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/infernojs/create-inferno-app.git",
-    "directory": "packages/cra-inferno-template-typescript"
+    "directory": "packages/cia-template-typescript"
   },
   "license": "MIT",
   "engines": {

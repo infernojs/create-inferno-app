@@ -19,16 +19,13 @@
     {
       "files": [
         "docusaurus/website/src/**/*.js",
-        "packages/cra-inferno-template/**/*.js",
+        "packages/cia-template/**/*.js",
         "packages/inferno-error-overlay/**/*.js",
         "packages/inferno-scripts/fixtures/kitchensink/template/{src,integration}/**/*.js",
         "test/fixtures/*/src/*.js"
       ],
       "excludedFiles": ["packages/inferno-error-overlay/*.js"],
-      "extends": [
-        "eslint:recommended",
-        "plugin:inferno/recommended"
-      ]
+      "extends": ["eslint:recommended", "plugin:inferno/recommended"]
     },
     {
       "files": [

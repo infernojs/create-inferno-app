@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-inferno-app",
-  "version": "7.0.1",
+  "version": "8.0.1",
   "description": "ESLint configuration used by Create Inferno App",
   "repository": {
     "type": "git",
@@ -20,19 +20,19 @@
     "eslint": "^8.0.0"
   },
   "dependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/eslint-parser": "^7.16.3",
-    "@rushstack/eslint-patch": "^1.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.5.0",
-    "@typescript-eslint/parser": "^5.5.0",
+    "@babel/core": "^7.23.5",
+    "@babel/eslint-parser": "^7.23.3",
+    "@rushstack/eslint-patch": "^1.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
     "babel-preset-inferno-app": "^10.0.1",
     "confusing-browser-globals": "^1.0.11",
     "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jest": "^25.3.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-inferno": "^7.27.1",
-    "eslint-plugin-testing-library": "^5.0.1"
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jest": "^25.7.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-inferno": "^7.33.2",
+    "eslint-plugin-testing-library": "^5.11.1"
   },
   "engines": {
     "node": ">=14.0.0"

@@ -112,7 +112,7 @@ function init() {
       console.log(`    A custom ${chalk.cyan('--template')} can be one of:`);
       console.log(
         `      - a custom template published on npm: ${chalk.green(
-          'cra-inferno-template-typescript'
+          'cia-template-typescript'
         )}`
       );
       console.log(
@@ -198,7 +198,9 @@ function init() {
   checkForLatestVersion()
     .catch(() => {
       try {
-        return execSync('npm view create-inferno-app version').toString().trim();
+        return execSync('npm view create-inferno-app version')
+          .toString()
+          .trim();
       } catch (e) {
         return null;
       }
@@ -445,7 +447,9 @@ function run(
         }
 
         console.log(
-          `Installing ${chalk.cyan('inferno')} and ${chalk.cyan(packageInfo.name)}${
+          `Installing ${chalk.cyan('inferno')} and ${chalk.cyan(
+            packageInfo.name
+          )}${
             supportsTemplates ? ` with ${chalk.cyan(templateInfo.name)}` : ''
           }...`
         );
@@ -588,7 +592,7 @@ function getInstallPackage(version, originalDirectory) {
 }
 
 function getTemplateInstallPackage(template, originalDirectory) {
-  let templateToInstall = 'cra-inferno-template';
+  let templateToInstall = 'cia-template';
   if (template) {
     if (template.match(/^file:/)) {
       templateToInstall = `file:${path.resolve(
@@ -602,7 +606,7 @@ function getTemplateInstallPackage(template, originalDirectory) {
       // for tar.gz or alternative paths
       templateToInstall = template;
     } else {
-      // Add prefix 'cra-inferno-template-' to non-prefixed templates, leaving any
+      // Add prefix 'cia-template-' to non-prefixed templates, leaving any
       // @scope/ and @version intact.
       const packageMatch = template.match(/^(@[^/]+\/)?([^@]+)?(@.+)?$/);
       const scope = packageMatch[1] || '';
@@ -614,16 +618,16 @@ function getTemplateInstallPackage(template, originalDirectory) {
         templateName.startsWith(`${templateToInstall}-`)
       ) {
         // Covers:
-        // - cra-inferno-template
-        // - @SCOPE/cra-inferno-template
-        // - cra-inferno-template-NAME
-        // - @SCOPE/cra-inferno-template-NAME
+        // - cia-template
+        // - @SCOPE/cia-template
+        // - cia-template-NAME
+        // - @SCOPE/cia-template-NAME
         templateToInstall = `${scope}${templateName}${version}`;
       } else if (version && !scope && !templateName) {
         // Covers using @SCOPE only
         templateToInstall = `${version}/${templateToInstall}`;
       } else {
-        // Covers templates without the `cra-inferno-template` prefix:
+        // Covers templates without the `cia-template` prefix:
         // - NAME
         // - @SCOPE/NAME
         templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;

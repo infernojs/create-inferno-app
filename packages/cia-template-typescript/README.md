@@ -1,4 +1,4 @@
-# cra-inferno-template-typescript
+# cia-template-typescript
 
 This is the official TypeScript template for [Create Inferno App](https://github.com/infernojs/create-inferno-app).
 

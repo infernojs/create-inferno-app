@@ -68,19 +68,6 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const hasJsxRuntime = (() => {
-  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
-    return false;
-  }
-
-  try {
-    require.resolve('react/jsx-runtime');
-    return true;
-  } catch (e) {
-    return false;
-  }
-})();
-
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
@@ -312,9 +299,7 @@ module.exports = function (webpackEnv) {
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
         // please link the files into your node_modules/ and let module-resolution kick in.
         // Make sure your source files are compiled, as they will not be processed in any way.
-        new ModuleScopePlugin(paths.appSrc, [
-          paths.appPackageJson
-        ]),
+        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
       ],
     },
     module: {
@@ -392,14 +377,7 @@ module.exports = function (webpackEnv) {
                 customize: require.resolve(
                   'babel-preset-inferno-app/webpack-overrides'
                 ),
-                presets: [
-                  [
-                    require.resolve('babel-preset-inferno-app'),
-                    {
-                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
-                    },
-                  ],
-                ],
+                presets: [[require.resolve('babel-preset-inferno-app')]],
                 // @remove-on-eject-begin
                 babelrc: false,
                 configFile: false,
@@ -668,7 +646,7 @@ module.exports = function (webpackEnv) {
           exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
           // Bump up the default maximum size (2mb) that's precached,
           // to make lazy-loading failure scenarios less likely.
-          // See https://github.com/cra-inferno-template/pwa/issues/13#issuecomment-722667270
+          // See https://github.com/cia-template/pwa/issues/13#issuecomment-722667270
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
         }),
       // TypeScript type checking
@@ -702,7 +680,7 @@ module.exports = function (webpackEnv) {
           issue: {
             // This one is specifically to match during CI tests,
             // as micromatch doesn't match
-            // '../cra-inferno-template-typescript/template/src/App.tsx'
+            // '../cia-template-typescript/template/src/App.tsx'
             // otherwise.
             include: [
               { file: '../**/src/**/*.{ts,tsx}' },
@@ -737,11 +715,7 @@ module.exports = function (webpackEnv) {
           resolvePluginsRelativeTo: __dirname,
           baseConfig: {
             extends: [require.resolve('eslint-config-inferno-app/base')],
-            rules: {
-              ...(!hasJsxRuntime && {
-                'react/react-in-jsx-scope': 'error',
-              }),
-            },
+            rules: {},
           },
         }),
     ].filter(Boolean),

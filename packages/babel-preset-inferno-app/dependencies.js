@@ -61,11 +61,6 @@ module.exports = function (api, opts) {
   }
 
   return {
-    // Babel assumes ES Modules, which isn't safe until CommonJS
-    // dies. This changes the behavior to assume CommonJS unless
-    // an `import` or `export` is present in the file.
-    // https://github.com/webpack/webpack/issues/4039#issuecomment-419284940
-    sourceType: 'unambiguous',
     presets: [
       isEnvTest && [
         // ES features necessary for user's Node version
@@ -93,6 +88,7 @@ module.exports = function (api, opts) {
       ],
     ].filter(Boolean),
     plugins: [
+      [require('babel-plugin-inferno'), { imports: true }],
       // Disabled as it's handled automatically by preset-env, and `selectiveLoose` isn't
       // yet merged into babel: https://github.com/babel/babel/pull/9486
       // Related: https://github.com/facebook/create-react-app/pull/8215
