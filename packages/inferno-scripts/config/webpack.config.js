@@ -390,11 +390,11 @@ module.exports = function (webpackEnv) {
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
-                  'babel-preset-react-app/webpack-overrides'
+                  'babel-preset-inferno-app/webpack-overrides'
                 ),
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app'),
+                    require.resolve('babel-preset-inferno-app'),
                     {
                       runtime: hasJsxRuntime ? 'automatic' : 'classic',
                     },
@@ -407,13 +407,13 @@ module.exports = function (webpackEnv) {
                 // side of caution.
                 // We remove this when the user ejects because the default
                 // is sane and uses Babel options. Instead of options, we use
-                // the inferno-scripts and babel-preset-react-app versions.
+                // the inferno-scripts and babel-preset-inferno-app versions.
                 cacheIdentifier: getCacheIdentifier(
                   isEnvProduction
                     ? 'production'
                     : isEnvDevelopment && 'development',
                   [
-                    'babel-preset-react-app',
+                    'babel-preset-inferno-app',
                     'inferno-dev-utils',
                     'inferno-scripts',
                   ]
@@ -439,7 +439,7 @@ module.exports = function (webpackEnv) {
                 compact: false,
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app/dependencies'),
+                    require.resolve('babel-preset-inferno-app/dependencies'),
                     { helpers: true },
                   ],
                 ],
@@ -452,7 +452,7 @@ module.exports = function (webpackEnv) {
                     ? 'production'
                     : isEnvDevelopment && 'development',
                   [
-                    'babel-preset-react-app',
+                    'babel-preset-inferno-app',
                     'inferno-dev-utils',
                     'inferno-scripts',
                   ]
