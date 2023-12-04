@@ -21,7 +21,7 @@ source local-registry.sh
 
 function cleanup {
   echo 'Cleaning up.'  
-  ps -ef | grep 'react-scripts' | grep -v grep | awk '{print $2}' | xargs kill -9
+  ps -ef | grep 'inferno-scripts' | grep -v grep | awk '{print $2}' | xargs kill -9
   cd "$root_path"
   # Restore the original NPM and Yarn registry URLs and stop Verdaccio
   stopLocalRegistry

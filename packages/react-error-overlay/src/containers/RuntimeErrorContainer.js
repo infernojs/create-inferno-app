@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import React, { PureComponent } from 'react';
+import { Component } from 'inferno';
 import ErrorOverlay from '../components/ErrorOverlay';
 import CloseButton from '../components/CloseButton';
 import NavigationBar from '../components/NavigationBar';
@@ -26,7 +26,7 @@ type State = {|
   currentIndex: number,
 |};
 
-class RuntimeErrorContainer extends PureComponent<Props, State> {
+class RuntimeErrorContainer extends Component<Props, State> {
   state = {
     currentIndex: 0,
   };

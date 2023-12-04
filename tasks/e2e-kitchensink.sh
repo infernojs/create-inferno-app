@@ -23,7 +23,7 @@ source local-registry.sh
 function cleanup {
   echo 'Cleaning up.'
   unset BROWSERSLIST
-  ps -ef | grep 'react-scripts' | grep -v grep | awk '{print $2}' | xargs kill -9
+  ps -ef | grep 'inferno-scripts' | grep -v grep | awk '{print $2}' | xargs kill -9
   cd "$root_path"
   # TODO: fix "Device or resource busy" and remove ``|| $CI`
   rm -rf "$temp_app_path" "$temp_module_path" || $CI
@@ -85,14 +85,14 @@ publishToLocalRegistry
 
 # Install the app in a temporary location
 cd $temp_app_path
-npx create-react-app test-kitchensink --template=file:"$root_path"/packages/react-scripts/fixtures/kitchensink
+npx create-inferno-app test-kitchensink --template=file:"$root_path"/packages/inferno-scripts/fixtures/kitchensink
 
 # Install the test module
 cd "$temp_module_path"
 npm install test-integrity@^2.0.1
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on react-scripts,
+# Now that we used create-inferno-app to create an app depending on inferno-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 
@@ -103,7 +103,7 @@ cd "$temp_app_path/test-kitchensink"
 export BROWSERSLIST='ie 9'
 
 # Test the build
-REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
+INFERNO_APP_SHELL_ENV_MESSAGE=fromtheshell \
   PUBLIC_URL=http://www.example.org/spa/ \
   npm run build
 
@@ -113,7 +113,7 @@ exists build/static/js/main.*.js
 
 # Unit tests
 # https://facebook.github.io/jest/docs/en/troubleshooting.html#tests-are-extremely-slow-on-docker-and-or-continuous-integration-ci-server
-REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
+INFERNO_APP_SHELL_ENV_MESSAGE=fromtheshell \
   CI=true \
   NODE_ENV=test \
   npm test --no-cache --runInBand --testPathPattern=src
@@ -121,14 +121,14 @@ REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
 # Prepare "development" environment
 tmp_server_log=`mktemp`
 PORT=3001 \
-  REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
+  INFERNO_APP_SHELL_ENV_MESSAGE=fromtheshell \
   NODE_PATH=src \
   nohup npm start &>$tmp_server_log &
 grep -q 'You can now view' <(tail -f $tmp_server_log)
 
 # Test "development" environment
 E2E_URL="http://localhost:3001" \
-  REACT_APP_SHELL_ENV_MESSAGE=fromtheshell \
+  INFERNO_APP_SHELL_ENV_MESSAGE=fromtheshell \
   CI=true NODE_PATH=src \
   NODE_ENV=development \
   BABEL_ENV=test \

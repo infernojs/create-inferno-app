@@ -26,7 +26,7 @@ const restrictedGlobals = require('confusing-browser-globals');
 module.exports = {
   extends: [require.resolve('./base')],
 
-  plugins: ['import', 'flowtype', 'jsx-a11y', 'react-hooks'],
+  plugins: ['import', 'jsx-a11y', 'inferno'],
 
   overrides: [
     {
@@ -202,7 +202,6 @@ module.exports = {
     ],
     'no-with': 'warn',
     'no-whitespace-before-property': 'warn',
-    'react-hooks/exhaustive-deps': 'warn',
     'require-yield': 'warn',
     'rest-spread-spacing': ['warn', 'never'],
     strict: ['warn', 'never'],
@@ -215,13 +214,13 @@ module.exports = {
         object: 'require',
         property: 'ensure',
         message:
-          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
+          'Please use import() instead.',
       },
       {
         object: 'System',
         property: 'import',
         message:
-          'Please use import() instead. More info: https://facebook.github.io/create-react-app/docs/code-splitting',
+          'Please use import() instead.',
       },
     ],
     'getter-return': 'warn',
@@ -231,30 +230,6 @@ module.exports = {
     'import/no-amd': 'error',
     'import/no-anonymous-default-export': 'warn',
     'import/no-webpack-loader-syntax': 'error',
-
-    // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
-    'react/forbid-foreign-prop-types': ['warn', { allowInPropTypes: true }],
-    'react/jsx-no-comment-textnodes': 'warn',
-    'react/jsx-no-duplicate-props': 'warn',
-    'react/jsx-no-target-blank': 'warn',
-    'react/jsx-no-undef': 'error',
-    'react/jsx-pascal-case': [
-      'warn',
-      {
-        allowAllCaps: true,
-        ignore: [],
-      },
-    ],
-    'react/no-danger-with-children': 'warn',
-    // Disabled because of undesirable warnings
-    // See https://github.com/facebook/create-react-app/issues/5204 for
-    // blockers until its re-enabled
-    // 'react/no-deprecated': 'warn',
-    'react/no-direct-mutation-state': 'warn',
-    'react/no-is-mounted': 'warn',
-    'react/no-typos': 'error',
-    'react/require-render-return': 'error',
-    'react/style-prop-object': 'warn',
 
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
     'jsx-a11y/alt-text': 'warn',
@@ -279,9 +254,6 @@ module.exports = {
     'jsx-a11y/role-has-required-aria-props': 'warn',
     'jsx-a11y/role-supports-aria-props': 'warn',
     'jsx-a11y/scope': 'warn',
-
-    // https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
-    'react-hooks/rules-of-hooks': 'error',
 
     // https://github.com/gajus/eslint-plugin-flowtype
     'flowtype/define-flow-type': 'warn',

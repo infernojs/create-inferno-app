@@ -1,6 +1,6 @@
-# `react-error-overlay`
+# `inferno-error-overlay`
 
-`react-error-overlay` is an overlay which displays when there is a runtime error.
+`inferno-error-overlay` is an overlay which displays when there is a runtime error.
 
 ## Development
 

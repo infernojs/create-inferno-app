@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import React, { Component } from 'react';
+import { Component } from 'inferno';
 import StackFrame from './StackFrame';
 import Collapsible from '../components/Collapsible';
 import { isInternalFile } from '../utils/isInternalFile';
@@ -16,9 +16,9 @@ import type { StackFrame as StackFrameType } from '../utils/stack-frame';
 import type { ErrorLocation } from '../utils/parseCompileError';
 
 const traceStyle = {
-  fontSize: '1em',
+  'font-size': '1em',
   flex: '0 1 auto',
-  minHeight: '0px',
+  'min-height': '0px',
   overflow: 'auto',
 };
 
@@ -37,7 +37,8 @@ class StackTrace extends Component<Props> {
       currentBundle = [],
       bundleCount = 0;
 
-    stackFrames.forEach((frame, index) => {
+    for (let index = 0; index < stackFrames.length; index++){
+      const frame = stackFrames[index];
       const { fileName, _originalFileName: sourceFileName } = frame;
       const isInternalUrl = isInternalFile(sourceFileName, fileName);
       const isThrownIntentionally = !isBultinErrorName(errorName);
@@ -81,7 +82,7 @@ class StackTrace extends Component<Props> {
       if (!shouldCollapse) {
         renderedFrames.push(frameEle);
       }
-    });
+    }
 
     return renderedFrames;
   }

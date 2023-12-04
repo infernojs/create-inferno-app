@@ -2,8 +2,8 @@ build/
 package-lock.json
 test/fixtures/webpack-message-formatting/src/AppBabel.js
 test/fixtures/webpack-message-formatting/src/AppCss.css
-packages/react-error-overlay/fixtures/bundle*
-packages/react-error-overlay/fixtures/inline*
-packages/react-error-overlay/fixtures/junk*
-packages/react-error-overlay/lib/
-packages/react-error-overlay/coverage/
+packages/inferno-error-overlay/fixtures/bundle*
+packages/inferno-error-overlay/fixtures/inline*
+packages/inferno-error-overlay/fixtures/junk*
+packages/inferno-error-overlay/lib/
+packages/inferno-error-overlay/coverage/

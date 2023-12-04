@@ -20,7 +20,7 @@ var stripAnsi = require('strip-ansi');
 var url = require('url');
 var launchEditorEndpoint = require('./launchEditorEndpoint');
 var formatWebpackMessages = require('./formatWebpackMessages');
-var ErrorOverlay = require('react-error-overlay');
+var ErrorOverlay = require('inferno-error-overlay');
 
 ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {
   // Keep this sync with errorOverlayMiddleware.js
@@ -232,14 +232,14 @@ function canApplyUpdates() {
 
 function canAcceptErrors() {
   // NOTE: This var is injected by Webpack's DefinePlugin, and is a boolean instead of string.
-  const hasReactRefresh = process.env.FAST_REFRESH;
+  const hasRefresh = process.env.FAST_REFRESH;
 
   const status = module.hot.status();
-  // React refresh can handle hot-reloading over errors.
+  // Inferno refresh can handle hot-reloading over errors.
   // However, when hot-reload status is abort or fail,
   // it indicates the current update cannot be applied safely,
   // and thus we should bail out to a forced reload for consistency.
-  return hasReactRefresh && ['abort', 'fail'].indexOf(status) === -1;
+  return hasRefresh && ['abort', 'fail'].indexOf(status) === -1;
 }
 
 // Attempt to update code on the fly, fall back to a hard reload.

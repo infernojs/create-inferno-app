@@ -6,73 +6,82 @@
  */
 
 /* @flow */
-import React, { useContext, useEffect } from 'react';
-import { ThemeContext } from '../iframeScript';
-
-import type { Node as ReactNode } from 'react';
-import type { Theme } from '../styles';
+import {Component, createRef} from 'inferno';
+import type {InfernoNode} from 'inferno';
+import type {Theme} from '../styles';
 
 const overlayStyle = (theme: Theme) => ({
-  position: 'relative',
-  display: 'inline-flex',
-  flexDirection: 'column',
-  height: '100%',
-  width: '1024px',
-  maxWidth: '100%',
-  overflowX: 'hidden',
-  overflowY: 'auto',
-  padding: '0.5rem',
-  boxSizing: 'border-box',
-  textAlign: 'left',
-  fontFamily: 'Consolas, Menlo, monospace',
-  fontSize: '11px',
-  whiteSpace: 'pre-wrap',
-  wordBreak: 'break-word',
-  lineHeight: 1.5,
-  color: theme.color,
+    position: 'relative',
+    display: 'inline-flex',
+    'flex-direction': 'column',
+    height: '100%',
+    width: '1024px',
+    'max-width': '100%',
+    'overflow-x': 'hidden',
+    'overflow-y': 'auto',
+    padding: '0.5rem',
+    'box-sizing': 'border-box',
+    'text-align': 'left',
+    'font-family': 'Consolas, Menlo, monospace',
+    'font-size': '11px',
+    'white-space': 'pre-wrap',
+    'word-break': 'break-word',
+    'line-height': 1.5,
+    color: theme.color,
 });
 
 type ErrorOverlayPropsType = {|
-  children: ReactNode,
-  shortcutHandler?: (eventKey: string) => void,
+    children: InfernoNode,
+    shortcutHandler?: (eventKey: string) => void,
 |};
 
-let iframeWindow: window = null;
+class ErrorOverlay extends Component<ErrorOverlayPropsType> {
+    constructor(props) {
+        super(props);
+        this.iframeWindowRef = createRef()
 
-function ErrorOverlay(props: ErrorOverlayPropsType) {
-  const theme = useContext(ThemeContext);
-
-  const getIframeWindow = (element: ?HTMLDivElement) => {
-    if (element) {
-      const document = element.ownerDocument;
-      iframeWindow = document.defaultView;
+        this.onKeyDown = this.onKeyDown.bind(this);
     }
-  };
-  const { shortcutHandler } = props;
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (shortcutHandler) {
-        shortcutHandler(e.key);
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    if (iframeWindow) {
-      iframeWindow.addEventListener('keydown', onKeyDown);
+    get iframeWindow() {
+        return this.iframeWindowRef.ref.current
     }
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      if (iframeWindow) {
-        iframeWindow.removeEventListener('keydown', onKeyDown);
-      }
-    };
-  }, [shortcutHandler]);
 
-  return (
-    <div style={overlayStyle(theme)} ref={getIframeWindow}>
-      {props.children}
-    </div>
-  );
+    onKeyDown(ev) {
+        if (this.props.shortcutHandler) {
+            this.props.shortcutHandler(ev.key);
+        }
+    }
+
+    componentDidUpdate() {
+        this.updateEventListener(this.props.shortcutHandler);
+    }
+
+    componentWillUnmount() {
+        this.updateEventListener(null);
+    }
+
+    updateEventListener(eventListener) {
+        if (eventListener) {
+            window.addEventListener('keydown', this.onKeyDown);
+            if (this.iframeWindow) {
+                this.iframeWindow.addEventListener('keydown', this.onKeyDown);
+            }
+        } else {
+            window.removeEventListener('keydown', this.onKeyDown);
+            if (this.iframeWindow) {
+                this.iframeWindow.removeEventListener('keydown', this.onKeyDown);
+            }
+        }
+    }
+
+    render() {
+        return (
+            <div style={overlayStyle(this.context.theme)} ref={this.iframeWindowRef}>
+                {this.props.children}
+            </div>
+        );
+    }
 }
 
 export default ErrorOverlay;

@@ -5,15 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component, createElement } from 'react';
-import PropTypes from 'prop-types';
+import { Component, createComponentVNode } from 'inferno';
 
 class BuiltEmitter extends Component {
-  static propTypes = {
-    error: PropTypes.string,
-    feature: PropTypes.func,
-  };
-
   componentDidMount() {
     const { error, feature } = this.props;
 
@@ -30,11 +24,11 @@ class BuiltEmitter extends Component {
   }
 
   handleError(error) {
-    document.dispatchEvent(new Event('ReactFeatureError'));
+    document.dispatchEvent(new Event('InfernoFeatureError'));
   }
 
   handleReady() {
-    document.dispatchEvent(new Event('ReactFeatureDidMount'));
+    document.dispatchEvent(new Event('InfernoFeatureDidMount'));
   }
 
   render() {
@@ -44,10 +38,13 @@ class BuiltEmitter extends Component {
     } = this;
     return (
       <div>
-        {feature &&
-          createElement(feature, {
+        {feature && createComponentVNode(
+          VNodeFlags.ComponentUnknown,
+          feature,
+          {
             onReady: handleReady,
-          })}
+          })
+        }
       </div>
     );
   }

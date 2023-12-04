@@ -73,15 +73,15 @@ case ${test_suite} in
 esac
 
 read -r -d '' apply_changes <<- CMD
-cd /var/create-react-app
-git config --global user.name "Create React App"
+cd /var/create-inferno-app
+git config --global user.name "Create Inferno App"
 git config --global user.email "cra@email.com"
 git stash save -u
 git stash show -p > patch
 git diff 4b825dc642cb6eb9a060e54bf8d69288fbee4904 stash^3 >> patch
 git stash pop
 cd -
-mv /var/create-react-app/patch .
+mv /var/create-inferno-app/patch .
 git apply patch
 rm patch
 git add -A
@@ -96,8 +96,8 @@ read -r -d '' command <<- CMD
 npm install npm@8 -g
 export PATH=\$(npm config get prefix -g)/bin:\$PATH
 set -x
-git clone /var/create-react-app create-react-app --branch ${git_branch}
-cd create-react-app
+git clone /var/create-inferno-app create-inferno-app --branch ${git_branch}
+cd create-inferno-app
 ${apply_changes}
 node --version
 npm --version
@@ -121,7 +121,7 @@ docker run \
   --tty \
   --rm \
   --user node \
-  --volume ${PWD}/..:/var/create-react-app \
+  --volume ${PWD}/..:/var/create-inferno-app \
   --workdir /home/node \
   $([[ ${interactive} == 'true' ]] && echo '--interactive') \
   node:${node_version} \

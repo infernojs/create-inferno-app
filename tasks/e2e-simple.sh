@@ -23,7 +23,7 @@ function cleanup {
   echo 'Cleaning up.'
   cd "$root_path"
   # Uncomment when snapshot testing is enabled by default:
-  # rm ./packages/react-scripts/template/src/__snapshots__/App.test.js.snap
+  # rm ./packages/inferno-scripts/template/src/__snapshots__/App.test.js.snap
   rm -rf "$temp_app_path"
   # Restore the original NPM and Yarn registry URLs and stop Verdaccio
   stopLocalRegistry
@@ -64,10 +64,10 @@ cd ..
 root_path=$PWD
 
 # Make sure we don't introduce accidental references to PATENTS.
-EXPECTED='packages/react-error-overlay/fixtures/bundle.mjs
-packages/react-error-overlay/fixtures/bundle.mjs.map
-packages/react-error-overlay/fixtures/bundle_u.mjs
-packages/react-error-overlay/fixtures/bundle_u.mjs.map
+EXPECTED='packages/inferno-error-overlay/fixtures/bundle.mjs
+packages/inferno-error-overlay/fixtures/bundle.mjs.map
+packages/inferno-error-overlay/fixtures/bundle_u.mjs
+packages/inferno-error-overlay/fixtures/bundle_u.mjs.map
 tasks/e2e-simple.sh'
 ACTUAL=$(git grep -l PATENTS)
 if [ "$EXPECTED" != "$ACTUAL" ]; then
@@ -79,20 +79,20 @@ fi
 # Start the local NPM registry
 startLocalRegistry "$root_path"/tasks/verdaccio.yaml
 
-npm test -w react-error-overlay
+npm test -w inferno-error-overlay
 if [ "$AGENT_OS" != 'Windows_NT' ]; then
   # Flow started hanging on Windows build agents
-  npm run flow -w react-error-overlay
+  npm run flow -w inferno-error-overlay
 fi
 
-npm test -w react-dev-utils
+npm test -w inferno-dev-utils
 
 npm test -w babel-plugin-named-asset-import
 
 npm test -w confusing-browser-globals
 
 # ******************************************************************************
-# First, test the create-react-app development environment.
+# First, test the create-inferno-app development environment.
 # This does not affect our users but makes sure we can develop it.
 # ******************************************************************************
 
@@ -117,17 +117,17 @@ npm start -- --smoke-test
 publishToLocalRegistry
 
 # ******************************************************************************
-# Install react-scripts prerelease via create-react-app prerelease.
+# Install inferno-scripts prerelease via create-inferno-app prerelease.
 # ******************************************************************************
 
 # Install the app in a temporary location
 cd $temp_app_path
-npx create-react-app test-app
+npx create-inferno-app test-app
 
 # TODO: verify we installed prerelease
 
 # ******************************************************************************
-# Now that we used create-react-app to create an app depending on react-scripts,
+# Now that we used create-inferno-app to create an app depending on inferno-scripts,
 # let's make sure all npm scripts are in the working state.
 # ******************************************************************************
 

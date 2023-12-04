@@ -1,10 +1,7 @@
 {
   "dependencies": {
-    "@types/react": "*",
-    "@types/react-dom": "*",
     "@types/jest": "*",
-    "react": "*",
-    "react-dom": "*",
+    "inferno": "*",
     "typescript": "^3.9.5"
   }
 }

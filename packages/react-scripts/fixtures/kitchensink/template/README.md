@@ -1,4 +1,4 @@
-# Contributing to Create React App's E2E tests
+# Contributing to Create Inferno App's E2E tests
 
 This is an end to end kitchensink test suite, but has multiple usages in it.
 
@@ -28,9 +28,9 @@ Features are categorized by their scope:
 
 In it's most basic for this serve as a collection of unit tests on a single functionality.
 
-Unit tests are written in a `src/features/**/*.test.js` file located in the same folder as the feature they test, and usually consist of a `ReactDOM.render` call.
+Unit tests are written in a `src/features/**/*.test.js` file located in the same folder as the feature they test, and usually consist of a `Inferno.render` call.
 
-These tests are run by **jest** and the environment is `test`, so that it resembles how a **Create React App** application is tested.
+These tests are run by **jest** and the environment is `test`, so that it resembles how a **Create Inferno App** application is tested.
 
 ### Using it as Integration Tests
 

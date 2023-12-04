@@ -84,12 +84,12 @@ const initDOM = async feature =>
       }, 10000);
 
       document.addEventListener(
-        'ReactFeatureDidMount',
+        'InfernoFeatureDidMount',
         () => resolve(document),
         { capture: true, once: true }
       );
       document.addEventListener(
-        'ReactFeatureError',
+        'InfernoFeatureError',
         () => {
           clearTimeout(cancelToken);
 

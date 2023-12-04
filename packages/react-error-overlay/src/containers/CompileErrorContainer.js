@@ -6,8 +6,6 @@
  */
 
 /* @flow */
-import React, { useContext } from 'react';
-import { ThemeContext } from '../iframeScript';
 import ErrorOverlay from '../components/ErrorOverlay';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -25,8 +23,7 @@ type CompileErrorContainerPropsType = {|
   editorHandler: (errorLoc: ErrorLocation) => void,
 |};
 
-function CompileErrorContainer(props: CompileErrorContainerPropsType) {
-  const theme = useContext(ThemeContext);
+function CompileErrorContainer(props: CompileErrorContainerPropsType, { theme }) {
   const { error, editorHandler } = props;
   const errLoc: ?ErrorLocation = parseCompileError(error);
   const canOpenInEditor = errLoc !== null && editorHandler !== null;

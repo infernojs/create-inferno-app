@@ -5,15 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component } from 'inferno';
 import load from 'absoluteLoad';
 
 export default class BaseUrl extends Component {
-  static propTypes = {
-    onReady: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.state = { users: [] };

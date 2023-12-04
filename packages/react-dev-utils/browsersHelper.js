@@ -51,7 +51,7 @@ function checkBrowsers(dir, isInteractive, retry = true) {
     return Promise.reject(
       new Error(
         chalk.red(
-          'As of react-scripts >=2 you must specify targeted browsers.'
+          'As of inferno-scripts >=2 you must specify targeted browsers.'
         ) +
           os.EOL +
           `Please add a ${chalk.underline(

@@ -1,23 +1,23 @@
 {
-  "name": "cra-template",
+  "name": "cra-inferno-template",
   "version": "1.2.0",
   "keywords": [
-    "react",
-    "create-react-app",
+    "inferno",
+    "create-inferno-app",
     "template"
   ],
-  "description": "The base template for Create React App.",
+  "description": "The base template for Create Inferno App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/cra-template"
+    "url": "https://github.com/infernojs/create-inferno-app.git",
+    "directory": "packages/cra-inferno-template"
   },
   "license": "MIT",
   "engines": {
     "node": ">=14"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "files": [
     "template",

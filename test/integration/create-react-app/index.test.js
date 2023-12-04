@@ -5,7 +5,7 @@ const { mkdirp, writeFileSync, existsSync, readdirSync } = require('fs-extra');
 const { join } = require('path');
 const { rmSync } = require('fs');
 
-const cli = require.resolve('create-react-app/index.js');
+const cli = require.resolve('create-inferno-app/index.js');
 
 // Increase the timeout for GitHub macOS runner
 jest.setTimeout(1000 * 60 * (process.env.RUNNER_OS === 'macOS' ? 10 : 5));
@@ -41,7 +41,7 @@ const run = async (args, options) => {
   process.stdout.write(
     `::group::Test "${
       expect.getState().currentTestName
-    }" - "create-react-app ${args.join(' ')}" output:\n`
+    }" - "create-inferno-app ${args.join(' ')}" output:\n`
   );
   const result = execa('node', [cli].concat(args), options);
   result.stdout.on('data', chunk =>
@@ -62,7 +62,7 @@ const run = async (args, options) => {
 const expectAllFiles = (arr1, arr2) =>
   expect([...arr1].sort()).toEqual([...arr2].sort());
 
-describe('create-react-app', () => {
+describe('create-inferno-app', () => {
   it('check yarn installation', async () => {
     const { exitCode } = await execa('yarn', ['--version']);
 

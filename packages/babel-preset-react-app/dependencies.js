@@ -14,7 +14,7 @@ const validateBoolOption = (name, value, defaultValue) => {
   }
 
   if (typeof value !== 'boolean') {
-    throw new Error(`Preset react-app: '${name}' option must be a boolean.`);
+    throw new Error(`Preset inferno-app: '${name}' option must be a boolean.`);
   }
 
   return value;
@@ -52,7 +52,7 @@ module.exports = function (api, opts) {
 
   if (!isEnvDevelopment && !isEnvProduction && !isEnvTest) {
     throw new Error(
-      'Using `babel-preset-react-app` requires that you specify `NODE_ENV` or ' +
+      'Using `babel-preset-inferno-app` requires that you specify `NODE_ENV` or ' +
         '`BABEL_ENV` environment variables. Valid values are "development", ' +
         '"test", and "production". Instead, received: ' +
         JSON.stringify(env) +

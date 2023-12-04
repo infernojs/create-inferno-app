@@ -6,40 +6,38 @@
  */
 
 /* @flow */
-import React, { useContext } from 'react';
-import { ThemeContext } from '../iframeScript';
 import type { Theme } from '../styles';
 
 const navigationBarStyle = {
-  marginBottom: '0.5rem',
+  'margin-bottom': '0.5rem',
 };
 
 const buttonContainerStyle = {
-  marginRight: '1em',
+  'margin-right': '1em',
 };
 
 const _navButtonStyle = {
   border: 'none',
-  borderRadius: '4px',
+  'border-radius': '4px',
   padding: '3px 6px',
   cursor: 'pointer',
 };
 
 const leftButtonStyle = (theme: Theme) => ({
   ..._navButtonStyle,
-  backgroundColor: theme.navBackground,
+  'background-color': theme.navBackground,
   color: theme.navArrow,
-  borderTopRightRadius: '0px',
-  borderBottomRightRadius: '0px',
-  marginRight: '1px',
+  'border-top-right-radius': '0px',
+  'border-bottom-right-radius': '0px',
+  'margin-right': '1px',
 });
 
 const rightButtonStyle = (theme: Theme) => ({
   ..._navButtonStyle,
-  backgroundColor: theme.navBackground,
+  'background-color': theme.navBackground,
   color: theme.navArrow,
-  borderTopLeftRadius: '0px',
-  borderBottomLeftRadius: '0px',
+  'border-top-left-radius': '0px',
+  'border-bottom-left-radius': '0px',
 });
 
 type Callback = () => void;
@@ -51,8 +49,7 @@ type NavigationBarPropsType = {|
   next: Callback,
 |};
 
-function NavigationBar(props: NavigationBarPropsType) {
-  const theme = useContext(ThemeContext);
+function NavigationBar(props: NavigationBarPropsType, {theme}) {
   const { currentError, totalErrors, previous, next } = props;
   return (
     <div style={navigationBarStyle}>

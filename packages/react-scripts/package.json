@@ -1,18 +1,18 @@
 {
-  "name": "react-scripts",
+  "name": "inferno-scripts",
   "version": "5.0.1",
-  "description": "Configuration and scripts for Create React App.",
+  "description": "Configuration and scripts for Create Inferno App.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/react-scripts"
+    "url": "https://github.com/infernojs/create-inferno-app.git",
+    "directory": "packages/inferno-scripts"
   },
   "license": "MIT",
   "engines": {
     "node": ">=14.0.0"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "files": [
     "bin",
@@ -24,7 +24,7 @@
     "utils"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "inferno-scripts": "./bin/inferno-scripts.js"
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
@@ -33,7 +33,6 @@
     "@svgr/webpack": "^5.5.0",
     "babel-jest": "^27.4.2",
     "babel-loader": "^8.2.3",
-    "babel-plugin-named-asset-import": "^0.3.8",
     "babel-preset-react-app": "^10.0.1",
     "bfj": "^7.0.2",
     "browserslist": "^4.18.1",
@@ -77,8 +76,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "devDependencies": {
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "inferno": "^8.2.2"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"

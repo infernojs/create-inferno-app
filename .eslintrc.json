@@ -19,13 +19,16 @@
     {
       "files": [
         "docusaurus/website/src/**/*.js",
-        "packages/cra-template/**/*.js",
-        "packages/react-error-overlay/**/*.js",
-        "packages/react-scripts/fixtures/kitchensink/template/{src,integration}/**/*.js",
+        "packages/cra-inferno-template/**/*.js",
+        "packages/inferno-error-overlay/**/*.js",
+        "packages/inferno-scripts/fixtures/kitchensink/template/{src,integration}/**/*.js",
         "test/fixtures/*/src/*.js"
       ],
-      "excludedFiles": ["packages/react-error-overlay/*.js"],
-      "extends": ["react-app", "react-app/jest"]
+      "excludedFiles": ["packages/inferno-error-overlay/*.js"],
+      "extends": [
+        "eslint:recommended",
+        "plugin:inferno/recommended"
+      ]
     },
     {
       "files": [

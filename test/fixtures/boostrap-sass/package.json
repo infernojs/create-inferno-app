@@ -2,7 +2,6 @@
   "dependencies": {
     "bootstrap": "^4.x",
     "node-sass": "^6.x",
-    "react": "latest",
-    "react-dom": "latest"
+    "inferno": "latest"
   }
 }

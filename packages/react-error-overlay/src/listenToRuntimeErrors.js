@@ -19,8 +19,8 @@ import {
 } from './effects/stackTraceLimit';
 import {
   permanentRegister as permanentRegisterConsole,
-  registerReactStack,
-  unregisterReactStack,
+  registerInfernoStack,
+  unregisterInfernoStack,
 } from './effects/proxyConsole';
 import { massage as massageWarning } from './utils/warnings';
 import getStackFrames from './utils/getStackFrames';
@@ -65,7 +65,7 @@ export function listenToRuntimeErrors(
   registerError(window, error => crashWithFramesRunTime(error, false));
   registerPromise(window, error => crashWithFramesRunTime(error, true));
   registerStackTraceLimit();
-  registerReactStack();
+  registerInfernoStack();
   permanentRegisterConsole('error', (warning, stack) => {
     const data = massageWarning(warning, stack);
     crashWithFramesRunTime(
@@ -83,6 +83,6 @@ export function listenToRuntimeErrors(
     unregisterStackTraceLimit();
     unregisterPromise(window);
     unregisterError(window);
-    unregisterReactStack();
+    unregisterInfernoStack();
   };
 }

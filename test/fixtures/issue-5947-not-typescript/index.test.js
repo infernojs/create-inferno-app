@@ -8,7 +8,7 @@ test('Ignores node_modules when detecting TypeScript', async () => {
   // CRA build will check for TypeScript files by
   // globbing for src/**/*.ts however this shouldn't
   // include any node_modules directories within src.
-  // See https://github.com/facebook/create-react-app/issues/5947
+  // See https://github.com/facebook/create-inferno-app/issues/5947
 
   const tsConfigPath = path.join(testSetup.testDirectory, 'tsconfig.json');
   const tsPackagePath = [

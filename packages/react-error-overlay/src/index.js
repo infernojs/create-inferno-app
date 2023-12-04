@@ -176,9 +176,8 @@ function updateIframeContent() {
   }
 }
 
-window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ =
-  window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__ || {};
-window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady =
+window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ = window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ || {};
+window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady =
   function iframeReady() {
     isIframeReady = true;
     isLoadingIframe = false;
@@ -187,7 +186,7 @@ window.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady =
 
 if (process.env.NODE_ENV === 'production') {
   console.warn(
-    'react-error-overlay is not meant for use in production. You should ' +
+    'inferno-error-overlay is not meant for use in production. You should ' +
       'ensure it is not included in your build to reduce bundle size.'
   );
 }

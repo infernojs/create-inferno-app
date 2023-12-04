@@ -145,17 +145,6 @@ function verifyTypeScriptSetup() {
     resolveJsonModule: { value: true, reason: 'to match webpack loader' },
     isolatedModules: { value: true, reason: 'implementation limitation' },
     noEmit: { value: true },
-    jsx: {
-      parsedValue:
-        hasJsxRuntime && semver.gte(ts.version, '4.1.0-beta')
-          ? ts.JsxEmit.ReactJSX
-          : ts.JsxEmit.React,
-      value:
-        hasJsxRuntime && semver.gte(ts.version, '4.1.0-beta')
-          ? 'react-jsx'
-          : 'react',
-      reason: 'to support the new JSX transform in React 17',
-    },
     paths: { value: undefined, reason: 'aliased imports are not supported' },
   };
 
@@ -286,11 +275,11 @@ function verifyTypeScriptSetup() {
     writeJson(paths.appTsConfig, appTsConfig);
   }
 
-  // Reference `react-scripts` types
+  // Reference `inferno-scripts` types
   if (!fs.existsSync(paths.appTypeDeclarations)) {
     fs.writeFileSync(
       paths.appTypeDeclarations,
-      `/// <reference types="react-scripts" />${os.EOL}`
+      `/// <reference types="inferno-scripts" />${os.EOL}`
     );
   }
 }

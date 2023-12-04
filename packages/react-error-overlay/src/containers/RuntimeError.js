@@ -6,7 +6,6 @@
  */
 
 /* @flow */
-import React from 'react';
 import Header from '../components/Header';
 import StackTrace from './StackTrace';
 
@@ -15,7 +14,7 @@ import type { ErrorLocation } from '../utils/parseCompileError';
 
 const wrapperStyle = {
   display: 'flex',
-  flexDirection: 'column',
+  'flex-direction': 'column',
 };
 
 export type ErrorRecord = {|
@@ -46,11 +45,7 @@ function RuntimeError({ errorRecord, editorHandler }: Props) {
     // It's just scaring people
     .replace(/^Invariant Violation:\s*/, '')
     // This is not helpful either:
-    .replace(/^Warning:\s*/, '')
-    // Break the actionable part to the next line.
-    // AFAIK React 16+ should already do this.
-    .replace(' Check the render method', '\n\nCheck the render method')
-    .replace(' Check your code at', '\n\nCheck your code at');
+    .replace(/^Warning:\s*/, '');
 
   return (
     <div style={wrapperStyle}>

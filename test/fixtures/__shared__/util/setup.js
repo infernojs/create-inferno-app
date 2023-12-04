@@ -4,7 +4,7 @@ const execa = require('execa');
 const fs = require('fs-extra');
 const path = require('path');
 const tempy = require('tempy');
-const ReactScripts = require('./scripts');
+const InfernoScripts = require('./scripts');
 
 module.exports = class TestSetup {
   constructor(fixtureName, templateDirectory) {
@@ -37,13 +37,13 @@ module.exports = class TestSetup {
     const shouldInstallScripts = !this.isLocal;
     if (shouldInstallScripts) {
       packageJson.dependencies = Object.assign({}, packageJson.dependencies, {
-        'react-scripts': 'latest',
+        'inferno-scripts': 'latest',
       });
     }
     packageJson.scripts = Object.assign({}, packageJson.scripts, {
-      start: 'react-scripts start',
-      build: 'react-scripts build',
-      test: 'react-scripts test',
+      start: 'inferno-scripts start',
+      build: 'inferno-scripts build',
+      test: 'inferno-scripts test',
     });
     packageJson.license = packageJson.license || 'UNLICENSED';
     await fs.writeJson(
@@ -62,14 +62,14 @@ module.exports = class TestSetup {
             __dirname,
             '../../../..',
             'packages',
-            'react-scripts',
+            'inferno-scripts',
             'bin',
-            'react-scripts.js'
+            'inferno-scripts.js'
           )
         ),
-        path.join(this.testDirectory, 'node_modules', '.bin', 'react-scripts')
+        path.join(this.testDirectory, 'node_modules', '.bin', 'inferno-scripts')
       );
-      await execa('npm', ['link', 'react-scripts'], {
+      await execa('npm', ['link', 'inferno-scripts'], {
         cwd: this.testDirectory,
       });
     }
@@ -80,7 +80,7 @@ module.exports = class TestSetup {
       return null;
     }
     if (this._scripts == null) {
-      this._scripts = new ReactScripts(this.testDirectory);
+      this._scripts = new InfernoScripts(this.testDirectory);
     }
     return this._scripts;
   }

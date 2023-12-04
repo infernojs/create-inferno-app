@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'inferno'
 import FileEnvVariables from './FileEnvVariables';
 
 describe('.env variables', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<FileEnvVariables />, div);
+    render(<FileEnvVariables />, div);
   });
 });

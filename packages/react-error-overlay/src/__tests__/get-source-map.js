@@ -25,7 +25,7 @@ test('finds an external source map', async () => {
   expect(sm.getOriginalPosition(26122, 21)).toEqual({
     line: 7,
     column: 0,
-    source: 'webpack:///packages/react-scripts/template/src/App.js',
+    source: 'webpack:///packages/inferno-scripts/template/src/App.js',
   });
 });
 

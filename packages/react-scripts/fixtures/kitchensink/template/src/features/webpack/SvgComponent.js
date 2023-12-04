@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { ReactComponent as Logo } from './assets/logo.svg';
+import {forwardRef} from 'inferno';
+import { InfernoComponent as Logo } from './assets/logo.svg';
 
 const SvgComponent = () => {
   return <Logo id="feature-svg-component" />;
 };
 
-export const SvgComponentWithRef = React.forwardRef((props, ref) => (
+export const SvgComponentWithRef = forwardRef((props, ref) => (
   <Logo id="feature-svg-component-with-ref" ref={ref} />
 ));
 

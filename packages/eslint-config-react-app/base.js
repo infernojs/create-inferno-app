@@ -11,7 +11,7 @@
 require('@rushstack/eslint-patch/modern-module-resolution');
 
 // This file contains the minimum ESLint configuration required for Create
-// React App support, and is used as the `baseConfig` for `eslint-loader`
+// Inferno App support, and is used as the `baseConfig` for `eslint-loader`
 // to ensure that user-provided configs don't need this boilerplate.
 
 module.exports = {
@@ -19,7 +19,7 @@ module.exports = {
 
   parser: '@babel/eslint-parser',
 
-  plugins: ['react'],
+  plugins: ['inferno'],
 
   env: {
     browser: true,
@@ -33,18 +33,7 @@ module.exports = {
     sourceType: 'module',
     requireConfigFile: false,
     babelOptions: {
-      presets: [require.resolve('babel-preset-react-app/prod')],
+      presets: [require.resolve('babel-preset-inferno-app/prod')],
     },
-  },
-
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
-
-  rules: {
-    'react/jsx-uses-vars': 'warn',
-    'react/jsx-uses-react': 'warn',
-  },
+  }
 };

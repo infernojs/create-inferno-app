@@ -17,11 +17,11 @@ module.exports = {
         pascalCase: true,
       });
       const componentName = `Svg${pascalCaseFilename}`;
-      return `const React = require('react');
+      return `const {forwardRef} = require('inferno');
       module.exports = {
         __esModule: true,
         default: ${assetFilename},
-        ReactComponent: React.forwardRef(function ${componentName}(props, ref) {
+        InfernoComponent: forwardRef(function ${componentName}(props, ref) {
           return {
             $$typeof: Symbol.for('react.element'),
             type: 'svg',

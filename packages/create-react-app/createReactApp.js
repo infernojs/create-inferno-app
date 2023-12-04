@@ -9,16 +9,16 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// The only job of create-react-app is to init the repository and then
-// forward all the commands to the local version of create-react-app.
+// The only job of create-inferno-app is to init the repository and then
+// forward all the commands to the local version of create-inferno-app.
 //
 // If you need to add a new command, please add it to the scripts/ folder.
 //
 // The only reason to modify this file is to add more warnings and
-// troubleshooting information for the `create-react-app` command.
+// troubleshooting information for the `create-inferno-app` command.
 //
 // Do not make breaking changes! We absolutely don't want to have to
-// tell people to update their global version of create-react-app.
+// tell people to update their global version of create-inferno-app.
 //
 // Also be careful with new language features.
 // This file must work on Node 10+.
@@ -67,7 +67,7 @@ function init() {
     .option('--info', 'print environment debug info')
     .option(
       '--scripts-version <alternative-package>',
-      'use a non-standard version of react-scripts'
+      'use a non-standard version of inferno-scripts'
     )
     .option(
       '--template <path-to-template>',
@@ -87,22 +87,22 @@ function init() {
       console.log(`      - a specific npm tag: ${chalk.green('@next')}`);
       console.log(
         `      - a custom fork published on npm: ${chalk.green(
-          'my-react-scripts'
+          'my-inferno-scripts'
         )}`
       );
       console.log(
         `      - a local path relative to the current working directory: ${chalk.green(
-          'file:../my-react-scripts'
+          'file:../my-inferno-scripts'
         )}`
       );
       console.log(
         `      - a .tgz archive: ${chalk.green(
-          'https://mysite.com/my-react-scripts-0.8.2.tgz'
+          'https://mysite.com/my-inferno-scripts-0.8.2.tgz'
         )}`
       );
       console.log(
         `      - a .tar.gz archive: ${chalk.green(
-          'https://mysite.com/my-react-scripts-0.8.2.tar.gz'
+          'https://mysite.com/my-inferno-scripts-0.8.2.tar.gz'
         )}`
       );
       console.log(
@@ -112,7 +112,7 @@ function init() {
       console.log(`    A custom ${chalk.cyan('--template')} can be one of:`);
       console.log(
         `      - a custom template published on npm: ${chalk.green(
-          'cra-template-typescript'
+          'cra-inferno-template-typescript'
         )}`
       );
       console.log(
@@ -136,7 +136,7 @@ function init() {
       );
       console.log(
         `      ${chalk.cyan(
-          'https://github.com/facebook/create-react-app/issues/new'
+          'https://github.com/infernojs/create-inferno-app/issues/new'
         )}`
       );
       console.log();
@@ -161,8 +161,8 @@ function init() {
             'Firefox',
             'Safari',
           ],
-          npmPackages: ['react', 'react-dom', 'react-scripts'],
-          npmGlobalPackages: ['create-react-app'],
+          npmPackages: ['inferno', 'inferno-scripts'],
+          npmGlobalPackages: ['create-inferno-app'],
         },
         {
           duplicates: true,
@@ -180,7 +180,7 @@ function init() {
     console.log();
     console.log('For example:');
     console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('my-react-app')}`
+      `  ${chalk.cyan(program.name())} ${chalk.green('my-inferno-app')}`
     );
     console.log();
     console.log(
@@ -198,7 +198,7 @@ function init() {
   checkForLatestVersion()
     .catch(() => {
       try {
-        return execSync('npm view create-react-app version').toString().trim();
+        return execSync('npm view create-inferno-app version').toString().trim();
       } catch (e) {
         return null;
       }
@@ -208,14 +208,9 @@ function init() {
         console.log();
         console.error(
           chalk.yellow(
-            `You are running \`create-react-app\` ${packageJson.version}, which is behind the latest release (${latest}).\n\n` +
-              'We recommend always using the latest version of create-react-app if possible.'
+            `You are running \`create-inferno-app\` ${packageJson.version}, which is behind the latest release (${latest}).\n\n` +
+              'We recommend always using the latest version of create-inferno-app if possible.'
           )
-        );
-        console.log();
-        console.log(
-          'The latest instructions for creating a new app can be found here:\n' +
-            'https://create-react-app.dev/docs/getting-started/'
         );
         console.log();
       } else {
@@ -246,8 +241,8 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
           `Please update to Node 14 or higher for a better, fully supported experience.\n`
       )
     );
-    // Fall back to latest supported react-scripts on Node 4
-    version = 'react-scripts@0.9.x';
+    // Fall back to latest supported inferno-scripts on Node 4
+    version = 'inferno-scripts@0.9.x';
   }
 
   const root = path.resolve(name);
@@ -260,7 +255,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
   }
   console.log();
 
-  console.log(`Creating a new React app in ${chalk.green(root)}.`);
+  console.log(`Creating a new Inferno app in ${chalk.green(root)}.`);
   console.log();
 
   const packageJson = {
@@ -290,8 +285,8 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
           )
         );
       }
-      // Fall back to latest supported react-scripts for npm 3
-      version = 'react-scripts@0.9.x';
+      // Fall back to latest supported inferno-scripts for npm 3
+      version = 'inferno-scripts@0.9.x';
     }
   } else if (usePnp) {
     const yarnInfo = checkYarnVersion();
@@ -407,7 +402,7 @@ function run(
     getInstallPackage(version, originalDirectory),
     getTemplateInstallPackage(template, originalDirectory),
   ]).then(([packageToInstall, templateToInstall]) => {
-    const allDependencies = ['react', 'react-dom', packageToInstall];
+    const allDependencies = ['inferno', packageToInstall];
 
     console.log('Installing packages. This might take a couple of minutes.');
 
@@ -432,7 +427,7 @@ function run(
           packageVersion = templatesVersionMinimum;
         }
 
-        // Only support templates when used alongside new react-scripts versions.
+        // Only support templates when used alongside new inferno-scripts versions.
         const supportsTemplates = semver.gte(
           packageVersion,
           templatesVersionMinimum
@@ -443,16 +438,14 @@ function run(
           console.log('');
           console.log(
             `The ${chalk.cyan(packageInfo.name)} version you're using ${
-              packageInfo.name === 'react-scripts' ? 'is not' : 'may not be'
+              packageInfo.name === 'inferno-scripts' ? 'is not' : 'may not be'
             } compatible with the ${chalk.cyan('--template')} option.`
           );
           console.log('');
         }
 
         console.log(
-          `Installing ${chalk.cyan('react')}, ${chalk.cyan(
-            'react-dom'
-          )}, and ${chalk.cyan(packageInfo.name)}${
+          `Installing ${chalk.cyan('inferno')} and ${chalk.cyan(packageInfo.name)}${
             supportsTemplates ? ` with ${chalk.cyan(templateInfo.name)}` : ''
           }...`
         );
@@ -493,7 +486,7 @@ function run(
       `
         );
 
-        if (version === 'react-scripts@0.9.x') {
+        if (version === 'inferno-scripts@0.9.x') {
           console.log(
             chalk.yellow(
               `\nNote: the project was bootstrapped with an old unsupported version of tools.\n` +
@@ -545,7 +538,7 @@ function run(
 }
 
 function getInstallPackage(version, originalDirectory) {
-  let packageToInstall = 'react-scripts';
+  let packageToInstall = 'inferno-scripts';
   const validSemver = semver.valid(version);
   if (validSemver) {
     packageToInstall += `@${validSemver}`;
@@ -565,11 +558,11 @@ function getInstallPackage(version, originalDirectory) {
 
   const scriptsToWarn = [
     {
-      name: 'react-scripts-ts',
+      name: 'inferno-scripts-ts',
       message: chalk.yellow(
-        `The react-scripts-ts package is deprecated. TypeScript is now supported natively in Create React App. You can use the ${chalk.green(
+        `The inferno-scripts-ts package is deprecated. TypeScript is now supported natively in Create Inferno App. You can use the ${chalk.green(
           '--template typescript'
-        )} option instead when generating your app to include TypeScript support. Would you like to continue using react-scripts-ts?`
+        )} option instead when generating your app to include TypeScript support. Would you like to continue using inferno-scripts-ts?`
       ),
     },
   ];
@@ -595,7 +588,7 @@ function getInstallPackage(version, originalDirectory) {
 }
 
 function getTemplateInstallPackage(template, originalDirectory) {
-  let templateToInstall = 'cra-template';
+  let templateToInstall = 'cra-inferno-template';
   if (template) {
     if (template.match(/^file:/)) {
       templateToInstall = `file:${path.resolve(
@@ -609,7 +602,7 @@ function getTemplateInstallPackage(template, originalDirectory) {
       // for tar.gz or alternative paths
       templateToInstall = template;
     } else {
-      // Add prefix 'cra-template-' to non-prefixed templates, leaving any
+      // Add prefix 'cra-inferno-template-' to non-prefixed templates, leaving any
       // @scope/ and @version intact.
       const packageMatch = template.match(/^(@[^/]+\/)?([^@]+)?(@.+)?$/);
       const scope = packageMatch[1] || '';
@@ -621,16 +614,16 @@ function getTemplateInstallPackage(template, originalDirectory) {
         templateName.startsWith(`${templateToInstall}-`)
       ) {
         // Covers:
-        // - cra-template
-        // - @SCOPE/cra-template
-        // - cra-template-NAME
-        // - @SCOPE/cra-template-NAME
+        // - cra-inferno-template
+        // - @SCOPE/cra-inferno-template
+        // - cra-inferno-template-NAME
+        // - @SCOPE/cra-inferno-template-NAME
         templateToInstall = `${scope}${templateName}${version}`;
       } else if (version && !scope && !templateName) {
         // Covers using @SCOPE only
         templateToInstall = `${version}/${templateToInstall}`;
       } else {
-        // Covers templates without the `cra-template` prefix:
+        // Covers templates without the `cra-inferno-template` prefix:
         // - NAME
         // - @SCOPE/NAME
         templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;
@@ -701,7 +694,7 @@ function getPackageInfo(installPackage) {
         return { name, version };
       })
       .catch(err => {
-        // The package name could be with or without semver version, e.g. react-scripts-0.2.0-alpha.1.tgz
+        // The package name could be with or without semver version, e.g. inferno-scripts-0.2.0-alpha.1.tgz
         // However, this function returns package name only without semver version.
         console.log(
           `Could not extract the package name from the archive: ${err.message}`
@@ -718,8 +711,8 @@ function getPackageInfo(installPackage) {
       });
   } else if (installPackage.startsWith('git+')) {
     // Pull package name out of git urls e.g:
-    // git+https://github.com/mycompany/react-scripts.git
-    // git+ssh://github.com/mycompany/react-scripts.git#v1.2.3
+    // git+https://github.com/mycompany/inferno-scripts.git
+    // git+ssh://github.com/mycompany/inferno-scripts.git#v1.2.3
     return Promise.resolve({
       name: installPackage.match(/([^/]+)\.git(#.*)?$/)[1],
     });
@@ -808,7 +801,7 @@ function checkNodeVersion(packageName) {
     console.error(
       chalk.red(
         'You are running Node %s.\n' +
-          'Create React App requires Node %s or higher. \n' +
+          'Create Inferno App requires Node %s or higher. \n' +
           'Please update your version of Node.'
       ),
       process.version,
@@ -839,7 +832,7 @@ function checkAppName(appName) {
   }
 
   // TODO: there should be a single place that holds the dependencies
-  const dependencies = ['react', 'react-dom', 'react-scripts'].sort();
+  const dependencies = ['inferno', 'inferno-scripts'].sort();
   if (dependencies.includes(appName)) {
     console.error(
       chalk.red(
@@ -892,8 +885,7 @@ function setCaretRangeForRuntimeDeps(packageName) {
     process.exit(1);
   }
 
-  makeCaretRange(packageJson.dependencies, 'react');
-  makeCaretRange(packageJson.dependencies, 'react-dom');
+  makeCaretRange(packageJson.dependencies, 'inferno');
 
   fs.writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + os.EOL);
 }
@@ -1098,7 +1090,7 @@ function checkForLatestVersion() {
   return new Promise((resolve, reject) => {
     https
       .get(
-        'https://registry.npmjs.org/-/package/create-react-app/dist-tags',
+        'https://registry.npmjs.org/-/package/create-inferno-app/dist-tags',
         res => {
           if (res.statusCode === 200) {
             let body = '';

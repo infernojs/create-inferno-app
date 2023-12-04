@@ -1,8 +1,7 @@
 {
   "dependencies": {
     "graphql": "^14.0.2",
-    "react": "latest",
-    "react-dom": "latest",
+    "inferno": "latest",
     "serve": "^10.0.2"
   }
 }

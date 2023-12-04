@@ -196,8 +196,8 @@ function getArgumentsForLineNumber(
 
 function guessEditor() {
   // Explicit config always wins
-  if (process.env.REACT_EDITOR) {
-    return shellQuote.parse(process.env.REACT_EDITOR);
+  if (process.env.INFERNO_EDITOR) {
+    return shellQuote.parse(process.env.INFERNO_EDITOR);
   }
 
   // We can find out which editor is currently running by:
@@ -274,7 +274,7 @@ function printInstructions(fileName, errorMessage) {
   console.log();
   console.log(
     'To set up the editor integration, add something like ' +
-      chalk.cyan('REACT_EDITOR=atom') +
+      chalk.cyan('INFERNO_EDITOR=atom') +
       ' to the ' +
       chalk.green('.env.local') +
       ' file in your project folder ' +

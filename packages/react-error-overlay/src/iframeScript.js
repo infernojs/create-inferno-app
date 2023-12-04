@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'react-app-polyfill/ie9';
-import React, { createContext } from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'inferno';
 import CompileErrorContainer from './containers/CompileErrorContainer';
 import RuntimeErrorContainer from './containers/RuntimeErrorContainer';
 import { overlayStyle } from './styles';
@@ -15,9 +13,8 @@ import { applyStyles, getTheme } from './utils/dom/css';
 
 let iframeRoot = null;
 const theme = getTheme();
-export const ThemeContext = createContext();
 
-function render({
+function renderContainer({
   currentBuildError,
   currentRuntimeErrorRecords,
   dismissRuntimeErrors,
@@ -25,37 +22,33 @@ function render({
 }) {
   if (currentBuildError) {
     return (
-      <ThemeContext.Provider value={theme}>
         <CompileErrorContainer
           error={currentBuildError}
           editorHandler={editorHandler}
         />
-      </ThemeContext.Provider>
     );
   }
   if (currentRuntimeErrorRecords.length > 0) {
     return (
-      <ThemeContext.Provider value={theme}>
         <RuntimeErrorContainer
           errorRecords={currentRuntimeErrorRecords}
           close={dismissRuntimeErrors}
           editorHandler={editorHandler}
         />
-      </ThemeContext.Provider>
     );
   }
   return null;
 }
 
 window.updateContent = function updateContent(errorOverlayProps) {
-  let renderedElement = render(errorOverlayProps);
+  let renderedElement = renderContainer(errorOverlayProps);
 
   if (renderedElement === null) {
-    ReactDOM.unmountComponentAtNode(iframeRoot);
+    render(null, iframeRoot);
     return false;
   }
   // Update the overlay
-  ReactDOM.render(renderedElement, iframeRoot);
+  render(renderedElement, iframeRoot, null, { theme: theme });
   return true;
 };
 
@@ -65,4 +58,4 @@ document.body.style['max-width'] = '100vw';
 iframeRoot = document.createElement('div');
 applyStyles(iframeRoot, overlayStyle(theme));
 document.body.appendChild(iframeRoot);
-window.parent.__REACT_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady();
+window.parent.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady();

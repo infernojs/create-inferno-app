@@ -1,48 +1,38 @@
-# eslint-config-react-app
+# eslint-config-inferno-app
 
-This package includes the shareable ESLint configuration used by [Create React App](https://github.com/facebook/create-react-app).<br>
-Please refer to its documentation:
+This package includes the shareable ESLint configuration used by [Create Inferno App](https://github.com/infernojs/create-inferno-app).
 
-- [Getting Started](https://facebook.github.io/create-react-app/docs/getting-started) – How to create a new app.
-- [User Guide](https://facebook.github.io/create-react-app/) – How to develop apps bootstrapped with Create React App.
+## Usage in Create Inferno App Projects
 
-## Usage in Create React App Projects
+The easiest way to use this configuration is with [Create Inferno App](https://github.com/infernojs/create-inferno-app), which includes it by default.
 
-The easiest way to use this configuration is with [Create React App](https://github.com/facebook/create-react-app), which includes it by default.
+**You don’t need to install it separately in Create Inferno App projects.**
 
-**You don’t need to install it separately in Create React App projects.**
+## Usage Outside of Create Inferno App
 
-## Usage Outside of Create React App
-
-If you want to use this ESLint configuration in a project not built with Create React App, you can install it with the following steps.
+If you want to use this ESLint configuration in a project not built with Create Inferno App, you can install it with the following steps.
 
 First, install this package and ESLint.
 
 ```sh
-npm install --save-dev eslint-config-react-app eslint@^8.0.0
+npm install --save-dev eslint-config-inferno-app eslint@^8.0.0
 ```
 
 Then create a file named `.eslintrc.json` with following contents in the root folder of your project:
 
 ```json
 {
-  "extends": "react-app"
+  "extends": "inferno-app"
 }
 ```
 
-That's it! You can override the settings from `eslint-config-react-app` by editing the `.eslintrc.json` file. Learn more about [configuring ESLint](https://eslint.org/docs/user-guide/configuring) on the ESLint website.
+That's it! You can override the settings from `eslint-config-inferno-app` by editing the `.eslintrc.json` file. Learn more about [configuring ESLint](https://eslint.org/docs/user-guide/configuring) on the ESLint website.
 
 ## Jest rules
 
 This config also ships with optional Jest rules for ESLint (based on [`eslint-plugin-jest`](https://github.com/jest-community/eslint-plugin-jest)).
 
 You can enable these rules by adding the Jest config to the `extends` array in your ESLint config.
-
-```json
-{
-  "extends": ["react-app", "react-app/jest"]
-}
-```
 
 ## Accessibility Checks
 
@@ -70,9 +60,9 @@ If you want to enable even more accessibility rules, you can create an `.eslintr
 
 ```json
 {
-  "extends": ["react-app", "plugin:jsx-a11y/recommended"],
+  "extends": ["eslint:recommended", "plugin:inferno/recommended", "plugin:jsx-a11y/recommended"],
   "plugins": ["jsx-a11y"]
 }
 ```
 
-However, if you are using [Create React App](https://github.com/facebook/create-react-app) and have not ejected, any additional rules will only be displayed in the [IDE integrations](https://facebook.github.io/create-react-app/docs/setting-up-your-editor#displaying-lint-output-in-the-editor), but not in the browser or the terminal.
+However, if you are using [Create Inferno App](https://github.com/infernojs/create-inferno-app) and have not ejected, any additional rules will only be displayed in the [IDE integrations](https://facebook.github.io/create-react-app/docs/setting-up-your-editor#displaying-lint-output-in-the-editor), but not in the browser or the terminal.

@@ -10,73 +10,73 @@
 const { getTemplateInstallPackage } = require('../createReactApp');
 
 describe('getTemplateInstallPackage', () => {
-  it('no options gives cra-template', async () => {
-    await expect(getTemplateInstallPackage()).resolves.toBe('cra-template');
+  it('no options gives cra-inferno-template', async () => {
+    await expect(getTemplateInstallPackage()).resolves.toBe('cra-inferno-template');
   });
 
-  it('cra-template gives cra-template', async () => {
-    await expect(getTemplateInstallPackage('cra-template')).resolves.toBe(
-      'cra-template'
+  it('cra-inferno-template gives cra-inferno-template', async () => {
+    await expect(getTemplateInstallPackage('cra-inferno-template')).resolves.toBe(
+      'cra-inferno-template'
     );
   });
 
-  it('cra-template-typescript gives cra-template-typescript', async () => {
+  it('cra-inferno-template-typescript gives cra-inferno-template-typescript', async () => {
     await expect(
-      getTemplateInstallPackage('cra-template-typescript')
-    ).resolves.toBe('cra-template-typescript');
+      getTemplateInstallPackage('cra-inferno-template-typescript')
+    ).resolves.toBe('cra-inferno-template-typescript');
   });
 
-  it('typescript gives cra-template-typescript', async () => {
+  it('typescript gives cra-inferno-template-typescript', async () => {
     await expect(getTemplateInstallPackage('typescript')).resolves.toBe(
-      'cra-template-typescript'
+      'cra-inferno-template-typescript'
     );
   });
 
-  it('typescript@next gives cra-template-typescript@next', async () => {
+  it('typescript@next gives cra-inferno-template-typescript@next', async () => {
     await expect(getTemplateInstallPackage('typescript@next')).resolves.toBe(
-      'cra-template-typescript@next'
+      'cra-inferno-template-typescript@next'
     );
   });
 
-  it('cra-template@next gives cra-template@next', async () => {
-    await expect(getTemplateInstallPackage('cra-template@next')).resolves.toBe(
-      'cra-template@next'
+  it('cra-inferno-template@next gives cra-inferno-template@next', async () => {
+    await expect(getTemplateInstallPackage('cra-inferno-template@next')).resolves.toBe(
+      'cra-inferno-template@next'
     );
   });
 
-  it('cra-template-typescript@next gives cra-template-typescript@next', async () => {
+  it('cra-inferno-template-typescript@next gives cra-inferno-template-typescript@next', async () => {
     await expect(
-      getTemplateInstallPackage('cra-template-typescript@next')
-    ).resolves.toBe('cra-template-typescript@next');
+      getTemplateInstallPackage('cra-inferno-template-typescript@next')
+    ).resolves.toBe('cra-inferno-template-typescript@next');
   });
 
-  it('@iansu gives @iansu/cra-template', async () => {
+  it('@iansu gives @iansu/cra-inferno-template', async () => {
     await expect(getTemplateInstallPackage('@iansu')).resolves.toBe(
-      '@iansu/cra-template'
+      '@iansu/cra-inferno-template'
     );
   });
 
-  it('@iansu/cra-template gives @iansu/cra-template', async () => {
+  it('@iansu/cra-inferno-template gives @iansu/cra-inferno-template', async () => {
     await expect(
-      getTemplateInstallPackage('@iansu/cra-template')
-    ).resolves.toBe('@iansu/cra-template');
+      getTemplateInstallPackage('@iansu/cra-inferno-template')
+    ).resolves.toBe('@iansu/cra-inferno-template');
   });
 
-  it('@iansu/cra-template@next gives @iansu/cra-template@next', async () => {
+  it('@iansu/cra-inferno-template@next gives @iansu/cra-inferno-template@next', async () => {
     await expect(
-      getTemplateInstallPackage('@iansu/cra-template@next')
-    ).resolves.toBe('@iansu/cra-template@next');
+      getTemplateInstallPackage('@iansu/cra-inferno-template@next')
+    ).resolves.toBe('@iansu/cra-inferno-template@next');
   });
 
-  it('@iansu/cra-template-typescript@next gives @iansu/cra-template-typescript@next', async () => {
+  it('@iansu/cra-inferno-template-typescript@next gives @iansu/cra-inferno-template-typescript@next', async () => {
     await expect(
-      getTemplateInstallPackage('@iansu/cra-template-typescript@next')
-    ).resolves.toBe('@iansu/cra-template-typescript@next');
+      getTemplateInstallPackage('@iansu/cra-inferno-template-typescript@next')
+    ).resolves.toBe('@iansu/cra-inferno-template-typescript@next');
   });
 
-  it('http://example.com/cra-template.tar.gz gives http://example.com/cra-template.tar.gz', async () => {
+  it('http://example.com/cra-inferno-template.tar.gz gives http://example.com/cra-inferno-template.tar.gz', async () => {
     await expect(
-      getTemplateInstallPackage('http://example.com/cra-template.tar.gz')
-    ).resolves.toBe('http://example.com/cra-template.tar.gz');
+      getTemplateInstallPackage('http://example.com/cra-inferno-template.tar.gz')
+    ).resolves.toBe('http://example.com/cra-inferno-template.tar.gz');
   });
 });

@@ -5,23 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* @flow */
-import React, { useContext } from 'react';
-import { ThemeContext } from '../iframeScript';
-
 const _preStyle = {
   position: 'relative',
   display: 'block',
   padding: '0.5em',
-  marginTop: '0.5em',
-  marginBottom: '0.5em',
-  overflowX: 'auto',
-  whiteSpace: 'pre-wrap',
-  borderRadius: '0.25rem',
+  'margin-top': '0.5em',
+  'margin-bottom': '0.5em',
+  'overflow-x': 'auto',
+  'white-space': 'pre-wrap',
+  'border-radius': '0.25rem',
 };
 
 const codeStyle = {
-  fontFamily: 'Consolas, Menlo, monospace',
+  'font-family': 'Consolas, Menlo, monospace',
 };
 
 type CodeBlockPropsType = {|
@@ -29,16 +25,15 @@ type CodeBlockPropsType = {|
   codeHTML: string,
 |};
 
-function CodeBlock({ main, codeHTML }: CodeBlockPropsType) {
-  const theme = useContext(ThemeContext);
+function CodeBlock({ main, codeHTML }: CodeBlockPropsType, { theme }) {
   const primaryPreStyle = {
     ..._preStyle,
-    backgroundColor: theme.primaryPreBackground,
+    'background-color': theme.primaryPreBackground,
     color: theme.primaryPreColor,
   };
   const secondaryPreStyle = {
     ..._preStyle,
-    backgroundColor: theme.secondaryPreBackground,
+    'background-color': theme.secondaryPreBackground,
     color: theme.secondaryPreColor,
   };
   const preStyle = main ? primaryPreStyle : secondaryPreStyle;

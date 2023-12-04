@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'inferno';
 import './AppCss.css';
 
 class App extends Component {

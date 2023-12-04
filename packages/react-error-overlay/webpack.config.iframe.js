@@ -40,7 +40,7 @@ module.exports = {
                 configFile: false,
                 compact: false,
                 presets: [
-                  ['babel-preset-react-app/dependencies', { helpers: true }],
+                  ['babel-preset-inferno-app/dependencies', { helpers: true }],
                 ],
               },
             },
@@ -69,11 +69,9 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      // We set process.env.NODE_ENV to 'production' so that React is built
+      // We set process.env.NODE_ENV to 'production' so that Inferno is built
       // in production mode.
-      'process.env': { NODE_ENV: '"production"' },
-      // This prevents our bundled React from accidentally hijacking devtools.
-      __REACT_DEVTOOLS_GLOBAL_HOOK__: '({})',
+      'process.env': { NODE_ENV: '"production"' }
     }),
   ],
   performance: false,

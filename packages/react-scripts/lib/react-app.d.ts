@@ -1,6 +1,5 @@
 /// <reference types="node" />
-/// <reference types="react" />
-/// <reference types="react-dom" />
+/// <reference types="inferno" />
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -45,10 +44,10 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  import * as React from 'react';
+  import * as Inferno from 'inferno';
 
-  export const ReactComponent: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & { title?: string }
+  export const InfernoComponent: Inferno.FunctionComponent<
+    Inferno.SVGProps<SVGSVGElement> & { title?: string }
   >;
 
   const src: string;

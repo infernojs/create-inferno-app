@@ -21,8 +21,8 @@ var execOptions = {
   ],
 };
 
-function isProcessAReactApp(processCommand) {
-  return /^node .*react-scripts\/scripts\/start\.js\s?$/.test(processCommand);
+function isProcessAInfernoApp(processCommand) {
+  return /^node .*inferno-scripts\/scripts\/start\.js\s?$/.test(processCommand);
 }
 
 function getProcessIdOnPort(port) {
@@ -53,7 +53,7 @@ function getProcessCommand(processId, processDirectory) {
 
   command = command.replace(/\n$/, '');
 
-  if (isProcessAReactApp(command)) {
+  if (isProcessAInfernoApp(command)) {
     const packageName = getPackageNameInDirectory(processDirectory);
     return packageName ? packageName : command;
   } else {

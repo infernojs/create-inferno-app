@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import {render} from 'inferno';
 import PublicUrl from './PublicUrl';
 
 describe('PUBLIC_URL', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<PublicUrl />, div);
+    render(<PublicUrl />, div);
   });
 });

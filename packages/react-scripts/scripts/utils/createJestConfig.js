@@ -54,7 +54,6 @@ module.exports = (resolve, rootDir, isEjecting) => {
     ],
     modulePaths: modules.additionalModulePaths || [],
     moduleNameMapper: {
-      '^react-native$': 'react-native-web',
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
       ...(modules.jestAliases || {}),
     },
@@ -124,14 +123,14 @@ module.exports = (resolve, rootDir, isEjecting) => {
       } else {
         console.error(
           chalk.red(
-            '\nOut of the box, Create React App only supports overriding ' +
+            '\nOut of the box, Create Inferno App only supports overriding ' +
               'these Jest options:\n\n' +
               supportedKeys
                 .map(key => chalk.bold('  \u2022 ' + key))
                 .join('\n') +
               '.\n\n' +
               'These options in your package.json Jest configuration ' +
-              'are not currently supported by Create React App:\n\n' +
+              'are not currently supported by Create Inferno App:\n\n' +
               unsupportedKeys
                 .map(key => chalk.bold('  \u2022 ' + key))
                 .join('\n') +
@@ -139,7 +138,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
               'eject from the default setup. You can do so by running ' +
               chalk.bold('npm run eject') +
               ' but remember that this is a one-way operation. ' +
-              'You may also file an issue with Create React App to discuss ' +
+              'You may also file an issue with Create Inferno App to discuss ' +
               'supporting more options out of the box.\n'
           )
         );

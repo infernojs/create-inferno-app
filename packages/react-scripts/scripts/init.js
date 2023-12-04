@@ -59,7 +59,7 @@ function tryGitInit() {
 function tryGitCommit(appPath) {
   try {
     execSync('git add -A', { stdio: 'ignore' });
-    execSync('git commit -m "Initialize project using Create React App"', {
+    execSync('git commit -m "Initialize project using Create Inferno App"', {
       stdio: 'ignore',
     });
     return true;
@@ -95,20 +95,20 @@ module.exports = function (
     console.log('');
     console.error(
       `A template was not provided. This is likely because you're using an outdated version of ${chalk.cyan(
-        'create-react-app'
+        'create-inferno-app'
       )}.`
     );
     console.error(
       `Please note that global installs of ${chalk.cyan(
-        'create-react-app'
+        'create-inferno-app'
       )} are no longer supported.`
     );
     console.error(
       `You can fix this by running ${chalk.cyan(
-        'npm uninstall -g create-react-app'
+        'npm uninstall -g create-inferno-app'
       )} or ${chalk.cyan(
-        'yarn global remove create-react-app'
-      )} before using ${chalk.cyan('create-react-app')} again.`
+        'yarn global remove create-inferno-app'
+      )} before using ${chalk.cyan('create-inferno-app')} again.`
     );
     return;
   }
@@ -131,7 +131,7 @@ module.exports = function (
     console.log();
     console.log(
       chalk.red(
-        'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create React App 5.\n' +
+        'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create Inferno App 5.\n' +
           'This template needs to be updated to use the new `package` key.'
       )
     );
@@ -184,10 +184,10 @@ module.exports = function (
   const templateScripts = templatePackage.scripts || {};
   appPackage.scripts = Object.assign(
     {
-      start: 'react-scripts start',
-      build: 'react-scripts build',
-      test: 'react-scripts test',
-      eject: 'react-scripts eject',
+      start: 'inferno-scripts start',
+      build: 'inferno-scripts build',
+      test: 'inferno-scripts test',
+      eject: 'inferno-scripts eject',
     },
     templateScripts
   );
@@ -311,14 +311,14 @@ module.exports = function (
     );
   }
 
-  // Install react and react-dom for backward compatibility with old CRA cli
-  // which doesn't install react and react-dom along with react-scripts
-  if (!isReactInstalled(appPackage)) {
-    args = args.concat(['react', 'react-dom']);
+  // Install inferno for backward compatibility with old CRA cli
+  // which doesn't install inferno along with inferno-scripts
+  if (!isInfernoInstalled(appPackage)) {
+    args = args.concat(['inferno']);
   }
 
-  // Install template dependencies, and react and react-dom if missing.
-  if ((!isReactInstalled(appPackage) || templateName) && args.length > 1) {
+  // Install template dependencies, and inferno if missing.
+  if ((!isInfernoInstalled(appPackage) || templateName) && args.length > 1) {
     console.log();
     console.log(`Installing template dependencies using ${command}...`);
 
@@ -406,11 +406,10 @@ module.exports = function (
   console.log('Happy hacking!');
 };
 
-function isReactInstalled(appPackage) {
+function isInfernoInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};
 
   return (
-    typeof dependencies.react !== 'undefined' &&
-    typeof dependencies['react-dom'] !== 'undefined'
+    typeof dependencies.inferno !== 'undefined'
   );
 }

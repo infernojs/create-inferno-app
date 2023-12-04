@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-
 const ShellEnvVariables = () => (
   <span id="feature-shell-env-variables">
-    {process.env.REACT_APP_SHELL_ENV_MESSAGE}.
+    {process.env.INFERNO_APP_SHELL_ENV_MESSAGE}.
   </span>
 );
 

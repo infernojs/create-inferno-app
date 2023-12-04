@@ -6,8 +6,6 @@
  */
 
 /* @flow */
-import React, { useContext } from 'react';
-import { ThemeContext } from '../iframeScript';
 import CodeBlock from '../components/CodeBlock';
 import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
 import type { ScriptLine } from '../utils/stack-frame';
@@ -27,24 +25,23 @@ type StackFrameCodeBlockPropsType = {|
 // See: https://github.com/facebook/flow/issues/2405
 type Exact<T> = $Shape<T>;
 
-function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
-  const theme = useContext(ThemeContext);
+function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>, {theme}) {
   const { lines, lineNum, columnNum, contextSize, main } = props;
   const sourceCode = [];
   let whiteSpace = Infinity;
-  lines.forEach(function (e) {
+  for (const e of lines) {
     const { content: text } = e;
     const m = text.match(/^\s*/);
     if (text === '') {
-      return;
+      continue;
     }
     if (m && m[0]) {
       whiteSpace = Math.min(whiteSpace, m[0].length);
     } else {
       whiteSpace = 0;
     }
-  });
-  lines.forEach(function (e) {
+  }
+  for (const e of lines) {
     let { content: text } = e;
     const { lineNumber: line } = e;
 
@@ -52,7 +49,7 @@ function StackFrameCodeBlock(props: Exact<StackFrameCodeBlockPropsType>) {
       text = text.substring(whiteSpace);
     }
     sourceCode[line - 1] = text;
-  });
+  }
   const ansiHighlight = codeFrameColumns(
     sourceCode.join('\n'),
     {

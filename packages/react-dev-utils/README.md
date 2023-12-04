@@ -1,18 +1,14 @@
-# react-dev-utils
+# inferno-dev-utils
 
-This package includes some utilities used by [Create React App](https://github.com/facebook/create-react-app).<br>
-Please refer to its documentation:
+This package includes some utilities used by [Create Inferno App](https://github.com/infernojs/create-inferno-app).
 
-- [Getting Started](https://facebook.github.io/create-react-app/docs/getting-started) – How to create a new app.
-- [User Guide](https://facebook.github.io/create-react-app/) – How to develop apps bootstrapped with Create React App.
+## Usage in Create Inferno App Projects
 
-## Usage in Create React App Projects
+These utilities come by default with [Create Inferno App](https://github.com/infernojs/create-inferno-app). **You don’t need to install it separately in Create Inferno App projects.**
 
-These utilities come by default with [Create React App](https://github.com/facebook/create-react-app). **You don’t need to install it separately in Create React App projects.**
+## Usage Outside of Create Inferno App
 
-## Usage Outside of Create React App
-
-If you don’t use Create React App, or if you [ejected](https://facebook.github.io/create-react-app/docs/available-scripts#npm-run-eject), you may keep using these utilities. Their development will be aligned with Create React App, so major versions of these utilities may come out relatively often. Feel free to fork or copy and paste them into your projects if you’d like to have more control over them, or feel free to use the old versions. Not all of them are React-specific, but we might make some of them more React-specific in the future.
+If you don’t use Create Inferno App, or if you [ejected](https://facebook.github.io/create-react-app/docs/available-scripts#npm-run-eject), you may keep using these utilities. Their development will be aligned with Create Inferno App, so major versions of these utilities may come out relatively often. Feel free to fork or copy and paste them into your projects if you’d like to have more control over them, or feel free to use the old versions.
 
 ### Entry Points
 
@@ -144,7 +140,7 @@ console.log('Just cleared the screen!');
 
 #### `eslintFormatter(results: Object): string`
 
-This is our custom ESLint formatter that integrates well with Create React App console output.<br>
+This is our custom ESLint formatter that integrates well with Create Inferno App console output.<br>
 You can use the default one instead if you prefer so.
 
 ```js
@@ -248,8 +244,8 @@ Finds the currently running process on `port`.
 Returns a string containing the name and directory, e.g.,
 
 ```
-create-react-app
-in /Users/developer/create-react-app
+create-inferno-app
+in /Users/developer/create-inferno-app
 ```
 
 ```js
@@ -260,7 +256,7 @@ getProcessForPort(3000);
 
 #### `launchEditor(fileName: string, lineNumber: number): void`
 
-On macOS, tries to find a known running editor process and opens the file in it. It can also be explicitly configured by `REACT_EDITOR`, `VISUAL`, or `EDITOR` environment variables. For example, you can put `REACT_EDITOR=atom` in your `.env.local` file, and Create React App will respect that.
+On macOS, tries to find a known running editor process and opens the file in it. It can also be explicitly configured by `INFERNO_EDITOR`, `VISUAL`, or `EDITOR` environment variables. For example, you can put `INFERNO_EDITOR=atom` in your `.env.local` file, and Create Inferno App will respect that.
 
 #### `noopServiceWorkerMiddleware(servedPath: string): ExpressMiddleware`
 

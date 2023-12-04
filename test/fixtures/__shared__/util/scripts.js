@@ -23,7 +23,7 @@ function execaSafe(...args) {
     }));
 }
 
-module.exports = class ReactScripts {
+module.exports = class InfernoScripts {
   constructor(root) {
     this.root = root;
   }

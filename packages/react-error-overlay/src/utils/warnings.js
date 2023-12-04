@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import type { ReactFrame } from '../effects/proxyConsole';
+import type { InfernoFrame } from '../effects/proxyConsole';
 
 function stripInlineStacktrace(message: string): string {
   return message
@@ -17,11 +17,11 @@ function stripInlineStacktrace(message: string): string {
 
 function massage(
   warning: string,
-  frames: ReactFrame[]
+  frames: InfernoFrame[]
 ): { message: string, stack: string } {
   let message = stripInlineStacktrace(warning);
 
-  // Reassemble the stack with full filenames provided by React
+  // Reassemble the stack with full filenames provided by Inferno
   let stack = '';
   let lastFilename;
   let lastLineNumber;

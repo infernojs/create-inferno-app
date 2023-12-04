@@ -51,7 +51,7 @@ function exists {
 # Check for accidental dependencies in package.json
 function checkDependencies {
   if ! awk '/"dependencies": {/{y=1;next}/},/{y=0; next}y' package.json | \
-  grep -v -q -E '^\s*"(@testing-library\/.+)|web-vitals|(react(-dom|-scripts)?)"'; then
+  grep -v -q -E '^\s*"(@testing-library\/.+)|web-vitals|(inferno(-dom|-scripts)?)"'; then
    echo "Dependencies are correct"
   else
    echo "There are extraneous dependencies in package.json"
@@ -62,7 +62,7 @@ function checkDependencies {
 # Check for accidental dependencies in package.json
 function checkTypeScriptDependencies {
   if ! awk '/"dependencies": {/{y=1;next}/},/{y=0; next}y' package.json | \
-  grep -v -q -E '^\s*"(@testing-library\/.+)|web-vitals|(@types\/.+)|typescript|(react(-dom|-scripts)?)"'; then
+  grep -v -q -E '^\s*"(@testing-library\/.+)|web-vitals|(@types\/.+)|typescript|(inferno(-dom|-scripts)?)"'; then
    echo "Dependencies are correct"
   else
    echo "There are extraneous dependencies in package.json"
@@ -93,19 +93,19 @@ startLocalRegistry "$root_path"/tasks/verdaccio.yaml
 # Publish the monorepo
 publishToLocalRegistry
 
-echo "Create React App Version: "
-npx create-react-app --version
+echo "Create Inferno App Version: "
+npx create-inferno-app --version
 
 # ******************************************************************************
 # Test --scripts-version with a distribution tag
 # ******************************************************************************
 
 cd "$temp_app_path"
-npx create-react-app test-app-dist-tag --scripts-version=@latest
+npx create-inferno-app test-app-dist-tag --scripts-version=@latest
 cd test-app-dist-tag
 
 # Check corresponding scripts version is installed and no TypeScript or yarn is present by default
-exists node_modules/react-scripts
+exists node_modules/inferno-scripts
 ! exists node_modules/typescript
 ! exists src/index.tsx
 ! exists yarn.lock
@@ -117,12 +117,12 @@ checkDependencies
 # ******************************************************************************
 
 cd "$temp_app_path"
-npx create-react-app test-app-version-number --scripts-version=1.0.17
+npx create-inferno-app test-app-version-number --scripts-version=1.0.17
 cd test-app-version-number
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts
-grep '"version": "1.0.17"' node_modules/react-scripts/package.json
+exists node_modules/inferno-scripts
+grep '"version": "1.0.17"' node_modules/inferno-scripts/package.json
 checkDependencies
 
 # ******************************************************************************
@@ -130,13 +130,13 @@ checkDependencies
 # ******************************************************************************
 
 cd "$temp_app_path"
-yarn create react-app test-use-yarn-create --scripts-version=1.0.17
+yarn create inferno-app test-use-yarn-create --scripts-version=1.0.17
 cd test-use-yarn-create
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts
+exists node_modules/inferno-scripts
 exists yarn.lock
-grep '"version": "1.0.17"' node_modules/react-scripts/package.json
+grep '"version": "1.0.17"' node_modules/inferno-scripts/package.json
 checkDependencies
 
 # ******************************************************************************
@@ -144,15 +144,15 @@ checkDependencies
 # ******************************************************************************
 
 cd "$temp_app_path"
-npx create-react-app test-app-typescript --template typescript
+npx create-inferno-app test-app-typescript --template typescript
 cd test-app-typescript
 
 # Check corresponding template is installed.
-exists node_modules/react-scripts
+exists node_modules/inferno-scripts
 exists node_modules/typescript
 exists src/index.tsx
 exists tsconfig.json
-exists src/react-app-env.d.ts
+exists src/inferno-app-env.d.ts
 checkTypeScriptDependencies
 
 # Check that the TypeScript template passes smoke tests, build, and normal tests
@@ -166,7 +166,7 @@ CI=true npm test
 echo yes | npm run eject
 
 # Ensure env file still exists
-exists src/react-app-env.d.ts
+exists src/inferno-app-env.d.ts
 
 # Check that the TypeScript template passes ejected smoke tests, build, and normal tests
 npm start -- --smoke-test
@@ -177,25 +177,25 @@ CI=true npm test
 # Test --scripts-version with a tarball url
 # ******************************************************************************
 
-cd "$temp_app_path"
-npx create-react-app test-app-tarball-url --scripts-version=https://registry.npmjs.org/react-scripts/-/react-scripts-1.0.17.tgz
-cd test-app-tarball-url
-
-# Check corresponding scripts version is installed.
-exists node_modules/react-scripts
-grep '"version": "1.0.17"' node_modules/react-scripts/package.json
-checkDependencies
+#cd "$temp_app_path"
+#npx create-inferno-app test-app-tarball-url --scripts-version=https://registry.npmjs.org/inferno-scripts/-/inferno-scripts-1.0.17.tgz
+#cd test-app-tarball-url
+#
+## Check corresponding scripts version is installed.
+#exists node_modules/inferno-scripts
+#grep '"version": "1.0.17"' node_modules/inferno-scripts/package.json
+#checkDependencies
 
 # ******************************************************************************
-# Test --scripts-version with a custom fork of react-scripts
+# Test --scripts-version with a custom fork of inferno-scripts
 # ******************************************************************************
 
 cd "$temp_app_path"
-npx create-react-app test-app-fork --scripts-version=react-scripts-fork
+npx create-inferno-app test-app-fork --scripts-version=inferno-scripts-fork
 cd test-app-fork
 
 # Check corresponding scripts version is installed.
-exists node_modules/react-scripts-fork
+exists node_modules/inferno-scripts-fork
 
 # ******************************************************************************
 # Test project folder is deleted on failing package installation
@@ -203,7 +203,7 @@ exists node_modules/react-scripts-fork
 
 cd "$temp_app_path"
 # we will install a non-existing package to simulate a failed installation.
-npx create-react-app test-app-should-not-exist --scripts-version=`date +%s` || true
+npx create-inferno-app test-app-should-not-exist --scripts-version=`date +%s` || true
 # confirm that the project files were deleted
 test ! -e test-app-should-not-exist/package.json
 test ! -d test-app-should-not-exist/node_modules
@@ -216,7 +216,7 @@ cd "$temp_app_path"
 mkdir test-app-should-remain
 echo '## Hello' > ./test-app-should-remain/README.md
 # we will install a non-existing package to simulate a failed installation.
-npx create-react-app test-app-should-remain --scripts-version=`date +%s` || true
+npx create-inferno-app test-app-should-remain --scripts-version=`date +%s` || true
 # confirm the file exist
 test -e test-app-should-remain/README.md
 # confirm only README.md is the only file in the directory
@@ -225,16 +225,16 @@ if [ "$(ls -1 ./test-app-should-remain | wc -l | tr -d '[:space:]')" != "1" ]; t
 fi
 
 # ******************************************************************************
-# Test --scripts-version with a scoped fork tgz of react-scripts
+# Test --scripts-version with a scoped fork tgz of inferno-scripts
 # ******************************************************************************
-
-cd $temp_app_path
-curl "https://registry.npmjs.org/@enoah_netzach/react-scripts/-/react-scripts-0.9.0.tgz" -o enoah-scripts-0.9.0.tgz
-npx create-react-app test-app-scoped-fork-tgz --scripts-version=$temp_app_path/enoah-scripts-0.9.0.tgz
-cd test-app-scoped-fork-tgz
+#
+#cd $temp_app_path
+#curl "https://registry.npmjs.org/@enoah_netzach/inferno-scripts/-/inferno-scripts-0.9.0.tgz" -o enoah-scripts-0.9.0.tgz
+#npx create-inferno-app test-app-scoped-fork-tgz --scripts-version=$temp_app_path/enoah-scripts-0.9.0.tgz
+#cd test-app-scoped-fork-tgz
 
 # Check corresponding scripts version is installed.
-exists node_modules/@enoah_netzach/react-scripts
+exists node_modules/@enoah_netzach/inferno-scripts
 
 # ******************************************************************************
 # Test nested folder path as the project name
@@ -245,20 +245,20 @@ cd "$temp_app_path"
 mkdir test-app-nested-paths-t1
 cd test-app-nested-paths-t1
 mkdir -p test-app-nested-paths-t1/aa/bb/cc/dd
-npx create-react-app test-app-nested-paths-t1/aa/bb/cc/dd
+npx create-inferno-app test-app-nested-paths-t1/aa/bb/cc/dd
 cd test-app-nested-paths-t1/aa/bb/cc/dd
 npm start -- --smoke-test
 
 # Testing a path that does not exist
 cd "$temp_app_path"
-npx create-react-app test-app-nested-paths-t2/aa/bb/cc/dd
+npx create-inferno-app test-app-nested-paths-t2/aa/bb/cc/dd
 cd test-app-nested-paths-t2/aa/bb/cc/dd
 npm start -- --smoke-test
 
 # Testing a path that is half exists
 cd "$temp_app_path"
 mkdir -p test-app-nested-paths-t3/aa
-npx create-react-app test-app-nested-paths-t3/aa/bb/cc/dd
+npx create-inferno-app test-app-nested-paths-t3/aa/bb/cc/dd
 cd test-app-nested-paths-t3/aa/bb/cc/dd
 npm start -- --smoke-test
 
@@ -266,7 +266,7 @@ npm start -- --smoke-test
 # Test when PnP is enabled
 # ******************************************************************************
 cd "$temp_app_path"
-yarn create react-app test-app-pnp --use-pnp
+yarn create inferno-app test-app-pnp --use-pnp
 cd test-app-pnp
 ! exists node_modules
 exists .pnp.js

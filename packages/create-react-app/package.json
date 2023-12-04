@@ -1,28 +1,28 @@
 {
-  "name": "create-react-app",
+  "name": "create-inferno-app",
   "version": "5.0.1",
   "keywords": [
-    "react"
+    "inferno"
   ],
-  "description": "Create React apps with no build configuration.",
+  "description": "Create Inferno apps with no build configuration.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/create-react-app.git",
-    "directory": "packages/create-react-app"
+    "url": "https://github.com/infernojs/create-inferno-app.git",
+    "directory": "packages/create-inferno-app"
   },
   "license": "MIT",
   "engines": {
     "node": ">=14"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "files": [
     "index.js",
     "createReactApp.js"
   ],
   "bin": {
-    "create-react-app": "./index.js"
+    "create-inferno-app": "./index.js"
   },
   "scripts": {
     "test": "cross-env FORCE_COLOR=true jest"

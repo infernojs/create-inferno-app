@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {Component} from 'inferno';
 
 interface MyType {
   foo: number;
@@ -17,7 +17,7 @@ assertIsString(foo);
 
 type MyObject = Pick<MyType, 'bar' | 'baz'>;
 
-class App extends React.Component {
+class App extends Component {
   static foo: MyObject = { bar: true, baz: { n: 123 } };
   n = App.foo?.baz!.n ?? 'foo';
 

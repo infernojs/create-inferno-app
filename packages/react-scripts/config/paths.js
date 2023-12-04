@@ -83,7 +83,7 @@ module.exports = {
 // @remove-on-eject-begin
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
-// config before eject: we're in ./node_modules/react-scripts/config/
+// config before eject: we're in ./node_modules/inferno-scripts/config/
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
@@ -111,17 +111,17 @@ module.exports = {
 };
 
 const ownPackageJson = require('../package.json');
-const reactScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
-const reactScriptsLinked =
-  fs.existsSync(reactScriptsPath) &&
-  fs.lstatSync(reactScriptsPath).isSymbolicLink();
+const infernoScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
+const infernoScriptsLinked =
+  fs.existsSync(infernoScriptsPath) &&
+  fs.lstatSync(infernoScriptsPath).isSymbolicLink();
 
-// config before publish: we're in ./packages/react-scripts/config/
+// config before publish: we're in ./packages/inferno-scripts/config/
 if (
-  !reactScriptsLinked &&
-  __dirname.indexOf(path.join('packages', 'react-scripts', 'config')) !== -1
+  !infernoScriptsLinked &&
+  __dirname.indexOf(path.join('packages', 'inferno-scripts', 'config')) !== -1
 ) {
-  const templatePath = '../cra-template/template';
+  const templatePath = '../cra-inferno-template/template';
   module.exports = {
     dotenv: resolveOwn(`${templatePath}/.env`),
     appPath: resolveApp('.'),
