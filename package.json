@@ -6,7 +6,6 @@
   ],
   "scripts": {
     "build": "cd packages/inferno-scripts && node bin/inferno-scripts.js build",
-    "changelog": "lerna-changelog",
     "create-inferno-app": "node tasks/cra.js",
     "e2e": "tasks/e2e-simple.sh",
     "e2e:docker": "tasks/local-test.sh",
