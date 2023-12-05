@@ -25,7 +25,7 @@ type HeaderPropType = {|
   headerText: string,
 |};
 
-function Header(props: HeaderPropType, {theme}) {
+function Header(props: HeaderPropType, { theme }) {
   return <div style={headerStyle(theme)}>{props.headerText}</div>;
 }
 

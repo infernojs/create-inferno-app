@@ -34,7 +34,7 @@ module.exports = {
         'jest/valid-describe-callback': 'error',
         'jest/valid-expect': 'error',
         'jest/valid-expect-in-promise': 'error',
-        'jest/valid-title': 'warn'
+        'jest/valid-title': 'warn',
       },
     },
   ],

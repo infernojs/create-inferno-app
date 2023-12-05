@@ -6,10 +6,7 @@
       "web-vitals": "^2.1.0"
     },
     "eslintConfig": {
-      "extends": [
-        "eslint:recommended",
-        "plugin:inferno/recommended"
-      ]
+      "extends": ["eslint:recommended", "plugin:inferno/recommended"]
     }
   }
 }

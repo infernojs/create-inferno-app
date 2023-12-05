@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {forwardRef} from 'inferno';
+import { forwardRef } from 'inferno';
 import { InfernoComponent as Logo } from './assets/logo.svg';
 
 const SvgComponent = () => {

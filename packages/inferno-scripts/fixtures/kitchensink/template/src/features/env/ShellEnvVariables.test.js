@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {render} from 'inferno';
+import { render } from 'inferno';
 import ShellEnvVariables from './ShellEnvVariables';
 
 describe('shell env variables', () => {

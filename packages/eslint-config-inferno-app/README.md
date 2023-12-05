@@ -60,7 +60,11 @@ If you want to enable even more accessibility rules, you can create an `.eslintr
 
 ```json
 {
-  "extends": ["eslint:recommended", "plugin:inferno/recommended", "plugin:jsx-a11y/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:inferno/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
   "plugins": ["jsx-a11y"]
 }
 ```

@@ -38,13 +38,10 @@ class BuiltEmitter extends Component {
     } = this;
     return (
       <div>
-        {feature && createComponentVNode(
-          VNodeFlags.ComponentUnknown,
-          feature,
-          {
+        {feature &&
+          createComponentVNode(VNodeFlags.ComponentUnknown, feature, {
             onReady: handleReady,
-          })
-        }
+          })}
       </div>
     );
   }

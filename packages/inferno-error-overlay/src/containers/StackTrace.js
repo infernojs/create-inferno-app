@@ -37,7 +37,7 @@ class StackTrace extends Component<Props> {
       currentBundle = [],
       bundleCount = 0;
 
-    for (let index = 0; index < stackFrames.length; index++){
+    for (let index = 0; index < stackFrames.length; index++) {
       const frame = stackFrames[index];
       const { fileName, _originalFileName: sourceFileName } = frame;
       const isInternalUrl = isInternalFile(sourceFileName, fileName);

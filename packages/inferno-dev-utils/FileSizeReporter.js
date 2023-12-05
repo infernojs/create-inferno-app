@@ -90,11 +90,7 @@ function printFileSizesAfterBuild(
     console.log(
       chalk.yellow('The bundle size is significantly larger than recommended.')
     );
-    console.log(
-      chalk.yellow(
-        'Consider reducing it with code splitting.'
-      )
-    );
+    console.log(chalk.yellow('Consider reducing it with code splitting.'));
     console.log(
       chalk.yellow(
         'You can also analyze the project dependencies: https://goo.gl/LeUzfb'

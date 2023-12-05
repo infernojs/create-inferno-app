@@ -35,5 +35,5 @@ module.exports = {
     babelOptions: {
       presets: [require.resolve('babel-preset-inferno-app/prod')],
     },
-  }
+  },
 };

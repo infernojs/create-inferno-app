@@ -176,7 +176,8 @@ function updateIframeContent() {
   }
 }
 
-window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ = window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ || {};
+window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ =
+  window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__ || {};
 window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady =
   function iframeReady() {
     isIframeReady = true;

@@ -52,7 +52,7 @@ type StackFramePropsType = {|
   editorHandler: (errorLoc: ErrorLocation) => void,
 |};
 
-class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
+class StackFrame extends Component<StackFramePropsType, { compiled: boolean }> {
   constructor(props) {
     super(props);
 
@@ -62,12 +62,12 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
   }
 
   toggleCompiled = () => {
-    this.setState((prevState) => ({ compiled: !prevState.compiled }));
+    this.setState(prevState => ({ compiled: !prevState.compiled }));
   };
 
   getErrorLocation = () => {
     const { _originalFileName: fileName, _originalLineNumber: lineNumber } =
-        this.props.frame;
+      this.props.frame;
 
     if (!fileName) {
       return null;
@@ -89,20 +89,15 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
     this.props.editorHandler(errorLoc);
   };
 
-  onKeyDown = (e) => {
+  onKeyDown = e => {
     if (e.key === 'Enter') {
       this.editorHandler();
     }
   };
 
   render() {
-    const {
-      frame,
-      contextSize,
-      critical,
-      showCode,
-      editorHandler,
-    } = this.props;
+    const { frame, contextSize, critical, showCode, editorHandler } =
+      this.props;
     const { compiled } = this.state;
     const theme = this.context.theme;
 
@@ -119,22 +114,22 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
     const functionName = frame.getFunctionName();
 
     const url = getPrettyURL(
-        sourceFileName,
-        sourceLineNumber,
-        sourceColumnNumber,
-        fileName,
-        lineNumber,
-        columnNumber,
-        compiled
+      sourceFileName,
+      sourceLineNumber,
+      sourceColumnNumber,
+      fileName,
+      lineNumber,
+      columnNumber,
+      compiled
     );
 
     let codeBlockProps = null;
     if (showCode) {
       if (
-          compiled &&
-          scriptLines &&
-          scriptLines.length !== 0 &&
-          lineNumber != null
+        compiled &&
+        scriptLines &&
+        scriptLines.length !== 0 &&
+        lineNumber != null
       ) {
         codeBlockProps = {
           lines: scriptLines,
@@ -144,10 +139,10 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
           main: critical,
         };
       } else if (
-          !compiled &&
-          sourceLines &&
-          sourceLines.length !== 0 &&
-          sourceLineNumber != null
+        !compiled &&
+        sourceLines &&
+        sourceLines.length !== 0 &&
+        sourceLineNumber != null
       ) {
         codeBlockProps = {
           lines: sourceLines,
@@ -160,26 +155,26 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
     }
 
     const canOpenInEditor =
-        this.getErrorLocation() !== null && editorHandler !== null;
+      this.getErrorLocation() !== null && editorHandler !== null;
 
     return (
-        <div>
-          <div>{functionName}</div>
-          <div style={linkStyle(theme)}>
+      <div>
+        <div>{functionName}</div>
+        <div style={linkStyle(theme)}>
           <span
-              style={canOpenInEditor ? anchorStyle(theme) : null}
-              onClick={canOpenInEditor ? this.editorHandler : null}
-              onKeyDown={canOpenInEditor ? this.onKeyDown : null}
-              tabIndex={canOpenInEditor ? '0' : null}
+            style={canOpenInEditor ? anchorStyle(theme) : null}
+            onClick={canOpenInEditor ? this.editorHandler : null}
+            onKeyDown={canOpenInEditor ? this.onKeyDown : null}
+            tabIndex={canOpenInEditor ? '0' : null}
           >
             {url}
           </span>
-          </div>
-          {codeBlockProps && (
-              <span>
+        </div>
+        {codeBlockProps && (
+          <span>
             <span
-                onClick={canOpenInEditor ? this.editorHandler : null}
-                style={canOpenInEditor ? codeAnchorStyle(theme) : null}
+              onClick={canOpenInEditor ? this.editorHandler : null}
+              style={canOpenInEditor ? codeAnchorStyle(theme) : null}
             >
               <CodeBlock {...codeBlockProps} />
             </span>
@@ -187,8 +182,8 @@ class StackFrame extends Component<StackFramePropsType, {compiled: boolean}> {
               {'View ' + (compiled ? 'source' : 'compiled')}
             </button>
           </span>
-          )}
-        </div>
+        )}
+      </div>
     );
   }
 }

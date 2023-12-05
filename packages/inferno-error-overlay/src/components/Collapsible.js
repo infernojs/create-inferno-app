@@ -58,32 +58,31 @@ class Collapsible {
     const count = props.children.length;
 
     return (
-        <div>
+      <div>
+        <button
+          onClick={toggleCollapsed}
+          style={
+            collapsed
+              ? collapsibleCollapsedStyle(theme)
+              : collapsibleExpandedStyle(theme)
+          }
+        >
+          {(collapsed ? '▶' : '▼') +
+            ` ${count} stack frames were ` +
+            (collapsed ? 'collapsed.' : 'expanded.')}
+        </button>
+        <div style={{ display: collapsed ? 'none' : 'block' }}>
+          {props.children}
           <button
-              onClick={toggleCollapsed}
-              style={
-                collapsed
-                    ? collapsibleCollapsedStyle(theme)
-                    : collapsibleExpandedStyle(theme)
-              }
+            onClick={this.toggleCollapsed}
+            style={collapsibleExpandedStyle(theme)}
           >
-            {(collapsed ? '▶' : '▼') +
-                ` ${count} stack frames were ` +
-                (collapsed ? 'collapsed.' : 'expanded.')}
+            {`▲ ${count} stack frames were expanded.`}
           </button>
-          <div style={{ display: collapsed ? 'none' : 'block' }}>
-            {props.children}
-            <button
-                onClick={this.toggleCollapsed}
-                style={collapsibleExpandedStyle(theme)}
-            >
-              {`▲ ${count} stack frames were expanded.`}
-            </button>
-          </div>
         </div>
+      </div>
     );
   }
 }
-
 
 export default Collapsible;

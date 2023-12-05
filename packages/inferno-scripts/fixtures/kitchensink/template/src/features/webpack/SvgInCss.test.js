@@ -1,4 +1,4 @@
-import {render} from 'inferno';
+import { render } from 'inferno';
 import SvgInCss from './SvgInCss';
 
 describe('svg in css', () => {

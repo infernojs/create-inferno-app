@@ -8,7 +8,9 @@
 const ExpandEnvVariables = () => (
   <span>
     <span id="feature-expand-env-1">{process.env.INFERNO_APP_BASIC}</span>
-    <span id="feature-expand-env-2">{process.env.INFERNO_APP_BASIC_EXPAND}</span>
+    <span id="feature-expand-env-2">
+      {process.env.INFERNO_APP_BASIC_EXPAND}
+    </span>
     <span id="feature-expand-env-3">
       {process.env.INFERNO_APP_BASIC_EXPAND_SIMPLE}
     </span>

@@ -23,7 +23,10 @@ type CompileErrorContainerPropsType = {|
   editorHandler: (errorLoc: ErrorLocation) => void,
 |};
 
-function CompileErrorContainer(props: CompileErrorContainerPropsType, { theme }) {
+function CompileErrorContainer(
+  props: CompileErrorContainerPropsType,
+  { theme }
+) {
   const { error, editorHandler } = props;
   const errLoc: ?ErrorLocation = parseCompileError(error);
   const canOpenInEditor = errLoc !== null && editorHandler !== null;

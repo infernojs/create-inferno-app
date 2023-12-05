@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {render, createRef} from 'inferno';
+import { render, createRef } from 'inferno';
 import SvgComponent, { SvgComponentWithRef } from './SvgComponent';
 
 describe('svg component', () => {

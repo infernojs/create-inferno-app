@@ -409,7 +409,5 @@ module.exports = function (
 function isInfernoInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};
 
-  return (
-    typeof dependencies.inferno !== 'undefined'
-  );
+  return typeof dependencies.inferno !== 'undefined';
 }

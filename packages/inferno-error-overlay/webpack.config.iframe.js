@@ -71,7 +71,7 @@ module.exports = {
     new webpack.DefinePlugin({
       // We set process.env.NODE_ENV to 'production' so that Inferno is built
       // in production mode.
-      'process.env': { NODE_ENV: '"production"' }
+      'process.env': { NODE_ENV: '"production"' },
     }),
   ],
   performance: false,

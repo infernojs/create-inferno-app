@@ -213,14 +213,12 @@ module.exports = {
       {
         object: 'require',
         property: 'ensure',
-        message:
-          'Please use import() instead.',
+        message: 'Please use import() instead.',
       },
       {
         object: 'System',
         property: 'import',
-        message:
-          'Please use import() instead.',
+        message: 'Please use import() instead.',
       },
     ],
     'getter-return': 'warn',

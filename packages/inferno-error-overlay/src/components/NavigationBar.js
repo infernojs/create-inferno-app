@@ -49,7 +49,7 @@ type NavigationBarPropsType = {|
   next: Callback,
 |};
 
-function NavigationBar(props: NavigationBarPropsType, {theme}) {
+function NavigationBar(props: NavigationBarPropsType, { theme }) {
   const { currentError, totalErrors, previous, next } = props;
   return (
     <div style={navigationBarStyle}>
