@@ -1,5 +1,6 @@
 {
   "name": "babel-preset-inferno-app",
+  "type": "module",
   "version": "10.0.1",
   "description": "Babel preset used by Create Inferno App",
   "repository": {
