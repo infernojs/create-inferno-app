@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const { getTemplateInstallPackage } = require('../createInfernoApp');
+import { getTemplateInstallPackage } from "../createInfernoApp";
+
 
 describe('getTemplateInstallPackage', () => {
   it('no options gives cia-template', async () => {

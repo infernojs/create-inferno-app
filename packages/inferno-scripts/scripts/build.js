@@ -6,9 +6,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
+
+// Ensure environment variables are read.
+import config0 from "./../config/env.js";
+import path from "path";
+import chalk from "inferno-dev-utils/chalk";
+import fs from "fs-extra";
+import bfj from "bfj";
+import webpack from "webpack";
+import paths from "../config/paths";
+import checkRequiredFiles from "inferno-dev-utils/checkRequiredFiles";
+import formatWebpackMessages from "inferno-dev-utils/formatWebpackMessages";
+import printHostingInstructions from "inferno-dev-utils/printHostingInstructions";
+import FileSizeReporter from "inferno-dev-utils/FileSizeReporter";
+import printBuildError from "inferno-dev-utils/printBuildError";
+
+// We require that you explicitly set browsers and do not fall back to
+// browserslist defaults.
+import { checkBrowsers } from "inferno-dev-utils/browsersHelper";
+
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
@@ -18,23 +36,7 @@ process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-// Ensure environment variables are read.
-require('../config/env');
-
-const path = require('path');
-const chalk = require('inferno-dev-utils/chalk');
-const fs = require('fs-extra');
-const bfj = require('bfj');
-const webpack = require('webpack');
 const configFactory = require('../config/webpack.config');
-const paths = require('../config/paths');
-const checkRequiredFiles = require('inferno-dev-utils/checkRequiredFiles');
-const formatWebpackMessages = require('inferno-dev-utils/formatWebpackMessages');
-const printHostingInstructions = require('inferno-dev-utils/printHostingInstructions');
-const FileSizeReporter = require('inferno-dev-utils/FileSizeReporter');
-const printBuildError = require('inferno-dev-utils/printBuildError');
-
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
@@ -56,10 +58,6 @@ const writeStatsJson = argv.indexOf('--stats') !== -1;
 
 // Generate configuration
 const config = configFactory('production');
-
-// We require that you explicitly set browsers and do not fall back to
-// browserslist defaults.
-const { checkBrowsers } = require('inferno-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // First, read the current file sizes in build directory.

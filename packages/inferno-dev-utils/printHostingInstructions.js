@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const chalk = require('chalk');
-const url = require('url');
-const globalModules = require('global-modules');
-const fs = require('fs');
+import chalk from "chalk";
+import url from "url";
+import globalModules from "global-modules";
+import fs from "fs";
 
 function printHostingInstructions(
   appPackage,
@@ -125,4 +124,4 @@ function printStaticServerInstructions(buildFolder, useYarn) {
   console.log(`  ${chalk.cyan('serve')} -s ${buildFolder}`);
 }
 
-module.exports = printHostingInstructions;
+export default printHostingInstructions;

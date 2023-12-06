@@ -6,13 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const paths = require('./paths');
-const chalk = require('inferno-dev-utils/chalk');
-const resolve = require('resolve');
+import fs from "fs";
+import path from "path";
+import paths from "./paths";
+import chalk from "inferno-dev-utils/chalk";
+import resolve from "resolve";
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
@@ -139,4 +138,4 @@ function getModules() {
   };
 }
 
-module.exports = getModules();
+export default getModules();

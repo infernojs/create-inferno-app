@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 function clearConsole() {
   process.stdout.write(
@@ -13,4 +12,4 @@ function clearConsole() {
   );
 }
 
-module.exports = clearConsole;
+export default clearConsole;

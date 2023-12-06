@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const fs = require('fs');
-const { JSDOM, ResourceLoader } = require('jsdom');
-const path = require('path');
-const url = require('url');
+import fs from "fs";
+import { JSDOM, ResourceLoader } from "jsdom";
+
+
+import path from "path";
+import url from "url";
 
 const file =
   process.env.E2E_FILE &&

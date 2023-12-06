@@ -1,6 +1,5 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
+import testSetup from "../__shared__/test-setup";
 
 test('passes tests', async () => {
   const { fulfilled } = await testSetup.scripts.test({

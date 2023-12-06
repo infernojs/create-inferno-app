@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const chalk = require('chalk');
+import chalk from "chalk";
 
-module.exports = function printBuildError(err) {
+export default function printBuildError(err) {
   const message = err != null && err.message;
   const stack = err != null && err.stack;
 
@@ -42,4 +41,4 @@ module.exports = function printBuildError(err) {
     console.log((message || err) + '\n');
   }
   console.log();
-};
+}

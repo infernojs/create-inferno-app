@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var immer = require('immer');
+import * as immer from "immer";
 
-module.exports = immer;
+export default immer;

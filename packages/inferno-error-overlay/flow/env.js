@@ -1,3 +1,5 @@
+/* eslint-disable ft-flow/no-types-missing-file-annotation */
+
 declare module 'anser' {
   declare module.exports: any;
 }

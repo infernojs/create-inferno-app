@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var chalk = require('chalk');
+import fs from "fs";
+import path from "path";
+import chalk from "chalk";
 
 function checkRequiredFiles(files) {
   var currentFilePath;
@@ -29,4 +28,4 @@ function checkRequiredFiles(files) {
   }
 }
 
-module.exports = checkRequiredFiles;
+export default checkRequiredFiles;

@@ -7,12 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const execa = require('execa');
-const tempy = require('tempy');
+import fs from "fs";
+import path from "path";
+import {execa} from "execa";
+import tempy from "tempy";
 
 main();
 

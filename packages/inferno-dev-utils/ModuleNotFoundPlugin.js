@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const chalk = require('chalk');
-const findUp = require('find-up');
-const path = require('path');
+import chalk from "chalk";
+import {findUpSync} from "find-up";
+import path from "path";
 
 class ModuleNotFoundPlugin {
   constructor(appPath, yarnLockFile) {
@@ -23,7 +22,7 @@ class ModuleNotFoundPlugin {
 
   useYarnCommand() {
     try {
-      return findUp.sync('yarn.lock', { cwd: this.appPath }) != null;
+      return findUpSync('yarn.lock', { cwd: this.appPath }) != null;
     } catch (_) {
       return false;
     }
@@ -141,4 +140,4 @@ class ModuleNotFoundPlugin {
   }
 }
 
-module.exports = ModuleNotFoundPlugin;
+export default ModuleNotFoundPlugin;

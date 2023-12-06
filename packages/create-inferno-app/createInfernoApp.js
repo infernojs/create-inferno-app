@@ -27,27 +27,25 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'use strict';
 
-const https = require('https');
-const chalk = require('chalk');
-const commander = require('commander');
-const dns = require('dns');
-const envinfo = require('envinfo');
-const execSync = require('child_process').execSync;
-const fs = require('fs-extra');
-const hyperquest = require('hyperquest');
-const prompts = require('prompts');
-const os = require('os');
-const path = require('path');
-const semver = require('semver');
-const spawn = require('cross-spawn');
-const tmp = require('tmp');
-const unpack = require('tar-pack').unpack;
-const url = require('url');
-const validateProjectName = require('validate-npm-package-name');
-
-const packageJson = require('./package.json');
+import https from "https";
+import chalk from "chalk";
+import commander from "commander";
+import dns from "dns";
+import envinfo from "envinfo";
+import { execSync } from "child_process";
+import fs from "fs-extra";
+import hyperquest from "hyperquest";
+import prompts from "prompts";
+import os from "os";
+import path from "path";
+import semver from "semver";
+import spawn from "cross-spawn";
+import tmp from "tmp";
+import { unpack } from "tar-pack";
+import url from "url";
+import validateProjectName from "validate-npm-package-name";
+import packageJson from "./package.json";
 
 function isUsingYarn() {
   return (process.env.npm_config_user_agent || '').indexOf('yarn') === 0;
@@ -55,7 +53,7 @@ function isUsingYarn() {
 
 let projectName;
 
-function init() {
+export function init() {
   const program = new commander.Command(packageJson.name)
     .version(packageJson.version)
     .arguments('<project-directory>')
@@ -591,7 +589,7 @@ function getInstallPackage(version, originalDirectory) {
   return Promise.resolve(packageToInstall);
 }
 
-function getTemplateInstallPackage(template, originalDirectory) {
+export function getTemplateInstallPackage(template, originalDirectory) {
   let templateToInstall = 'cia-template';
   if (template) {
     if (template.match(/^file:/)) {
@@ -1113,7 +1111,7 @@ function checkForLatestVersion() {
   });
 }
 
-module.exports = {
+export default {
   init,
   getTemplateInstallPackage,
 };

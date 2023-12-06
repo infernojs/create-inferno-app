@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var globby = require('globby');
+import {globby} from "globby";
 
-module.exports = globby;
+export default globby;

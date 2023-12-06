@@ -1,9 +1,12 @@
-'use strict';
 
-const execa = require('execa');
-const { mkdirp, writeFileSync, existsSync, readdirSync } = require('fs-extra');
-const { join } = require('path');
-const { rmSync } = require('fs');
+import { execa } from "execa";
+import { existsSync, mkdirp, readdirSync, writeFileSync } from "fs-extra";
+
+
+import { join } from "path";
+
+import { rmSync } from "fs";
+
 
 const cli = require.resolve('create-inferno-app/index.js');
 

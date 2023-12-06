@@ -6,9 +6,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
+
+// Ensure environment variables are read.
+import config from "../config/env";
+import jest from "jest";
+import { execSync } from "child_process";
+
+// @remove-on-eject-begin
+// This is not necessary after eject because we embed config into package.json.
+import createJestConfig from "./utils/createJestConfig";
+import path from "path";
+import paths from "../config/paths";
+
+// This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
+// We're trying to resolve the environment ourselves because Jest does it incorrectly.
+// TODO: remove this as soon as it's fixed in Jest.
+import resolve from "resolve";
+
 process.env.BABEL_ENV = 'test';
 process.env.NODE_ENV = 'test';
 process.env.PUBLIC_URL = '';
@@ -19,12 +35,6 @@ process.env.PUBLIC_URL = '';
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-// Ensure environment variables are read.
-require('../config/env');
-
-const jest = require('jest');
-const execSync = require('child_process').execSync;
 let argv = process.argv.slice(2);
 
 function isInGitRepository() {
@@ -55,12 +65,6 @@ if (
   const hasSourceControl = isInGitRepository() || isInMercurialRepository();
   argv.push(hasSourceControl ? '--watch' : '--watchAll');
 }
-
-// @remove-on-eject-begin
-// This is not necessary after eject because we embed config into package.json.
-const createJestConfig = require('./utils/createJestConfig');
-const path = require('path');
-const paths = require('../config/paths');
 argv.push(
   '--config',
   JSON.stringify(
@@ -72,10 +76,6 @@ argv.push(
   )
 );
 
-// This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
-// We're trying to resolve the environment ourselves because Jest does it incorrectly.
-// TODO: remove this as soon as it's fixed in Jest.
-const resolve = require('resolve');
 function resolveJestDefaultEnvironment(name) {
   const jestDir = path.dirname(
     resolve.sync('jest', {

@@ -34,7 +34,8 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-'use strict';
+
+import { init } from "./createInfernoApp";
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
@@ -51,6 +52,6 @@ if (major < 18) {
   process.exit(1);
 }
 
-const { init } = require('./createInfernoApp');
+
 
 init();

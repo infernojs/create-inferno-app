@@ -5,14 +5,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const fs = require('fs');
-const chalk = require('inferno-dev-utils/chalk');
-const paths = require('../../config/paths');
-const modules = require('../../config/modules');
+import fs from "fs";
+import chalk from "inferno-dev-utils/chalk";
+import paths from "../../config/paths";
+import modules from "../../config/modules";
 
-module.exports = (resolve, rootDir, isEjecting) => {
+export default (resolve, rootDir, isEjecting) => {
   // Use this instead of `paths.testsSetup` to avoid putting
   // an absolute filename into configuration after ejecting.
   const setupTestsMatches = paths.testsSetup.match(/src[/\\]setupTests\.(.+)/);
@@ -142,4 +141,4 @@ module.exports = (resolve, rootDir, isEjecting) => {
     }
   }
   return config;
-};
+}

@@ -5,16 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 // Fix eslint shareable config (https://github.com/eslint/eslint/issues/3458)
-require('@rushstack/eslint-patch/modern-module-resolution');
-
+// import generated from "@rushstack/eslint-patch/modern-module-resolution";
 // This file contains the minimum ESLint configuration required for Create
 // Inferno App support, and is used as the `baseConfig` for `eslint-loader`
 // to ensure that user-provided configs don't need this boilerplate.
 
-module.exports = {
+export default {
   root: true,
 
   parser: '@babel/eslint-parser',

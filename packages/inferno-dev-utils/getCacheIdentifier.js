@@ -4,10 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-'use strict';
-
-module.exports = function getCacheIdentifier(environment, packages) {
+export default function getCacheIdentifier(environment, packages) {
   let cacheIdentifier = environment == null ? '' : environment.toString();
   for (const packageName of packages) {
     cacheIdentifier += `:${packageName}@`;
@@ -18,4 +15,4 @@ module.exports = function getCacheIdentifier(environment, packages) {
     }
   }
   return cacheIdentifier;
-};
+}

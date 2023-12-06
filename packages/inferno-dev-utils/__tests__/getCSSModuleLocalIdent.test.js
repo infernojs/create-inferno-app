@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const getCSSModuleLocalIdent = require('../getCSSModuleLocalIdent');
+import getCSSModuleLocalIdent from "../getCSSModuleLocalIdent";
 
 const rootContext = '/path';
 const defaultClassName = 'class';

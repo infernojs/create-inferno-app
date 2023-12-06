@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var crossSpawn = require('cross-spawn');
+import crossSpawn from "cross-spawn";
 
-module.exports = crossSpawn;
+export default crossSpawn;

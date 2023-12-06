@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const ignoredFiles = require('../ignoredFiles');
+import ignoredFiles from "../ignoredFiles";
 
 describe('ignore watch files regex', () => {
   it('normal file', () => {

@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const { URL } = require('url');
+import { URL } from "url";
 
-module.exports = getPublicUrlOrPath;
+
+export default getPublicUrlOrPath;
 
 /**
  * Returns a URL or a path with slash at the end

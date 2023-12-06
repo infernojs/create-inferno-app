@@ -5,15 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var chalk = require('chalk');
-var filesize = require('filesize');
-var recursive = require('recursive-readdir');
-var stripAnsi = require('strip-ansi');
-var gzipSize = require('gzip-size').sync;
+import fs from "fs";
+import path from "path";
+import chalk from "chalk";
+import filesize from "filesize";
+import recursive from "recursive-readdir";
+import stripAnsi from "strip-ansi";
+import { gzipSizeSync } from "gzip-size";
 
 function canReadAsset(asset) {
   return (
@@ -40,7 +39,7 @@ function printFileSizesAfterBuild(
         .assets.filter(asset => canReadAsset(asset.name))
         .map(asset => {
           var fileContents = fs.readFileSync(path.join(root, asset.name));
-          var size = gzipSize(fileContents);
+          var size = gzipSizeSync(fileContents);
           var previousSize = sizes[removeFileNameHash(root, asset.name)];
           var difference = getDifferenceLabel(size, previousSize);
           return {
@@ -134,7 +133,7 @@ function measureFileSizesBeforeBuild(buildFolder) {
         sizes = fileNames.filter(canReadAsset).reduce((memo, fileName) => {
           var contents = fs.readFileSync(fileName);
           var key = removeFileNameHash(buildFolder, fileName);
-          memo[key] = gzipSize(contents);
+          memo[key] = gzipSizeSync(contents);
           return memo;
         }, {});
       }
@@ -146,7 +145,7 @@ function measureFileSizesBeforeBuild(buildFolder) {
   });
 }
 
-module.exports = {
+export default {
   measureFileSizesBeforeBuild: measureFileSizesBeforeBuild,
   printFileSizesAfterBuild: printFileSizesAfterBuild,
 };

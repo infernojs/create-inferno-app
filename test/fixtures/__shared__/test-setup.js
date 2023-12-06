@@ -1,8 +1,7 @@
-'use strict';
 
-const path = require('path');
-const fs = require('fs-extra');
-const TestSetup = require('./util/setup');
+import path from "path";
+import fs from "fs-extra";
+import TestSetup from "./util/setup";
 
 const fixturePath = path.dirname(module.parent.filename);
 const fixtureName = path.basename(fixturePath);
@@ -20,4 +19,4 @@ afterAll(async () => {
 
 beforeEach(() => jest.setTimeout(1000 * 60 * 5));
 
-module.exports = testSetup;
+export default testSetup;

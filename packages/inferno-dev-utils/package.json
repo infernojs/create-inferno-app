@@ -13,7 +13,7 @@
     "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=20.6"
   },
   "files": [
     "browsersHelper.js",
@@ -52,6 +52,44 @@
     "WebpackDevServerUtils.js",
     "webpackHotDevClient.js"
   ],
+  "exports": {
+    "./crossSpawn": "./crossSpawn.js",
+    "./browsersHelper": "./browsersHelper.js",
+    "./chalk": "./chalk.js",
+    "./checkRequiredFiles": "./checkRequiredFiles.js",
+    "./clearConsole": "./clearConsole.js",
+    "./crossSpawn": "./crossSpawn.js",
+    "./errorOverlayMiddleware": "./errorOverlayMiddleware.js",
+    "./eslintFormatter": "./eslintFormatter.js",
+    "./evalSourceMapMiddleware": "./evalSourceMapMiddleware.js",
+    "./FileSizeReporter": "./FileSizeReporter.js",
+    "./ForkTsCheckerWebpackPlugin": "./ForkTsCheckerWebpackPlugin.js",
+    "./ForkTsCheckerWarningWebpackPlugin": "./ForkTsCheckerWarningWebpackPlugin.js",
+    "./formatWebpackMessages": "./formatWebpackMessages.js",
+    "./getCacheIdentifier": "./getCacheIdentifier.js",
+    "./getCSSModuleLocalIdent": "./getCSSModuleLocalIdent.js",
+    "./getProcessForPort": "./getProcessForPort.js",
+    "./getPublicUrlOrPath": "./getPublicUrlOrPath.js",
+    "./globby": "./globby.js",
+    "./ignoredFiles": "./ignoredFiles.js",
+    "./immer": "./immer.js",
+    "./InlineChunkHtmlPlugin": "./InlineChunkHtmlPlugin.js",
+    "./InterpolateHtmlPlugin": "./InterpolateHtmlPlugin.js",
+    "./launchEditor": "./launchEditor.js",
+    "./launchEditorEndpoint": "./launchEditorEndpoint.js",
+    "./ModuleNotFoundPlugin": "./ModuleNotFoundPlugin.js",
+    "./ModuleScopePlugin": "./ModuleScopePlugin.js",
+    "./noopServiceWorkerMiddleware": "./noopServiceWorkerMiddleware.js",
+    "./openBrowser": "./openBrowser.js",
+    "./openChrome.applescript": "./openChrome.applescript",
+    "./printBuildError": "./printBuildError.js",
+    "./printHostingInstructions": "./printHostingInstructions.js",
+    "./redirectServedPathMiddleware": "./redirectServedPathMiddleware.js",
+    "./refreshOverlayInterop": "./refreshOverlayInterop.js",
+    "./typescriptFormatter": "./typescriptFormatter.js",
+    "./WebpackDevServerUtils": "./WebpackDevServerUtils.js",
+    "./webpackHotDevClient": "./webpackHotDevClient.js"
+  },
   "dependencies": {
     "@babel/code-frame": "^7.23.5",
     "address": "^2.0.1",

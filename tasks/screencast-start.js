@@ -7,11 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const execa = require('execa');
-const meow = require('meow');
-const multimatch = require('multimatch');
+import execa from "execa";
+import meow from "meow";
+import multimatch from "multimatch";
 
 main(meow());
 

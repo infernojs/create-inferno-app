@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var chalk = require('chalk');
-var execSync = require('child_process').execSync;
-var execFileSync = require('child_process').execFileSync;
-var path = require('path');
+import chalk from "chalk";
+import { execFileSync, execSync } from "child_process";
+import path from "path";
 
 var execOptions = {
   encoding: 'utf8',
@@ -86,4 +84,4 @@ function getProcessForPort(port) {
   }
 }
 
-module.exports = getProcessForPort;
+export default getProcessForPort;

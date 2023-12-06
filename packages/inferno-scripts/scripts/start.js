@@ -6,9 +6,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
 // Do this as the first thing so that any code reading it knows the right env.
+
+// Ensure environment variables are read.
+import config0 from "../config/env";
+import fs from "fs";
+import chalk from "inferno-dev-utils/chalk";
+import webpack from "webpack";
+import WebpackDevServer from "webpack-dev-server";
+import clearConsole from "inferno-dev-utils/clearConsole";
+import checkRequiredFiles from "inferno-dev-utils/checkRequiredFiles";
+import { choosePort, createCompiler, prepareProxy, prepareUrls } from "inferno-dev-utils/WebpackDevServerUtils";
+
+import openBrowser from "inferno-dev-utils/openBrowser";
+import paths from "../config/paths";
+
+// We require that you explicitly set browsers and do not fall back to
+// browserslist defaults.
+import { checkBrowsers } from "inferno-dev-utils/browsersHelper";
+
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
@@ -18,24 +35,6 @@ process.env.NODE_ENV = 'development';
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-// Ensure environment variables are read.
-require('../config/env');
-
-const fs = require('fs');
-const chalk = require('inferno-dev-utils/chalk');
-const webpack = require('webpack');
-const WebpackDevServer = require('webpack-dev-server');
-const clearConsole = require('inferno-dev-utils/clearConsole');
-const checkRequiredFiles = require('inferno-dev-utils/checkRequiredFiles');
-const {
-  choosePort,
-  createCompiler,
-  prepareProxy,
-  prepareUrls,
-} = require('inferno-dev-utils/WebpackDevServerUtils');
-const openBrowser = require('inferno-dev-utils/openBrowser');
-const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
@@ -67,10 +66,6 @@ if (process.env.HOST) {
   );
   console.log();
 }
-
-// We require that you explicitly set browsers and do not fall back to
-// browserslist defaults.
-const { checkBrowsers } = require('inferno-dev-utils/browsersHelper');
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => {
     // We attempt to use the default port but if it is busy, we offer the user to

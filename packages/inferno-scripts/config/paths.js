@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const getPublicUrlOrPath = require('inferno-dev-utils/getPublicUrlOrPath');
-
+import path from "path";
+import fs from "fs";
+import getPublicUrlOrPath from "inferno-dev-utils/getPublicUrlOrPath";
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
+import ownPackageJson from "../package.json";
+
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
@@ -59,7 +59,7 @@ const resolveModule = (resolveFn, filePath) => {
 };
 
 // config after eject: we're in ./config/
-module.exports = {
+export default {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
@@ -84,7 +84,7 @@ module.exports = {
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
 // config before eject: we're in ./node_modules/inferno-scripts/config/
-module.exports = {
+export default {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
@@ -109,8 +109,6 @@ module.exports = {
   appTypeDeclarations: resolveApp('src/react-app-env.d.ts'),
   ownTypeDeclarations: resolveOwn('lib/inferno-app.d.ts'),
 };
-
-const ownPackageJson = require('../package.json');
 const infernoScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
 const infernoScriptsLinked =
   fs.existsSync(infernoScriptsPath) &&
@@ -150,4 +148,4 @@ if (
 }
 // @remove-on-eject-end
 
-module.exports.moduleFileExtensions = moduleFileExtensions;
+export { moduleFileExtensions }

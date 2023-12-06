@@ -6,12 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const paths = require('./paths');
-
+import fs from "fs";
+import path from "path";
+import paths from "./paths";
 // Make sure that including paths.js after env.js will read .env variables.
 delete require.cache[require.resolve('./paths')];
 
@@ -109,4 +107,4 @@ function getClientEnvironment(publicUrl) {
   return { raw, stringified };
 }
 
-module.exports = getClientEnvironment;
+export default getClientEnvironment;

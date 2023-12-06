@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var chalk = require('chalk');
+import chalk from "chalk";
 
-module.exports = chalk;
+export default chalk;

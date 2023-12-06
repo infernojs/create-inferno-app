@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const path = require('path');
-const chalk = require('chalk');
-const stripAnsi = require('strip-ansi');
-const table = require('text-table');
+import path from "path";
+import chalk from "chalk";
+import stripAnsi from "strip-ansi";
+import table from "text-table";
 
 const cwd = process.cwd();
 
@@ -108,4 +107,4 @@ function formatter(results) {
   return output;
 }
 
-module.exports = formatter;
+export default formatter;

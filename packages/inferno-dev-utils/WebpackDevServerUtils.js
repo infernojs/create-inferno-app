@@ -4,20 +4,19 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const address = require('address');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
-const chalk = require('chalk');
-const detect = require('detect-port-alt');
-const isRoot = require('is-root');
-const prompts = require('prompts');
-const clearConsole = require('./clearConsole');
-const formatWebpackMessages = require('./formatWebpackMessages');
-const getProcessForPort = require('./getProcessForPort');
-const forkTsCheckerWebpackPlugin = require('./ForkTsCheckerWebpackPlugin');
+import {address} from "address";
+import fs from "fs";
+import path from "path";
+import url from "url";
+import chalk from "chalk";
+import detect from "detect-port-alt";
+import isRoot from "is-root";
+import prompts from "prompts";
+import clearConsole from "./clearConsole";
+import formatWebpackMessages from "./formatWebpackMessages";
+import getProcessForPort from "./getProcessForPort";
+import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin";
 
 const isInteractive = process.stdout.isTTY;
 
@@ -435,7 +434,7 @@ function choosePort(host, defaultPort) {
   );
 }
 
-module.exports = {
+export default {
   choosePort,
   createCompiler,
   prepareProxy,

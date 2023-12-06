@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 // This alternative WebpackDevServer combines the functionality of:
 // https://github.com/webpack/webpack-dev-server/blob/webpack-1/client/index.js
@@ -16,11 +15,11 @@
 // that looks similar to our console output. The error overlay is inspired by:
 // https://github.com/glenjamin/webpack-hot-middleware
 
-var stripAnsi = require('strip-ansi');
-var url = require('url');
-var launchEditorEndpoint = require('./launchEditorEndpoint');
-var formatWebpackMessages = require('./formatWebpackMessages');
-var ErrorOverlay = require('inferno-error-overlay');
+import stripAnsi from "strip-ansi";
+import url from "url";
+import launchEditorEndpoint from "./launchEditorEndpoint";
+import formatWebpackMessages from "./formatWebpackMessages";
+import ErrorOverlay from "inferno-error-overlay";
 
 ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {
   // Keep this sync with errorOverlayMiddleware.js

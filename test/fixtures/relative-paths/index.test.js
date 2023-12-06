@@ -1,10 +1,8 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
-
-const fs = require('fs-extra');
-const globby = require('globby');
-const path = require('path');
+import testSetup from "../__shared__/test-setup";
+import fs from "fs-extra";
+import globby from "globby";
+import path from "path";
 
 test('contains a relative path in production build', async () => {
   await testSetup.scripts.build();

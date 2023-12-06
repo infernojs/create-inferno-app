@@ -6,37 +6,41 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const webpack = require('webpack');
-const resolve = require('resolve');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const InlineChunkHtmlPlugin = require('inferno-dev-utils/InlineChunkHtmlPlugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const InterpolateHtmlPlugin = require('inferno-dev-utils/InterpolateHtmlPlugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const ModuleScopePlugin = require('inferno-dev-utils/ModuleScopePlugin');
-const getCSSModuleLocalIdent = require('inferno-dev-utils/getCSSModuleLocalIdent');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const paths = require('./paths');
-const modules = require('./modules');
-const getClientEnvironment = require('./env');
-const ModuleNotFoundPlugin = require('inferno-dev-utils/ModuleNotFoundPlugin');
+import fs from "fs";
+import path from "path";
+import webpack from "webpack";
+import resolve from "resolve";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
+import InlineChunkHtmlPlugin from "inferno-dev-utils/InlineChunkHtmlPlugin";
+import TerserPlugin from "terser-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+import { WebpackManifestPlugin } from "webpack-manifest-plugin";
+
+import InterpolateHtmlPlugin from "inferno-dev-utils/InterpolateHtmlPlugin";
+import WorkboxWebpackPlugin from "workbox-webpack-plugin";
+import ModuleScopePlugin from "inferno-dev-utils/ModuleScopePlugin";
+import getCSSModuleLocalIdent from "inferno-dev-utils/getCSSModuleLocalIdent";
+import ESLintPlugin from "eslint-webpack-plugin";
+import paths from "./paths";
+import modules from "./modules";
+import getClientEnvironment from "./env";
+import ModuleNotFoundPlugin from "inferno-dev-utils/ModuleNotFoundPlugin";
+import inferno_dev_utils from "inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin";
+import inferno_dev_utils0 from "inferno-dev-utils/ForkTsCheckerWebpackPlugin";
+
+// @remove-on-eject-begin
+import getCacheIdentifier from "inferno-dev-utils/getCacheIdentifier";
+
+// @remove-on-eject-end
+import createEnvironmentHash from "./webpack/persistentCache/createEnvironmentHash";
+
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === 'true'
-    ? require('inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin')
-    : require('inferno-dev-utils/ForkTsCheckerWebpackPlugin');
-// @remove-on-eject-begin
-const getCacheIdentifier = require('inferno-dev-utils/getCacheIdentifier');
-// @remove-on-eject-end
-const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash');
-
+    ? inferno_dev_utils
+    : inferno_dev_utils0;
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 
@@ -70,7 +74,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-module.exports = function (webpackEnv) {
+export default function(webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -723,4 +727,4 @@ module.exports = function (webpackEnv) {
     // our own hints via the FileSizeReporter
     performance: false,
   };
-};
+}

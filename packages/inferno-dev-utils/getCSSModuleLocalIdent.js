@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const loaderUtils = require('loader-utils');
-const path = require('path');
+import loaderUtils from "loader-utils";
+import path from "path";
 
-module.exports = function getLocalIdent(
+export default function getLocalIdent(
   context,
   localIdentName,
   localName,
@@ -37,4 +36,4 @@ module.exports = function getLocalIdent(
   );
   // Remove the .module that appears in every classname when based on the file and replace all "." with "_".
   return className.replace('.module_', '_').replace(/\./g, '_');
-};
+}

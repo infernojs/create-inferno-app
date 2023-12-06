@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 // Inspired by https://github.com/airbnb/javascript but less opinionated.
 
@@ -21,9 +20,9 @@
 // This is dangerous as it hides accidentally undefined variables.
 // We blacklist the globals that we deem potentially confusing.
 // To use them, explicitly reference them, e.g. `window.name` or `window.status`.
-const restrictedGlobals = require('confusing-browser-globals');
+import restrictedGlobals from "confusing-browser-globals";
 
-module.exports = {
+export default {
   extends: [require.resolve('./base')],
 
   plugins: ['import', 'jsx-a11y', 'inferno'],

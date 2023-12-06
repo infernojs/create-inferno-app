@@ -1,12 +1,11 @@
-'use strict';
 
-const execa = require('execa');
-const fs = require('fs-extra');
-const path = require('path');
-const tempy = require('tempy');
-const InfernoScripts = require('./scripts');
+import execa from "execa";
+import fs from "fs-extra";
+import path from "path";
+import tempy from "tempy";
+import InfernoScripts from "./scripts";
 
-module.exports = class TestSetup {
+export default class TestSetup {
   constructor(fixtureName, templateDirectory) {
     this.fixtureName = fixtureName;
 
@@ -100,4 +99,4 @@ module.exports = class TestSetup {
       this._scripts = null;
     }
   }
-};
+}

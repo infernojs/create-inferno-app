@@ -4,9 +4,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const path = require('path');
+import path from "path";
 
 const validateBoolOption = (name, value, defaultValue) => {
   if (typeof value === 'undefined') {
@@ -20,7 +19,7 @@ const validateBoolOption = (name, value, defaultValue) => {
   return value;
 };
 
-module.exports = function (api, opts) {
+export default function(api, opts) {
   if (!opts) {
     opts = {};
   }
@@ -136,4 +135,4 @@ module.exports = function (api, opts) {
       ],
     ].filter(Boolean),
   };
-};
+}

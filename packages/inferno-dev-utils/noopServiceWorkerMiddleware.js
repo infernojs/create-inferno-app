@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const path = require('path');
+import path from "path";
 
-module.exports = function createNoopServiceWorkerMiddleware(servedPath) {
+export default function createNoopServiceWorkerMiddleware(servedPath) {
   return function noopServiceWorkerMiddleware(req, res, next) {
     if (req.url === path.posix.join(servedPath, 'service-worker.js')) {
       res.setHeader('Content-Type', 'text/javascript');
@@ -37,4 +36,4 @@ self.addEventListener('activate', () => {
       next();
     }
   };
-};
+}

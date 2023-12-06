@@ -13,8 +13,7 @@
 // Learn more about creating plugins like this:
 // https://github.com/ampedandwired/html-webpack-plugin#events
 
-'use strict';
-const escapeStringRegexp = require('escape-string-regexp');
+import escapeStringRegexp from "escape-string-regexp";
 
 class InterpolateHtmlPlugin {
   constructor(htmlWebpackPlugin, replacements) {
@@ -40,4 +39,4 @@ class InterpolateHtmlPlugin {
   }
 }
 
-module.exports = InterpolateHtmlPlugin;
+export default InterpolateHtmlPlugin;

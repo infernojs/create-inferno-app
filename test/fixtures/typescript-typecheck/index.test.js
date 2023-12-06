@@ -1,7 +1,6 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
-const puppeteer = require('puppeteer');
+import testSetup from "../__shared__/test-setup";
+import puppeteer from "puppeteer";
 
 const expectedErrorMsg = `Argument of type '123' is not assignable to parameter of type 'string'`;
 

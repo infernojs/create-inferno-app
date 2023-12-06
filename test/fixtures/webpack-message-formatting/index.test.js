@@ -1,9 +1,7 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
-
-const fs = require('fs-extra');
-const path = require('path');
+import testSetup from "../__shared__/test-setup";
+import fs from "fs-extra";
+import path from "path";
 
 test('formats babel syntax error', async () => {
   fs.copySync(

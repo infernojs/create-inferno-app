@@ -1,9 +1,8 @@
-'use strict';
 
-const execa = require('execa');
-const getPort = require('get-port');
-const stripAnsi = require('strip-ansi');
-const waitForLocalhost = require('wait-for-localhost');
+import execa from "execa";
+import getPort from "get-port";
+import stripAnsi from "strip-ansi";
+import waitForLocalhost from "wait-for-localhost";
 
 function execaSafe(...args) {
   return execa(...args)
@@ -23,7 +22,7 @@ function execaSafe(...args) {
     }));
 }
 
-module.exports = class InfernoScripts {
+export default class InfernoScripts {
   constructor(root) {
     this.root = root;
   }
@@ -88,4 +87,4 @@ module.exports = class InfernoScripts {
       env: Object.assign({}, { CI: 'true' }, env),
     });
   }
-};
+}
