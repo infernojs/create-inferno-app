@@ -20,7 +20,7 @@ import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin";
 
 const isInteractive = process.stdout.isTTY;
 
-function prepareUrls(protocol, host, port, pathname = '/') {
+export function prepareUrls(protocol, host, port, pathname = '/') {
   const formatUrl = hostname =>
     url.format({
       protocol,
@@ -99,7 +99,7 @@ function printInstructions(appName, urls, useYarn) {
   console.log();
 }
 
-function createCompiler({
+export function createCompiler({
   appName,
   config,
   urls,
@@ -298,7 +298,7 @@ function onProxyError(proxy) {
   };
 }
 
-function prepareProxy(proxy, appPublicFolder, servedPathname) {
+export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   // `proxy` lets you specify alternate servers for specific requests.
   if (!proxy) {
     return undefined;
@@ -387,7 +387,7 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
   ];
 }
 
-function choosePort(host, defaultPort) {
+export function choosePort(host, defaultPort) {
   return detect(defaultPort, host).then(
     port =>
       new Promise(resolve => {

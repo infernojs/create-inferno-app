@@ -10,14 +10,14 @@
 
 import fs from "fs";
 import path from "path";
-import {execa} from "execa";
-import tempy from "tempy";
+import {execaSync} from "execa";
+import {temporaryDirectory} from "tempy";
 
 main();
 
 function main() {
   const previous = process.cwd();
-  const cwd = tempy.directory();
+  const cwd = temporaryDirectory();
 
   const cast = path.join(cwd, 'screencast.json');
   const script = path.join(__dirname, 'screencast.sh');
@@ -31,7 +31,7 @@ function main() {
   try {
     process.chdir(cwd);
     console.log(`Recording screencast ...`);
-    execa.sync('asciinema', ['rec', '--command', `sh ${script}`, cast], {
+    execaSync('asciinema', ['rec', '--command', `sh ${script}`, cast], {
       cwd,
       stdio: 'inherit',
     });
@@ -46,7 +46,7 @@ function main() {
     fs.writeFileSync(cast, JSON.stringify(data, null, '  '));
 
     console.log('Rendering SVG ...');
-    execa.sync('svg-term', ['--window', '--in', cast, '--out', out]);
+    execaSync('svg-term', ['--window', '--in', cast, '--out', out]);
 
     console.log(`Recorded screencast to ${cast}`);
     console.log(`Rendered SVG to ${out}`);

@@ -9,7 +9,7 @@
 
 import fs from "fs";
 import path from "path";
-import paths from "./paths";
+import {paths} from "./paths.js";
 import chalk from "inferno-dev-utils/chalk";
 import resolve from "resolve";
 

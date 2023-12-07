@@ -10,13 +10,13 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
-import config0 from "./../config/env.js";
+import "./../config/env.js";
 import path from "path";
 import chalk from "inferno-dev-utils/chalk";
 import fs from "fs-extra";
 import bfj from "bfj";
 import webpack from "webpack";
-import paths from "../config/paths";
+import {paths} from "../config/paths.js";
 import checkRequiredFiles from "inferno-dev-utils/checkRequiredFiles";
 import formatWebpackMessages from "inferno-dev-utils/formatWebpackMessages";
 import printHostingInstructions from "inferno-dev-utils/printHostingInstructions";

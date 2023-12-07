@@ -28,7 +28,7 @@
     "test": "cross-env FORCE_COLOR=true jest"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
+    "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "cross-spawn": "^7.0.3",
     "envinfo": "^7.11.0",

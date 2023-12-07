@@ -5,13 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from "path";
+import { dirname, join, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, './lib'),
+    path: join(__dirname, './lib'),
     filename: 'index.js',
     library: 'InfernoErrorOverlay',
     libraryTarget: 'umd',
@@ -24,14 +27,14 @@ export default {
       },
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, './src'),
+        include: resolve(__dirname, './src'),
         use: 'babel-loader',
       },
     ],
   },
   resolve: {
     alias: {
-      iframeScript$: path.resolve(__dirname, './lib/iframe-bundle.js'),
+      iframeScript$: resolve(__dirname, './lib/iframe-bundle.js'),
     },
     fallback: {
       fs: false,

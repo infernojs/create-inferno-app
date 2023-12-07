@@ -5,15 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from "path";
 import webpack from "webpack";
 import TerserPlugin from "terser-webpack-plugin";
+import { dirname, join, resolve } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/iframeScript.js',
   output: {
-    path: path.join(__dirname, './lib'),
+    path: join(__dirname, './lib'),
     filename: 'iframe-bundle.js',
   },
   module: {
@@ -23,7 +26,7 @@ export default {
           // Source
           {
             test: /\.js$/,
-            include: [path.resolve(__dirname, './src')],
+            include: [resolve(__dirname, './src')],
             use: {
               loader: 'babel-loader',
             },

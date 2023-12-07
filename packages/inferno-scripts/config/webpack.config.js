@@ -24,7 +24,7 @@ import WorkboxWebpackPlugin from "workbox-webpack-plugin";
 import ModuleScopePlugin from "inferno-dev-utils/ModuleScopePlugin";
 import getCSSModuleLocalIdent from "inferno-dev-utils/getCSSModuleLocalIdent";
 import ESLintPlugin from "eslint-webpack-plugin";
-import paths from "./paths";
+import { paths, moduleFileExtensions } from "./paths";
 import modules from "./modules";
 import getClientEnvironment from "./env";
 import ModuleNotFoundPlugin from "inferno-dev-utils/ModuleNotFoundPlugin";
@@ -291,7 +291,7 @@ export default function(webpackEnv) {
       // https://github.com/facebook/create-react-app/issues/290
       // `web` extension prefixes have been added for better support
       // for React Native Web.
-      extensions: paths.moduleFileExtensions
+      extensions: moduleFileExtensions
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {

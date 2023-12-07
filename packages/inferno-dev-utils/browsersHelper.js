@@ -40,7 +40,7 @@ function shouldSetBrowsers(isInteractive) {
   return prompts(question).then(answer => answer.shouldSetBrowsers);
 }
 
-function checkBrowsers(dir, isInteractive, retry = true) {
+export function checkBrowsers(dir, isInteractive, retry = true) {
   const current = browserslist.loadConfig({ path: dir });
   if (current != null) {
     return Promise.resolve(current);

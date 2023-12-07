@@ -39,7 +39,7 @@
     "meow": "^12.1.1",
     "multimatch": "^7.0.0",
     "prettier": "^3.1.0",
-    "puppeteer": "^21.5.2",
+    "puppeteer": "^21.6.0",
     "strip-ansi": "^7.1.0",
     "tempy": "^3.1.0",
     "wait-for-localhost": "^4.0.1",

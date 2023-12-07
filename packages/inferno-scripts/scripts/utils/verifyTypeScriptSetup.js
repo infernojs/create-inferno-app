@@ -11,10 +11,12 @@ import chalk from "inferno-dev-utils/chalk";
 import fs from "fs";
 import resolve from "resolve";
 import path from "path";
-import paths from "../../config/paths";
+import {paths} from "../../config/paths";
 import os from "os";
-import { produce as immer } from "inferno-dev-utils/immer";
-import { sync as globby } from "inferno-dev-utils/globby";
+import immerModule from "inferno-dev-utils/immer";
+import globby from "inferno-dev-utils/globby";
+
+const immer = immerModule.produce;
 
 function writeJson(fileName, object) {
   fs.writeFileSync(

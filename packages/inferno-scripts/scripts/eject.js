@@ -14,10 +14,12 @@ import path from "path";
 import prompts from "prompts";
 import { execSync } from "child_process";
 import chalk from "inferno-dev-utils/chalk";
-import paths from "../config/paths";
+import {paths} from "../config/paths.js";
 import createJestConfig from "./utils/createJestConfig";
-import { sync as spawnSync } from "inferno-dev-utils/crossSpawn";
+import crossSpawn from "inferno-dev-utils/crossSpawn";
 import os from "os";
+
+const spawnSync = crossSpawn.sync;
 
 process.on('unhandledRejection', err => {
   throw err;

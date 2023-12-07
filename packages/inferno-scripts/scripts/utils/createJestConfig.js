@@ -8,10 +8,10 @@
 
 import fs from "fs";
 import chalk from "inferno-dev-utils/chalk";
-import paths from "../../config/paths";
-import modules from "../../config/modules";
+import { paths, moduleFileExtensions } from "../../config/paths.js";
+import modules from "../../config/modules.js";
 
-export default (resolve, rootDir, isEjecting) => {
+export default (resolve, rootDir) => {
   // Use this instead of `paths.testsSetup` to avoid putting
   // an absolute filename into configuration after ejecting.
   const setupTestsMatches = paths.testsSetup.match(/src[/\\]setupTests\.(.+)/);
@@ -50,7 +50,7 @@ export default (resolve, rootDir, isEjecting) => {
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
       ...(modules.jestAliases || {}),
     },
-    moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(
+    moduleFileExtensions: [...moduleFileExtensions, 'node'].filter(
       ext => !ext.includes('mjs')
     ),
     watchPlugins: [

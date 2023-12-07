@@ -45,7 +45,7 @@ import tmp from "tmp";
 import { unpack } from "tar-pack";
 import url from "url";
 import validateProjectName from "validate-npm-package-name";
-import packageJson from "./package.json";
+import packageJson from "./package.json" assert { type: 'json' };
 
 function isUsingYarn() {
   return (process.env.npm_config_user_agent || '').indexOf('yarn') === 0;

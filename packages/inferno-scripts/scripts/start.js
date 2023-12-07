@@ -10,7 +10,7 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
-import config0 from "../config/env";
+import "../config/env.js";
 import fs from "fs";
 import chalk from "inferno-dev-utils/chalk";
 import webpack from "webpack";
@@ -20,7 +20,7 @@ import checkRequiredFiles from "inferno-dev-utils/checkRequiredFiles";
 import { choosePort, createCompiler, prepareProxy, prepareUrls } from "inferno-dev-utils/WebpackDevServerUtils";
 
 import openBrowser from "inferno-dev-utils/openBrowser";
-import paths from "../config/paths";
+import {paths} from "../config/paths.js";
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.

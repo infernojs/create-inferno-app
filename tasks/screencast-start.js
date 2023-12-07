@@ -8,7 +8,7 @@
  */
 
 
-import execa from "execa";
+import {execa} from "execa";
 import meow from "meow";
 import multimatch from "multimatch";
 

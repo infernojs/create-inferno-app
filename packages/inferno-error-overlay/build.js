@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const webpack = require('webpack');
-const chalk = require('chalk');
-const webpackConfig = require('./webpack.config.js');
-const iframeWebpackConfig = require('./webpack.config.iframe.js');
-const {rimraf} = require('rimraf');
-const chokidar = require('chokidar');
+import webpack from "webpack";
+import chalk from "chalk";
+import webpackConfig from "./webpack.config.js";
+import iframeWebpackConfig from "./webpack.config.iframe.js";
+import { rimraf } from "rimraf";
+
+import chokidar from "chokidar";
 
 const args = process.argv.slice(2);
 const watchMode = args[0] === '--watch' || args[0] === '-w';

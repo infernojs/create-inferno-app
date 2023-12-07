@@ -10,15 +10,15 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
-import config from "../config/env";
+import "../config/env.js";
 import jest from "jest";
 import { execSync } from "child_process";
 
 // @remove-on-eject-begin
 // This is not necessary after eject because we embed config into package.json.
-import createJestConfig from "./utils/createJestConfig";
+import createJestConfig from "./utils/createJestConfig.js";
 import path from "path";
-import paths from "../config/paths";
+import {paths} from "../config/paths.js";
 
 // This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
 // We're trying to resolve the environment ourselves because Jest does it incorrectly.
