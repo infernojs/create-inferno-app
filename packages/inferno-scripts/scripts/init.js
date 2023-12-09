@@ -17,6 +17,8 @@ import spawn from "inferno-dev-utils/crossSpawn";
 import { defaultBrowsers } from "inferno-dev-utils/browsersHelper";
 import os from "os";
 import verifyTypeScriptSetup from "./utils/verifyTypeScriptSetup";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
+import { fileURLToPath } from "url";
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -87,7 +89,7 @@ export default function(
   originalDirectory,
   templateName
 ) {
-  const appPackage = require(path.join(appPath, 'package.json'));
+  const appPackage = readJsonFile(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
   if (!templateName) {
@@ -113,14 +115,14 @@ export default function(
   }
 
   const templatePath = path.dirname(
-    require.resolve(`${templateName}/package.json`, { paths: [appPath] })
+    fileURLToPath(import.meta.resolve(`${templateName}/package.json`, { paths: [appPath] }))
   );
 
   const templateJsonPath = path.join(templatePath, 'template.json');
 
   let templateJson = {};
   if (fs.existsSync(templateJsonPath)) {
-    templateJson = require(templateJsonPath);
+    templateJson = readJsonFile(templateJsonPath);
   }
 
   const templatePackage = templateJson.package || {};

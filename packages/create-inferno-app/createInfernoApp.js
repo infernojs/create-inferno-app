@@ -34,6 +34,7 @@ import commander from "commander";
 import dns from "dns";
 import envinfo from "envinfo";
 import { execSync } from "child_process";
+import { readFileSync } from "fs";
 import fs from "fs-extra";
 import hyperquest from "hyperquest";
 import prompts from "prompts";
@@ -42,13 +43,17 @@ import path from "path";
 import semver from "semver";
 import spawn from "cross-spawn";
 import tmp from "tmp";
-import { unpack } from "tar-pack";
+import tar from "node-tar";
 import url from "url";
 import validateProjectName from "validate-npm-package-name";
 import packageJson from "./package.json" assert { type: 'json' };
 
 function isUsingYarn() {
   return (process.env.npm_config_user_agent || '').indexOf('yarn') === 0;
+}
+
+function readJsonFile(path) {
+  return JSON.parse(readFileSync(path))
 }
 
 let projectName;
@@ -663,13 +668,9 @@ function getTemporaryDirectory() {
 function extractStream(stream, dest) {
   return new Promise((resolve, reject) => {
     stream.pipe(
-      unpack(dest, err => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(dest);
-        }
-      })
+      tar.x({
+        c: dest
+      }).then(() => resolve(dest)).catch((err) => reject(err))
     );
   });
 }
@@ -688,7 +689,7 @@ function getPackageInfo(installPackage) {
         return extractStream(stream, obj.tmpdir).then(() => obj);
       })
       .then(obj => {
-        const { name, version } = require(path.join(
+        const { name, version } = readJsonFile(path.join(
           obj.tmpdir,
           'package.json'
         ));
@@ -726,7 +727,7 @@ function getPackageInfo(installPackage) {
     });
   } else if (installPackage.match(/^file:/)) {
     const installPackagePath = installPackage.match(/^file:(.*)?$/)[1];
-    const { name, version } = require(path.join(
+    const { name, version } = readJsonFile(path.join(
       installPackagePath,
       'package.json'
     ));
@@ -794,7 +795,7 @@ function checkNodeVersion(packageName) {
     return;
   }
 
-  const packageJson = require(packageJsonPath);
+  const packageJson = readJsonFile(packageJsonPath);
   if (!packageJson.engines || !packageJson.engines.node) {
     return;
   }
@@ -874,7 +875,7 @@ function makeCaretRange(dependencies, name) {
 
 function setCaretRangeForRuntimeDeps(packageName) {
   const packagePath = path.join(process.cwd(), 'package.json');
-  const packageJson = require(packagePath);
+  const packageJson = readJsonFile(packagePath);
 
   if (typeof packageJson.dependencies === 'undefined') {
     console.error(chalk.red('Missing dependencies in package.json'));

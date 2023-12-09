@@ -335,8 +335,8 @@ module.exports = {
   entry: [
     // You can replace the line below with these two lines if you prefer the
     // stock client:
-    // require.resolve('webpack-dev-server/client') + '?/',
-    // require.resolve('webpack/hot/dev-server'),
+    // import.meta.resolve('webpack-dev-server/client') + '?/',
+    // import.meta.resolve('webpack/hot/dev-server'),
     'inferno-dev-utils/webpackHotDevClient',
     'src/index',
   ],
@@ -361,9 +361,9 @@ module: {
     {
       test: /\.module\.css$/,
       use: [
-        require.resolve('style-loader'),
+        import.meta.resolve('style-loader'),
         {
-          loader: require.resolve('css-loader'),
+          loader: import.meta.resolve('css-loader'),
           options: {
             importLoaders: 1,
             modules: {
@@ -372,7 +372,7 @@ module: {
           },
         },
         {
-          loader: require.resolve('postcss-loader'),
+          loader: import.meta.resolve('postcss-loader'),
           options: postCSSLoaderOptions,
         },
       ],

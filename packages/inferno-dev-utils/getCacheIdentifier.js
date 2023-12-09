@@ -1,3 +1,5 @@
+import { readJsonFile } from "./readJsonFile.js";
+
 /**
  * Copyright (c) 2015-present, Facebook, Inc.
  *
@@ -9,7 +11,7 @@ export default function getCacheIdentifier(environment, packages) {
   for (const packageName of packages) {
     cacheIdentifier += `:${packageName}@`;
     try {
-      cacheIdentifier += require(`${packageName}/package.json`).version;
+      cacheIdentifier += readJsonFile(`${packageName}/package.json`).version;
     } catch (_) {
       // ignored
     }

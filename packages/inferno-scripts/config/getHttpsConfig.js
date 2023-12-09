@@ -11,7 +11,7 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 import chalk from "inferno-dev-utils/chalk";
-import paths from "./paths";
+import {paths} from "./paths.js";
 // Ensure the certificate and key provided are valid and if not
 // throw an easy to debug error
 function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import launchEditor from "./launchEditor";
-import launchEditorEndpoint from "./launchEditorEndpoint";
+import launchEditor from "./launchEditor.js";
+import launchEditorEndpoint from "./launchEditorEndpoint.js";
 
 export default function createLaunchEditorMiddleware() {
   return function launchEditorMiddleware(req, res, next) {

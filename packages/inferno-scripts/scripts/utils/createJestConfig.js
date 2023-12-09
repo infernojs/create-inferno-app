@@ -62,7 +62,7 @@ export default (resolve, rootDir) => {
   if (rootDir) {
     config.rootDir = rootDir;
   }
-  const overrides = Object.assign({}, require(paths.appPackageJson).jest);
+  const overrides = Object.assign({}, JSON.parse(fs.readFileSync(paths.appPackageJson)).jest);
   const supportedKeys = [
     'clearMocks',
     'collectCoverageFrom',

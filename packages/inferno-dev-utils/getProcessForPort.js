@@ -9,6 +9,7 @@
 import chalk from "chalk";
 import { execFileSync, execSync } from "child_process";
 import path from "path";
+import { readJsonFile } from "./readJsonFile.js";
 
 var execOptions = {
   encoding: 'utf8',
@@ -37,7 +38,7 @@ function getPackageNameInDirectory(directory) {
   var packagePath = path.join(directory.trim(), 'package.json');
 
   try {
-    return require(packagePath).name;
+    return readJsonFile(packagePath).name;
   } catch (e) {
     return null;
   }

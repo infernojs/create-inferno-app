@@ -8,9 +8,10 @@
 // @remove-on-eject-end
 
 import babelJest from "babel-jest";
+import { fileURLToPath } from "url";
 
 export default babelJest.createTransformer({
-  presets: [[require.resolve("babel-preset-inferno-app")]],
+  presets: [[fileURLToPath(import.meta.resolve("babel-preset-inferno-app"))]],
   babelrc: false,
   configFile: false
 });

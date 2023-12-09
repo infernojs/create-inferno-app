@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-inferno-app",
-  "type": "module",
+  "type": "commonjs",
   "version": "8.0.1",
   "description": "ESLint configuration used by Create Inferno App",
   "repository": {

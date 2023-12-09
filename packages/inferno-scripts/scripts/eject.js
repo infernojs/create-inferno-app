@@ -18,6 +18,7 @@ import {paths} from "../config/paths.js";
 import createJestConfig from "./utils/createJestConfig";
 import crossSpawn from "inferno-dev-utils/crossSpawn";
 import os from "os";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
 
 const spawnSync = crossSpawn.sync;
 
@@ -171,8 +172,8 @@ prompts({
   });
   console.log();
 
-  const ownPackage = require(path.join(ownPath, 'package.json'));
-  const appPackage = require(path.join(appPath, 'package.json'));
+  const ownPackage = readJsonFile(path.join(ownPath, 'package.json'));
+  const appPackage = readJsonFile(path.join(appPath, 'package.json'));
 
   console.log(cyan('Updating the dependencies'));
   const ownPackageName = ownPackage.name;

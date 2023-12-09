@@ -14,7 +14,7 @@ import {paths} from "./paths.js";
 import { expand } from "dotenv-expand";
 import { config } from "dotenv";
 
-// delete require.cache[require.resolve('./paths.js')];
+// delete require.cache[import.meta.resolve('./paths.js')];
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {

@@ -12,6 +12,7 @@ import fs from "fs";
 import path from "path";
 import {execaSync} from "execa";
 import {temporaryDirectory} from "tempy";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
 
 main();
 
@@ -37,7 +38,7 @@ function main() {
     });
 
     console.log('Cleaning data ...');
-    const data = require(cast);
+    const data = readJsonFile(cast);
 
     cut(data.stdout, { start: resolveLine, end: fetchLine });
     cut(data.stdout, { start: countLine, end: doneLine });

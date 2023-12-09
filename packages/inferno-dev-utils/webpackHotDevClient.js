@@ -17,8 +17,8 @@
 
 import stripAnsi from "strip-ansi";
 import url from "url";
-import launchEditorEndpoint from "./launchEditorEndpoint";
-import formatWebpackMessages from "./formatWebpackMessages";
+import launchEditorEndpoint from "./launchEditorEndpoint.js";
+import formatWebpackMessages from "./formatWebpackMessages.js";
 import ErrorOverlay from "inferno-error-overlay";
 
 ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {

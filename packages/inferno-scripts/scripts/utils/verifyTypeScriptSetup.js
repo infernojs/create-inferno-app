@@ -11,7 +11,7 @@ import chalk from "inferno-dev-utils/chalk";
 import fs from "fs";
 import resolve from "resolve";
 import path from "path";
-import {paths} from "../../config/paths";
+import {paths} from "../../config/paths.js";
 import os from "os";
 import immerModule from "inferno-dev-utils/immer";
 import globby from "inferno-dev-utils/globby";

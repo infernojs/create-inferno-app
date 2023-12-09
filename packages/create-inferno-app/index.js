@@ -35,13 +35,13 @@
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-import { init } from "./createInfernoApp";
+import { init } from "./createInfernoApp.js";
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
 const major = semver[0];
 
-if (major < 18) {
+if (major < 20) {
   console.error(
     'You are running Node ' +
       currentNodeVersion +

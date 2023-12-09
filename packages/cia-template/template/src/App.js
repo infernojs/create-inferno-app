@@ -1,5 +1,5 @@
 import { version, Component } from 'inferno';
-import Logo from './logo';
+import Logo from './logo.js';
 import './App.css';
 
 export default class App extends Component {

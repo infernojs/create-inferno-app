@@ -10,6 +10,7 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
+import './utils/process-env-prod.js';
 import "./../config/env.js";
 import path from "path";
 import chalk from "inferno-dev-utils/chalk";
@@ -22,13 +23,12 @@ import formatWebpackMessages from "inferno-dev-utils/formatWebpackMessages";
 import printHostingInstructions from "inferno-dev-utils/printHostingInstructions";
 import FileSizeReporter from "inferno-dev-utils/FileSizeReporter";
 import printBuildError from "inferno-dev-utils/printBuildError";
+import configFactory from "../config/webpack.config.js";
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 import { checkBrowsers } from "inferno-dev-utils/browsersHelper";
-
-process.env.BABEL_ENV = 'production';
-process.env.NODE_ENV = 'production';
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -36,7 +36,6 @@ process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', err => {
   throw err;
 });
-const configFactory = require('../config/webpack.config');
 const measureFileSizesBeforeBuild =
   FileSizeReporter.measureFileSizesBeforeBuild;
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
@@ -102,7 +101,7 @@ checkBrowsers(paths.appPath, isInteractive)
       );
       console.log();
 
-      const appPackage = require(paths.appPackageJson);
+      const appPackage = readJsonFile(paths.appPackageJson);
       const publicUrl = paths.publicUrlOrPath;
       const publicPath = config.output.publicPath;
       const buildFolder = path.relative(process.cwd(), paths.appBuild);

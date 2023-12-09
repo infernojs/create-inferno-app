@@ -9,7 +9,7 @@
 // References:
 // - https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#plugin-hooks
 // - https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/issues/232#issuecomment-645543747
-import ForkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin";
+import ForkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin.js";
 
 export default class ForkTsCheckerWarningWebpackPlugin {
   apply(compiler) {

@@ -13,10 +13,10 @@ import chalk from "chalk";
 import detect from "detect-port-alt";
 import isRoot from "is-root";
 import prompts from "prompts";
-import clearConsole from "./clearConsole";
-import formatWebpackMessages from "./formatWebpackMessages";
-import getProcessForPort from "./getProcessForPort";
-import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin";
+import clearConsole from "./clearConsole.js";
+import formatWebpackMessages from "./formatWebpackMessages.js";
+import getProcessForPort from "./getProcessForPort.js";
+import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin.js";
 
 const isInteractive = process.stdout.isTTY;
 

@@ -10,6 +10,7 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
+import "./utils/process-env-develop.js";
 import "../config/env.js";
 import fs from "fs";
 import chalk from "inferno-dev-utils/chalk";
@@ -25,18 +26,17 @@ import {paths} from "../config/paths.js";
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 import { checkBrowsers } from "inferno-dev-utils/browsersHelper";
-
-process.env.BABEL_ENV = 'development';
-process.env.NODE_ENV = 'development';
+import configFactory from "../config/webpack.config.js";
+import createDevServerConfig from "../config/webpackDevServer.config.js";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 process.on('unhandledRejection', err => {
+  console.error(JSON.stringify(err))
   throw err;
 });
-const configFactory = require('../config/webpack.config');
-const createDevServerConfig = require('../config/webpackDevServer.config');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
@@ -80,7 +80,7 @@ checkBrowsers(paths.appPath, isInteractive)
 
     const config = configFactory('development');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
-    const appName = require(paths.appPackageJson).name;
+    const appName = readJsonFile(paths.appPackageJson).name;
 
     const useTypeScript = fs.existsSync(paths.appTsConfig);
     const urls = prepareUrls(
@@ -99,7 +99,7 @@ checkBrowsers(paths.appPath, isInteractive)
       webpack,
     });
     // Load proxy config
-    const proxySetting = require(paths.appPackageJson).proxy;
+    const proxySetting = readJsonFile(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(
       proxySetting,
       paths.appPublic,

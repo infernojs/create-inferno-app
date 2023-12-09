@@ -4,12 +4,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+'use strict';
 
-import crypto from "crypto";
+const crypto = require('crypto');
 
 const macroCheck = new RegExp('[./]macro');
 
-export default function() {
+module.exports = function () {
   return {
     // This function transforms the Babel configuration on a per-file basis
     config(config, { source }) {
@@ -29,4 +30,4 @@ export default function() {
       return config.options;
     },
   };
-}
+};

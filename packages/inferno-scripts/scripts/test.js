@@ -10,6 +10,7 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
+import "./utils/process-env-test.js";
 import "../config/env.js";
 import jest from "jest";
 import { execSync } from "child_process";
@@ -17,17 +18,17 @@ import { execSync } from "child_process";
 // @remove-on-eject-begin
 // This is not necessary after eject because we embed config into package.json.
 import createJestConfig from "./utils/createJestConfig.js";
-import path from "path";
+import path, { dirname } from "path";
 import {paths} from "../config/paths.js";
 
 // This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
 // We're trying to resolve the environment ourselves because Jest does it incorrectly.
 // TODO: remove this as soon as it's fixed in Jest.
 import resolve from "resolve";
+import { fileURLToPath } from "url";
 
-process.env.BABEL_ENV = 'test';
-process.env.NODE_ENV = 'test';
-process.env.PUBLIC_URL = '';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will

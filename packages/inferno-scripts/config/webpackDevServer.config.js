@@ -12,8 +12,8 @@ import evalSourceMapMiddleware from "inferno-dev-utils/evalSourceMapMiddleware";
 import noopServiceWorkerMiddleware from "inferno-dev-utils/noopServiceWorkerMiddleware";
 import ignoredFiles from "inferno-dev-utils/ignoredFiles";
 import redirectServedPath from "inferno-dev-utils/redirectServedPathMiddleware";
-import paths from "./paths";
-import getHttpsConfig from "./getHttpsConfig";
+import {paths} from "./paths.js";
+import getHttpsConfig from "./getHttpsConfig.js";
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
