@@ -90,7 +90,7 @@ module.exports = {
         '@typescript-eslint/no-useless-constructor': 'warn',
         '@typescript-eslint/space-before-function-paren': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-non-null-assertion': 'error'
+        '@typescript-eslint/no-non-null-assertion': 'off'
       },
     },
   ],
