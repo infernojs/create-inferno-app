@@ -1,6 +1,6 @@
 {
   "name": "inferno-scripts",
-  "version": "8.0.3",
+  "version": "8.0.4",
   "type": "module",
   "description": "Configuration and scripts for Create Inferno App.",
   "repository": {
