@@ -5,7 +5,7 @@ interface LogoProps {
   width?: number
 }
 
-export default ({ width, height }: LogoProps): InfernoNode => {
+export default function Logo({ width, height }: LogoProps): InfernoNode {
   return (
     <svg
       version="1.0"

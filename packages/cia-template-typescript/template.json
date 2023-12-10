@@ -14,7 +14,7 @@
         "standard-with-typescript",
         "plugin:import/typescript",
         "eslint:recommended",
-        "plugin:inferno/recommended"
+        "eslint-config-inferno-app/index"
       ]
     }
   }
