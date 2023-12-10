@@ -11,7 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { paths } from './paths.js';
 import chalk from 'inferno-dev-utils/chalk';
-import resolve from 'resolve';
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
@@ -115,16 +115,11 @@ function getModules() {
   // TypeScript project and set up the config
   // based on tsconfig.json
   if (hasTsConfig) {
-    const ts = require(
-      resolve.sync('typescript', {
-        basedir: paths.appNodeModules,
-      }),
-    );
-    config = ts.readConfigFile(paths.appTsConfig, ts.sys.readFile).config;
+    config = readJsonFile(paths.appTsConfig);
     // Otherwise we'll check if there is jsconfig.json
     // for non TS projects.
   } else if (hasJsConfig) {
-    config = require(paths.appJsConfig);
+    config = readJsonFile(paths.appJsConfig);
   }
 
   config = config || {};
