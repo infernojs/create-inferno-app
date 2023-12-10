@@ -28,11 +28,14 @@
     "@typescript-eslint/parser": "^6.13.2",
     "babel-preset-inferno-app": "^10.0.4",
     "confusing-browser-globals": "^1.0.11",
+    "eslint-config-standard-with-typescript": "^42.0.0",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-inferno": "^7.33.2",
     "eslint-plugin-jest": "^27.6.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-testing-library": "^6.2.0"
   },
   "engines": {
