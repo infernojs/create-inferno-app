@@ -7,8 +7,11 @@
  */
 
 import fs from 'fs';
-import path from 'path';
+import path, { dirname } from "path";
 import cp from 'child_process';
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const cleanup = () => {
   console.log('Cleaning up.');
