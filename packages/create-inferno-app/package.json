@@ -1,7 +1,7 @@
 {
   "name": "create-inferno-app",
   "type": "module",
-  "version": "8.0.5",
+  "version": "8.0.6",
   "keywords": [
     "inferno"
   ],
