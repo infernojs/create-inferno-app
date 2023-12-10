@@ -600,7 +600,9 @@ function getInstallPackage(version, originalDirectory) {
 export function getTemplateInstallPackage(template, originalDirectory) {
   let templateToInstall = 'cia-template';
   if (template) {
-    if (template.match(/^file:/)) {
+    if (template === 'typescript') {
+      templateToInstall = 'cia-template-typescript';
+    } else if (template.match(/^file:/)) {
       templateToInstall = `file:${resolve(
         originalDirectory,
         template.match(/^file:(.*)?$/)[1],
@@ -640,6 +642,8 @@ export function getTemplateInstallPackage(template, originalDirectory) {
       }
     }
   }
+
+  console.log("WAT" + templateToInstall + " asddas " + template)
 
   return Promise.resolve(templateToInstall);
 }
