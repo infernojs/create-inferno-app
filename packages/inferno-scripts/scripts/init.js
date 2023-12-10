@@ -220,7 +220,7 @@ export default async function(
     appPackage[key] = templatePackage[key];
   });
 
-  await fs.write(
+  writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2) + os.EOL,
   );
