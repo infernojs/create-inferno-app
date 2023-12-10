@@ -60,7 +60,9 @@ const packageJson = readJsonFile(resolve(__dirname, 'package.json'));
 let projectName;
 
 export function init() {
-  const program = new Command(packageJson.name)
+  const program = new Command(packageJson.name);
+
+  program
     .version(packageJson.version)
     .arguments('<project-directory>')
     .usage(`${chalk.green('<project-directory>')} [options]`)
@@ -144,10 +146,13 @@ export function init() {
         )}`,
       );
       console.log();
-    })
-    .parse(process.argv);
+    });
 
-  if (program.info) {
+  program.parse(process.argv);
+
+  const options = program.opts();
+
+  if (options.info) {
     console.log(chalk.bold('\nEnvironment Info:'));
     console.log(
       `\n  current version of ${packageJson.name}: ${packageJson.version}`,
@@ -179,16 +184,16 @@ export function init() {
   if (typeof projectName === 'undefined') {
     console.error('Please specify the project directory:');
     console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`,
+      `  ${chalk.cyan(options.name())} ${chalk.green('<project-directory>')}`,
     );
     console.log();
     console.log('For example:');
     console.log(
-      `  ${chalk.cyan(program.name())} ${chalk.green('my-inferno-app')}`,
+      `  ${chalk.cyan(options.name())} ${chalk.green('my-inferno-app')}`,
     );
     console.log();
     console.log(
-      `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`,
+      `Run ${chalk.cyan(`${options.name()} --help`)} to see all options.`,
     );
     process.exit(1);
   }
@@ -223,11 +228,11 @@ export function init() {
         const useYarn = isUsingYarn();
         createApp(
           projectName,
-          program.verbose,
-          program.scriptsVersion,
-          program.template,
+          options.verbose,
+          options.scriptsVersion,
+          options.template,
           useYarn,
-          program.usePnp,
+          options.usePnp,
         );
       }
     });
