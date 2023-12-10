@@ -481,7 +481,7 @@ function run(
 
         const pnpPath = resolve(process.cwd(), '.pnp.js');
 
-        const nodeArgs = existsSync(pnpPath) ? ['--require', pnpPath] : [];
+        const nodeArgs = existsSync(pnpPath) ? ['--input-type=module', '--require', pnpPath] : ['--input-type=module'];
 
         await executeNodeScript(
           {
