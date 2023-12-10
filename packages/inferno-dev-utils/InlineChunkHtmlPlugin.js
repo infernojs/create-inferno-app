@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 class InlineChunkHtmlPlugin {
   constructor(htmlWebpackPlugin, tests) {
@@ -59,4 +58,4 @@ class InlineChunkHtmlPlugin {
   }
 }
 
-module.exports = InlineChunkHtmlPlugin;
+export default InlineChunkHtmlPlugin;

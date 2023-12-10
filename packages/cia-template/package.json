@@ -1,5 +1,6 @@
 {
   "name": "cia-template",
+  "type": "module",
   "version": "1.2.0",
   "keywords": [
     "inferno",
@@ -14,7 +15,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=20.6"
   },
   "bugs": {
     "url": "https://github.com/infernojs/create-inferno-app/issues"

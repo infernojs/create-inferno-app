@@ -1,8 +1,7 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
-const path = require('path');
-const fs = require('fs');
+import testSetup from "../__shared__/test-setup";
+import path from "path";
+import fs from "fs";
 
 test('Ignores node_modules when detecting TypeScript', async () => {
   // CRA build will check for TypeScript files by

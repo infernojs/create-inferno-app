@@ -4,16 +4,15 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const browserslist = require('browserslist');
-const chalk = require('chalk');
-const os = require('os');
-const prompts = require('prompts');
-const pkgUp = require('pkg-up');
-const fs = require('fs');
+import browserslist from "browserslist";
+import chalk from "chalk";
+import os from "os";
+import prompts from "prompts";
+import {pkgUp} from "pkg-up";
+import fs from "fs";
 
-const defaultBrowsers = {
+export const defaultBrowsers = {
   production: ['>0.2%', 'not dead', 'not op_mini all'],
   development: [
     'last 1 chrome version',
@@ -41,7 +40,7 @@ function shouldSetBrowsers(isInteractive) {
   return prompts(question).then(answer => answer.shouldSetBrowsers);
 }
 
-function checkBrowsers(dir, isInteractive, retry = true) {
+export function checkBrowsers(dir, isInteractive, retry = true) {
   const current = browserslist.loadConfig({ path: dir });
   if (current != null) {
     return Promise.resolve(current);
@@ -92,4 +91,4 @@ function checkBrowsers(dir, isInteractive, retry = true) {
   });
 }
 
-module.exports = { defaultBrowsers, checkBrowsers };
+export default { defaultBrowsers, checkBrowsers };

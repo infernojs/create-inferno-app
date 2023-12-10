@@ -6,14 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const {
-  dismissRuntimeErrors,
-  reportRuntimeError,
-} = require('inferno-error-overlay');
+import { dismissRuntimeErrors, reportRuntimeError } from "inferno-error-overlay";
 
-module.exports = {
+
+export default {
   clearRuntimeErrors: dismissRuntimeErrors,
   handleRuntimeError: reportRuntimeError,
 };

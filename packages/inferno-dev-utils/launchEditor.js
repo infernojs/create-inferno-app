@@ -4,14 +4,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const child_process = require('child_process');
-const os = require('os');
-const chalk = require('chalk');
-const shellQuote = require('shell-quote');
+import fs from "fs";
+import path from "path";
+import child_process from "child_process";
+import os from "os";
+import chalk from "chalk";
+import shellQuote from "shell-quote";
 
 function isTerminalEditor(editor) {
   switch (editor) {
@@ -397,4 +396,4 @@ function launchEditor(fileName, lineNumber, colNumber) {
   });
 }
 
-module.exports = launchEditor;
+export default launchEditor;

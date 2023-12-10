@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const chalk = require('chalk');
-const path = require('path');
-const os = require('os');
+import chalk from "chalk";
+import path from "path";
+import os from "os";
 
 class ModuleScopePlugin {
   constructor(appSrc, allowedFiles = []) {
@@ -104,4 +103,4 @@ class ModuleScopePlugin {
   }
 }
 
-module.exports = ModuleScopePlugin;
+export default ModuleScopePlugin;

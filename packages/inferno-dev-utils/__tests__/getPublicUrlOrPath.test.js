@@ -5,9 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const getPublicUrlOrPath = require('../getPublicUrlOrPath');
+import getPublicUrlOrPath from "../getPublicUrlOrPath";
 
 const tests = [
   // DEVELOPMENT with homepage

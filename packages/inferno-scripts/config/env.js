@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const paths = require('./paths');
-
+import fs from "fs";
+import path from "path";
+import {paths} from "./paths.js";
 // Make sure that including paths.js after env.js will read .env variables.
-delete require.cache[require.resolve('./paths')];
+import { expand } from "dotenv-expand";
+import { config } from "dotenv";
+
+// delete require.cache[import.meta.resolve('./paths.js')];
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
@@ -38,15 +39,13 @@ const dotenvFiles = [
 // that have already been set.  Variable expansion is supported in .env files.
 // https://github.com/motdotla/dotenv
 // https://github.com/motdotla/dotenv-expand
-dotenvFiles.forEach(dotenvFile => {
+for (const dotenvFile of dotenvFiles) {
   if (fs.existsSync(dotenvFile)) {
-    require('dotenv-expand')(
-      require('dotenv').config({
-        path: dotenvFile,
-      })
-    );
+    expand(config({
+      path: dotenvFile,
+    }));
   }
-});
+}
 
 // We support resolving modules according to `NODE_PATH`.
 // This lets you use absolute paths in imports inside large monorepos:
@@ -109,4 +108,4 @@ function getClientEnvironment(publicUrl) {
   return { raw, stringified };
 }
 
-module.exports = getClientEnvironment;
+export default getClientEnvironment;

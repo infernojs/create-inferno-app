@@ -6,16 +6,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
+import spawn from "inferno-dev-utils/crossSpawn";
+import {fileURLToPath} from 'url'
+
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-const spawn = require('inferno-dev-utils/crossSpawn');
 const args = process.argv.slice(2);
 
 const scriptIndex = args.findIndex(
@@ -25,10 +25,12 @@ const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
 if (['build', 'eject', 'start', 'test'].includes(script)) {
+  const modulePath = fileURLToPath(import.meta.resolve('inferno-scripts/scripts/' + script));
+
   const result = spawn.sync(
     process.execPath,
     nodeArgs
-      .concat(require.resolve('../scripts/' + script))
+      .concat(modulePath)
       .concat(args.slice(scriptIndex + 1)),
     { stdio: 'inherit' }
   );

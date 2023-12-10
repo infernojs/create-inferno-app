@@ -6,12 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const babelJest = require('babel-jest').default;
+import babelJest from "babel-jest";
+import { fileURLToPath } from "url";
 
-module.exports = babelJest.createTransformer({
-  presets: [[require.resolve('babel-preset-inferno-app')]],
+export default babelJest.createTransformer({
+  presets: [[fileURLToPath(import.meta.resolve("babel-preset-inferno-app"))]],
   babelrc: false,
-  configFile: false,
+  configFile: false
 });

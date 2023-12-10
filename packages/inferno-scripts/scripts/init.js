@@ -5,23 +5,24 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
+import fs from "fs-extra";
+import path from "path";
+import chalk from "inferno-dev-utils/chalk";
+import { execSync } from "child_process";
+import spawn from "inferno-dev-utils/crossSpawn";
+import { defaultBrowsers } from "inferno-dev-utils/browsersHelper";
+import os from "os";
+import verifyTypeScriptSetup from "./utils/verifyTypeScriptSetup";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
+import { fileURLToPath } from "url";
+
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-const fs = require('fs-extra');
-const path = require('path');
-const chalk = require('inferno-dev-utils/chalk');
-const execSync = require('child_process').execSync;
-const spawn = require('inferno-dev-utils/crossSpawn');
-const { defaultBrowsers } = require('inferno-dev-utils/browsersHelper');
-const os = require('os');
-const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
 function isInGitRepository() {
   try {
@@ -81,14 +82,14 @@ function tryGitCommit(appPath) {
   }
 }
 
-module.exports = function (
+export default function(
   appPath,
   appName,
   verbose,
   originalDirectory,
   templateName
 ) {
-  const appPackage = require(path.join(appPath, 'package.json'));
+  const appPackage = readJsonFile(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
   if (!templateName) {
@@ -114,14 +115,14 @@ module.exports = function (
   }
 
   const templatePath = path.dirname(
-    require.resolve(`${templateName}/package.json`, { paths: [appPath] })
+    fileURLToPath(import.meta.resolve(`${templateName}/package.json`, { paths: [appPath] }))
   );
 
   const templateJsonPath = path.join(templatePath, 'template.json');
 
   let templateJson = {};
   if (fs.existsSync(templateJsonPath)) {
-    templateJson = require(templateJsonPath);
+    templateJson = readJsonFile(templateJsonPath);
   }
 
   const templatePackage = templateJson.package || {};
@@ -404,7 +405,7 @@ module.exports = function (
   }
   console.log();
   console.log('Happy hacking!');
-};
+}
 
 function isInfernoInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};

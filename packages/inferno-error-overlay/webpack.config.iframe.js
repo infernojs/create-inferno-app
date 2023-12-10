@@ -4,17 +4,19 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const path = require('path');
-const webpack = require('webpack');
-const TerserPlugin = require('terser-webpack-plugin');
+import webpack from "webpack";
+import TerserPlugin from "terser-webpack-plugin";
+import { dirname, join, resolve } from 'path';
+import { fileURLToPath } from 'url';
 
-module.exports = {
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+export default {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/iframeScript.js',
   output: {
-    path: path.join(__dirname, './lib'),
+    path: join(__dirname, './lib'),
     filename: 'iframe-bundle.js',
   },
   module: {
@@ -24,7 +26,7 @@ module.exports = {
           // Source
           {
             test: /\.js$/,
-            include: [path.resolve(__dirname, './src')],
+            include: [resolve(__dirname, './src')],
             use: {
               loader: 'babel-loader',
             },

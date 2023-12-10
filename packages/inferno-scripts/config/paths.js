@@ -6,14 +6,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const path = require('path');
-const fs = require('fs');
-const getPublicUrlOrPath = require('inferno-dev-utils/getPublicUrlOrPath');
-
+import path, { dirname } from "path";
+import fs from "fs";
+import { fileURLToPath } from 'url';
+import getPublicUrlOrPath from "inferno-dev-utils/getPublicUrlOrPath";
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
+import ownPackageJson from "../package.json" assert { type: 'json' };
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 
@@ -25,13 +26,15 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 const publicUrlOrPath = getPublicUrlOrPath(
   process.env.NODE_ENV === 'development',
-  require(resolveApp('package.json')).homepage,
+  JSON.parse(fs.readFileSync(resolveApp('package.json'), {
+    encoding: "utf8",
+  })).homepage,
   process.env.PUBLIC_URL
 );
 
 const buildPath = process.env.BUILD_PATH || 'build';
 
-const moduleFileExtensions = [
+export const moduleFileExtensions = [
   'web.mjs',
   'mjs',
   'web.js',
@@ -58,8 +61,10 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
+let configPaths;
+
 // config after eject: we're in ./config/
-module.exports = {
+configPaths = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
@@ -84,7 +89,7 @@ module.exports = {
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 
 // config before eject: we're in ./node_modules/inferno-scripts/config/
-module.exports = {
+configPaths = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
   appBuild: resolveApp(buildPath),
@@ -110,7 +115,6 @@ module.exports = {
   ownTypeDeclarations: resolveOwn('lib/inferno-app.d.ts'),
 };
 
-const ownPackageJson = require('../package.json');
 const infernoScriptsPath = resolveApp(`node_modules/${ownPackageJson.name}`);
 const infernoScriptsLinked =
   fs.existsSync(infernoScriptsPath) &&
@@ -122,7 +126,7 @@ if (
   __dirname.indexOf(path.join('packages', 'inferno-scripts', 'config')) !== -1
 ) {
   const templatePath = '../cia-template/template';
-  module.exports = {
+  configPaths = {
     dotenv: resolveOwn(`${templatePath}/.env`),
     appPath: resolveApp('.'),
     appBuild: resolveOwn(path.join('../..', buildPath)),
@@ -150,4 +154,5 @@ if (
 }
 // @remove-on-eject-end
 
-module.exports.moduleFileExtensions = moduleFileExtensions;
+
+export const paths = configPaths;

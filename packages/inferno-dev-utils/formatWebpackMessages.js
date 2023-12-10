@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 const friendlySyntaxErrorLabel = 'Syntax error:';
 
@@ -125,4 +124,4 @@ function formatWebpackMessages(json) {
   return result;
 }
 
-module.exports = formatWebpackMessages;
+export default formatWebpackMessages;

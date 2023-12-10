@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
 // References:
 // - https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#plugin-hooks
 // - https://github.com/TypeStrong/fork-ts-checker-webpack-plugin/issues/232#issuecomment-645543747
-const ForkTsCheckerWebpackPlugin = require('./ForkTsCheckerWebpackPlugin');
+import ForkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin.js";
 
-module.exports = class ForkTsCheckerWarningWebpackPlugin {
+export default class ForkTsCheckerWarningWebpackPlugin {
   apply(compiler) {
     new ForkTsCheckerWebpackPlugin().apply(compiler);
 
@@ -22,4 +21,4 @@ module.exports = class ForkTsCheckerWarningWebpackPlugin {
       issues.map(issue => ({ ...issue, severity: 'warning' }))
     );
   }
-};
+}

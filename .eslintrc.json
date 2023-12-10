@@ -1,5 +1,15 @@
 {
-  "extends": "eslint:recommended",
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:ft-flow/recommended"
+  ],
+  "plugins": [
+    "import",
+    "ft-flow"
+  ],
+  "parser": "hermes-eslint",
   "env": {
     "browser": true,
     "commonjs": true,
@@ -8,12 +18,14 @@
     "jest": true
   },
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2022,
+    "sourceType": "module"
   },
   "rules": {
     "no-console": "off",
     "strict": ["error", "global"],
-    "curly": "warn"
+    "curly": "warn",
+    "no-types-missing-file-annotation": "off"
   },
   "overrides": [
     {

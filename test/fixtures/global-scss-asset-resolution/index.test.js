@@ -1,6 +1,5 @@
-'use strict';
 
-const testSetup = require('../__shared__/test-setup');
+import testSetup from "../__shared__/test-setup";
 
 if (testSetup.isLocal) {
   // TODO: make this work locally

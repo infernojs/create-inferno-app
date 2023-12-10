@@ -6,11 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const cp = require('child_process');
+import fs from "fs";
+import path from "path";
+import cp from "child_process";
 
 const cleanup = () => {
   console.log('Cleaning up.');

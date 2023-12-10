@@ -4,12 +4,11 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const launchEditor = require('./launchEditor');
-const launchEditorEndpoint = require('./launchEditorEndpoint');
+import launchEditor from "./launchEditor.js";
+import launchEditorEndpoint from "./launchEditorEndpoint.js";
 
-module.exports = function createLaunchEditorMiddleware() {
+export default function createLaunchEditorMiddleware() {
   return function launchEditorMiddleware(req, res, next) {
     if (req.url.startsWith(launchEditorEndpoint)) {
       const lineNumber = parseInt(req.query.lineNumber, 10) || 1;
@@ -20,4 +19,4 @@ module.exports = function createLaunchEditorMiddleware() {
       next();
     }
   };
-};
+}

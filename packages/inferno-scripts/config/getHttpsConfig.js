@@ -6,14 +6,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 // @remove-on-eject-end
-'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
-const chalk = require('inferno-dev-utils/chalk');
-const paths = require('./paths');
-
+import fs from "fs";
+import path from "path";
+import crypto from "crypto";
+import chalk from "inferno-dev-utils/chalk";
+import {paths} from "./paths.js";
 // Ensure the certificate and key provided are valid and if not
 // throw an easy to debug error
 function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
@@ -71,4 +69,4 @@ function getHttpsConfig() {
   return isHttps;
 }
 
-module.exports = getHttpsConfig;
+export default getHttpsConfig;

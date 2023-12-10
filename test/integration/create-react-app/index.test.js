@@ -1,11 +1,15 @@
-'use strict';
 
-const execa = require('execa');
-const { mkdirp, writeFileSync, existsSync, readdirSync } = require('fs-extra');
-const { join } = require('path');
-const { rmSync } = require('fs');
+import { execa } from "execa";
+import { existsSync, mkdirp, readdirSync, writeFileSync } from "fs-extra";
 
-const cli = require.resolve('create-inferno-app/index.js');
+
+import { join } from "path";
+
+import { rmSync } from "fs";
+import { fileURLToPath } from "url";
+
+
+const cli = fileURLToPath(import.meta.resolve('create-inferno-app/index.js'));
 
 // Increase the timeout for GitHub macOS runner
 jest.setTimeout(1000 * 60 * (process.env.RUNNER_OS === 'macOS' ? 10 : 5));

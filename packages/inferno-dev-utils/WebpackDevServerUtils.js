@@ -4,24 +4,23 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const address = require('address');
-const fs = require('fs');
-const path = require('path');
-const url = require('url');
-const chalk = require('chalk');
-const detect = require('detect-port-alt');
-const isRoot = require('is-root');
-const prompts = require('prompts');
-const clearConsole = require('./clearConsole');
-const formatWebpackMessages = require('./formatWebpackMessages');
-const getProcessForPort = require('./getProcessForPort');
-const forkTsCheckerWebpackPlugin = require('./ForkTsCheckerWebpackPlugin');
+import {address} from "address";
+import fs from "fs";
+import path from "path";
+import url from "url";
+import chalk from "chalk";
+import detect from "detect-port-alt";
+import isRoot from "is-root";
+import prompts from "prompts";
+import clearConsole from "./clearConsole.js";
+import formatWebpackMessages from "./formatWebpackMessages.js";
+import getProcessForPort from "./getProcessForPort.js";
+import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin.js";
 
 const isInteractive = process.stdout.isTTY;
 
-function prepareUrls(protocol, host, port, pathname = '/') {
+export function prepareUrls(protocol, host, port, pathname = '/') {
   const formatUrl = hostname =>
     url.format({
       protocol,
@@ -100,7 +99,7 @@ function printInstructions(appName, urls, useYarn) {
   console.log();
 }
 
-function createCompiler({
+export function createCompiler({
   appName,
   config,
   urls,
@@ -299,7 +298,7 @@ function onProxyError(proxy) {
   };
 }
 
-function prepareProxy(proxy, appPublicFolder, servedPathname) {
+export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   // `proxy` lets you specify alternate servers for specific requests.
   if (!proxy) {
     return undefined;
@@ -388,7 +387,7 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
   ];
 }
 
-function choosePort(host, defaultPort) {
+export function choosePort(host, defaultPort) {
   return detect(defaultPort, host).then(
     port =>
       new Promise(resolve => {
@@ -435,7 +434,7 @@ function choosePort(host, defaultPort) {
   );
 }
 
-module.exports = {
+export default {
   choosePort,
   createCompiler,
   prepareProxy,

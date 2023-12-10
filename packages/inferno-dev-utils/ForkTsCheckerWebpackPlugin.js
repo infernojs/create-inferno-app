@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-var ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
-module.exports = ForkTsCheckerWebpackPlugin;
+export default ForkTsCheckerWebpackPlugin;

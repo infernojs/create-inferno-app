@@ -6,16 +6,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
 
-const chalk = require('inferno-dev-utils/chalk');
-const fs = require('fs');
-const resolve = require('resolve');
-const path = require('path');
-const paths = require('../../config/paths');
-const os = require('os');
-const immer = require('inferno-dev-utils/immer').produce;
-const globby = require('inferno-dev-utils/globby').sync;
+import chalk from "inferno-dev-utils/chalk";
+import fs from "fs";
+import resolve from "resolve";
+import path from "path";
+import {paths} from "../../config/paths.js";
+import os from "os";
+import immerModule from "inferno-dev-utils/immer";
+import globby from "inferno-dev-utils/globby";
+
+const immer = immerModule.produce;
 
 function writeJson(fileName, object) {
   fs.writeFileSync(
@@ -270,4 +271,4 @@ function verifyTypeScriptSetup() {
   }
 }
 
-module.exports = verifyTypeScriptSetup;
+export default verifyTypeScriptSetup;

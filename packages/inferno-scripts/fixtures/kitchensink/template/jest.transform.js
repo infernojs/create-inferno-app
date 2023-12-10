@@ -1,7 +1,5 @@
-'use strict';
+
+import babelJest from "babel-jest";
 
 const babelOptions = { presets: ['react-app'] };
-
-const babelJest = require('babel-jest').default;
-
-module.exports = babelJest.createTransformer(babelOptions);
+export default babelJest.createTransformer(babelOptions);

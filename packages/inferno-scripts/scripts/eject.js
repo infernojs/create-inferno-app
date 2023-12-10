@@ -5,25 +5,26 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
+import fs from "fs-extra";
+import path from "path";
+import prompts from "prompts";
+import { execSync } from "child_process";
+import chalk from "inferno-dev-utils/chalk";
+import {paths} from "../config/paths.js";
+import createJestConfig from "./utils/createJestConfig";
+import crossSpawn from "inferno-dev-utils/crossSpawn";
+import os from "os";
+import { readJsonFile } from "inferno-dev-utils/readJsonFile";
+
+const spawnSync = crossSpawn.sync;
+
 process.on('unhandledRejection', err => {
   throw err;
 });
-
-const fs = require('fs-extra');
-const path = require('path');
-const prompts = require('prompts');
-const execSync = require('child_process').execSync;
-const chalk = require('inferno-dev-utils/chalk');
-const paths = require('../config/paths');
-const createJestConfig = require('./utils/createJestConfig');
-const spawnSync = require('inferno-dev-utils/crossSpawn').sync;
-const os = require('os');
-
 const green = chalk.green;
 const cyan = chalk.cyan;
 
@@ -171,8 +172,8 @@ prompts({
   });
   console.log();
 
-  const ownPackage = require(path.join(ownPath, 'package.json'));
-  const appPackage = require(path.join(appPath, 'package.json'));
+  const ownPackage = readJsonFile(path.join(ownPath, 'package.json'));
+  const appPackage = readJsonFile(path.join(appPath, 'package.json'));
 
   console.log(cyan('Updating the dependencies'));
   const ownPackageName = ownPackage.name;

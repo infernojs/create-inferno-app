@@ -5,14 +5,13 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-'use strict';
 
-const fs = require('fs');
-const chalk = require('inferno-dev-utils/chalk');
-const paths = require('../../config/paths');
-const modules = require('../../config/modules');
+import fs from "fs";
+import chalk from "inferno-dev-utils/chalk";
+import { paths, moduleFileExtensions } from "../../config/paths.js";
+import modules from "../../config/modules.js";
 
-module.exports = (resolve, rootDir, isEjecting) => {
+export default (resolve, rootDir) => {
   // Use this instead of `paths.testsSetup` to avoid putting
   // an absolute filename into configuration after ejecting.
   const setupTestsMatches = paths.testsSetup.match(/src[/\\]setupTests\.(.+)/);
@@ -51,7 +50,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
       ...(modules.jestAliases || {}),
     },
-    moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(
+    moduleFileExtensions: [...moduleFileExtensions, 'node'].filter(
       ext => !ext.includes('mjs')
     ),
     watchPlugins: [
@@ -63,7 +62,7 @@ module.exports = (resolve, rootDir, isEjecting) => {
   if (rootDir) {
     config.rootDir = rootDir;
   }
-  const overrides = Object.assign({}, require(paths.appPackageJson).jest);
+  const overrides = Object.assign({}, JSON.parse(fs.readFileSync(paths.appPackageJson)).jest);
   const supportedKeys = [
     'clearMocks',
     'collectCoverageFrom',
@@ -142,4 +141,4 @@ module.exports = (resolve, rootDir, isEjecting) => {
     }
   }
   return config;
-};
+}
