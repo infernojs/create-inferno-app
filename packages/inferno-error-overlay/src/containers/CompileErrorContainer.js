@@ -6,13 +6,13 @@
  */
 
 /* @flow */
-import ErrorOverlay from '../components/ErrorOverlay';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import CodeBlock from '../components/CodeBlock';
-import generateAnsiHTML from '../utils/generateAnsiHTML';
-import parseCompileError from '../utils/parseCompileError';
-import type { ErrorLocation } from '../utils/parseCompileError';
+import ErrorOverlay from '../components/ErrorOverlay.js';
+import Footer from '../components/Footer.js';
+import Header from '../components/Header.js';
+import CodeBlock from '../components/CodeBlock.js';
+import generateAnsiHTML from '../utils/generateAnsiHTML.js';
+import parseCompileError from '../utils/parseCompileError.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
 
 const codeAnchorStyle = {
   cursor: 'pointer',

@@ -28,9 +28,8 @@ import { paths, moduleFileExtensions } from "./paths.js";
 import modules from "./modules.js";
 import getClientEnvironment from "./env.js";
 import ModuleNotFoundPlugin from "inferno-dev-utils/ModuleNotFoundPlugin";
-import inferno_dev_utils from "inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin";
-import inferno_dev_utils0 from "inferno-dev-utils/ForkTsCheckerWebpackPlugin";
-import babelLoader from "babel-loader";
+import forkTsCheckerWarningPlugin from "inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin";
+import forkTsCheckerPlugin from "inferno-dev-utils/ForkTsCheckerWebpackPlugin";
 
 // @remove-on-eject-begin
 import getCacheIdentifier from "inferno-dev-utils/getCacheIdentifier";
@@ -42,8 +41,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === 'true'
-    ? inferno_dev_utils
-    : inferno_dev_utils0;
+    ? forkTsCheckerWarningPlugin
+    : forkTsCheckerPlugin;
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 

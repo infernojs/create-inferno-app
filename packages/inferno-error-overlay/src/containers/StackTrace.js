@@ -7,13 +7,13 @@
 
 /* @flow */
 import { Component } from 'inferno';
-import StackFrame from './StackFrame';
-import Collapsible from '../components/Collapsible';
-import { isInternalFile } from '../utils/isInternalFile';
-import { isBultinErrorName } from '../utils/isBultinErrorName';
+import StackFrame from './StackFrame.js';
+import Collapsible from '../components/Collapsible.js';
+import { isInternalFile } from '../utils/isInternalFile.js';
+import { isBultinErrorName } from '../utils/isBultinErrorName.js';
 
-import type { StackFrame as StackFrameType } from '../utils/stack-frame';
-import type { ErrorLocation } from '../utils/parseCompileError';
+import type { StackFrame as StackFrameType } from '../utils/stack-frame.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
 
 const traceStyle = {
   'font-size': '1em',

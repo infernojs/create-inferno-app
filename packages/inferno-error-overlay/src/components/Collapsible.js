@@ -6,7 +6,7 @@
  */
 
 import type { Element as InfernoElement } from 'inferno';
-import type { Theme } from '../styles';
+import type { Theme } from '../styles.js';
 
 const _collapsibleStyle = {
   cursor: 'pointer',

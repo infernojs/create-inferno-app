@@ -8,24 +8,24 @@
 import {
   register as registerError,
   unregister as unregisterError,
-} from './effects/unhandledError';
+} from './effects/unhandledError.js';
 import {
   register as registerPromise,
   unregister as unregisterPromise,
-} from './effects/unhandledRejection';
+} from './effects/unhandledRejection.js';
 import {
   register as registerStackTraceLimit,
   unregister as unregisterStackTraceLimit,
-} from './effects/stackTraceLimit';
+} from './effects/stackTraceLimit.js';
 import {
   permanentRegister as permanentRegisterConsole,
   registerInfernoStack,
   unregisterInfernoStack,
-} from './effects/proxyConsole';
-import { massage as massageWarning } from './utils/warnings';
-import getStackFrames from './utils/getStackFrames';
+} from './effects/proxyConsole.js';
+import { massage as massageWarning } from './utils/warnings.js';
+import getStackFrames from './utils/getStackFrames.js';
 
-import type { StackFrame } from './utils/stack-frame';
+import type { StackFrame } from './utils/stack-frame.js';
 
 const CONTEXT_SIZE: number = 3;
 

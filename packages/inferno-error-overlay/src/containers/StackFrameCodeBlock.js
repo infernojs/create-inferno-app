@@ -6,10 +6,10 @@
  */
 
 /* @flow */
-import CodeBlock from '../components/CodeBlock';
-import { absolutifyCaret } from '../utils/dom/absolutifyCaret';
-import type { ScriptLine } from '../utils/stack-frame';
-import generateAnsiHTML from '../utils/generateAnsiHTML';
+import CodeBlock from '../components/CodeBlock.js';
+import { absolutifyCaret } from '../utils/dom/absolutifyCaret.js';
+import type { ScriptLine } from '../utils/stack-frame.js';
+import generateAnsiHTML from '../utils/generateAnsiHTML.js';
 
 import { codeFrameColumns } from '@babel/code-frame';
 

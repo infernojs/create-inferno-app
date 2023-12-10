@@ -7,14 +7,14 @@
 
 /* @flow */
 import { Component } from 'inferno';
-import ErrorOverlay from '../components/ErrorOverlay';
-import CloseButton from '../components/CloseButton';
-import NavigationBar from '../components/NavigationBar';
-import RuntimeError from './RuntimeError';
-import Footer from '../components/Footer';
+import ErrorOverlay from '../components/ErrorOverlay.js';
+import CloseButton from '../components/CloseButton.js';
+import NavigationBar from '../components/NavigationBar.js';
+import RuntimeError from './RuntimeError.js';
+import Footer from '../components/Footer.js';
 
-import type { ErrorRecord } from './RuntimeError';
-import type { ErrorLocation } from '../utils/parseCompileError';
+import type { ErrorRecord } from './RuntimeError.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
 
 type Props = {|
   errorRecords: ErrorRecord[],

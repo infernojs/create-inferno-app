@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import type { Theme } from '../styles';
+import type { Theme } from '../styles.js';
 
 const headerStyle = (theme: Theme) => ({
   'font-size': '2em',

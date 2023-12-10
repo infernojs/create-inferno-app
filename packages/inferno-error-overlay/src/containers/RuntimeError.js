@@ -6,11 +6,11 @@
  */
 
 /* @flow */
-import Header from '../components/Header';
-import StackTrace from './StackTrace';
+import Header from '../components/Header.js';
+import StackTrace from './StackTrace.js';
 
-import type { StackFrame } from '../utils/stack-frame';
-import type { ErrorLocation } from '../utils/parseCompileError';
+import type { StackFrame } from '../utils/stack-frame.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
 
 const wrapperStyle = {
   display: 'flex',

@@ -7,12 +7,12 @@
 
 /* @flow */
 import { Component } from 'inferno';
-import CodeBlock from './StackFrameCodeBlock';
-import { getPrettyURL } from '../utils/getPrettyURL';
+import CodeBlock from './StackFrameCodeBlock.js';
+import { getPrettyURL } from '../utils/getPrettyURL.js';
 
-import type { StackFrame as StackFrameType } from '../utils/stack-frame';
-import type { ErrorLocation } from '../utils/parseCompileError';
-import type { Theme } from '../styles';
+import type { StackFrame as StackFrameType } from '../utils/stack-frame.js';
+import type { ErrorLocation } from '../utils/parseCompileError.js';
+import type { Theme } from '../styles.js';
 
 const linkStyle = (theme: Theme) => ({
   'font-size': '0.9em',

@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import type { InfernoFrame } from '../effects/proxyConsole';
+import type { InfernoFrame } from '../effects/proxyConsole.js';
 
 function stripInlineStacktrace(message: string): string {
   return message

@@ -6,9 +6,9 @@
  */
 
 /* @flow */
-import StackFrame from './stack-frame';
-import { getSourceMap } from './getSourceMap';
-import { getLinesAround } from './getLinesAround';
+import StackFrame from './stack-frame.js';
+import { getSourceMap } from './getSourceMap.js';
+import { getLinesAround } from './getLinesAround.js';
 import { settle } from 'settle-promise';
 
 /**

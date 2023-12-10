@@ -6,10 +6,10 @@
  */
 
 /* @flow */
-import type { StackFrame } from './stack-frame';
-import { parse } from './parser';
-import { map } from './mapper';
-import { unmap } from './unmapper';
+import type { StackFrame } from './stack-frame.js';
+import { parse } from './parser.js';
+import { map } from './mapper.js';
+import { unmap } from './unmapper.js';
 
 function getStackFrames(
   error: Error,
