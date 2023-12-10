@@ -14,6 +14,7 @@
     "e2e:docker": "tasks/local-test.sh",
     "postinstall": "npm run build:prod -w inferno-error-overlay",
     "publish": "tasks/publish.sh",
+    "publish-force": "tasks/publish-force.sh",
     "start": "cd packages/inferno-scripts && node bin/inferno-scripts.js start",
     "screencast": "node ./tasks/screencast.js",
     "screencast:error": "svg-term --cast jyu19xGl88FQ3poMY8Hbmfw8y --out screencast-error.svg --window --at 12000 --no-cursor",
