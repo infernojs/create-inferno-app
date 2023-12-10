@@ -10,9 +10,19 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+const EMPTY_EXPORT = 'module.exports = {};';
+
 export default {
   process() {
-    return 'module.exports = {};';
+    return {
+      code: EMPTY_EXPORT
+    };
+  },
+  processAsync() {
+    return Promise.resolve({
+      code: EMPTY_EXPORT
+    });
   },
   getCacheKey() {
     // The output is always the same.
