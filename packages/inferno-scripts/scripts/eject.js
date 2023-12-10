@@ -15,7 +15,7 @@ import prompts from 'prompts';
 import { execSync } from 'child_process';
 import chalk from 'inferno-dev-utils/chalk';
 import { paths } from '../config/paths.js';
-import createJestConfig from './utils/createJestConfig';
+import createJestConfig from './utils/createJestConfig.js';
 import crossSpawn from 'inferno-dev-utils/crossSpawn';
 import os from 'os';
 import { readJsonFile } from 'inferno-dev-utils/readJsonFile';

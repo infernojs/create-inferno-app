@@ -16,7 +16,7 @@ import { execSync } from 'child_process';
 import spawn from 'inferno-dev-utils/crossSpawn';
 import { defaultBrowsers } from 'inferno-dev-utils/browsersHelper';
 import os from 'os';
-import verifyTypeScriptSetup from './utils/verifyTypeScriptSetup';
+import verifyTypeScriptSetup from './utils/verifyTypeScriptSetup.js';
 import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
 import { fileURLToPath } from 'url';
 
