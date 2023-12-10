@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fs from "fs";
-import path from "path";
-import child_process from "child_process";
-import os from "os";
-import chalk from "chalk";
-import shellQuote from "shell-quote";
+import fs from 'fs';
+import path from 'path';
+import child_process from 'child_process';
+import os from 'os';
+import chalk from 'chalk';
+import shellQuote from 'shell-quote';
 
 function isTerminalEditor(editor) {
   switch (editor) {
@@ -126,7 +126,7 @@ function getArgumentsForLineNumber(
   fileName,
   lineNumber,
   colNumber,
-  workspace
+  workspace,
 ) {
   const editorBasename = path.basename(editor).replace(/\.(exe|cmd|bat)$/i, '');
   switch (editorBasename) {
@@ -162,7 +162,7 @@ function getArgumentsForLineNumber(
     case 'VSCodium':
       return addWorkspaceToArgumentsIfExists(
         ['-g', fileName + ':' + lineNumber + ':' + colNumber],
-        workspace
+        workspace,
       );
     case 'appcode':
     case 'clion':
@@ -183,7 +183,7 @@ function getArgumentsForLineNumber(
     case 'rider64':
       return addWorkspaceToArgumentsIfExists(
         ['--line', lineNumber, fileName],
-        workspace
+        workspace,
       );
   }
 
@@ -217,7 +217,7 @@ function guessEditor() {
       // Just filter them out upfront. This also saves 10-20ms on the command.
       const output = child_process
         .execSync(
-          'wmic process where "executablepath is not null" get executablepath'
+          'wmic process where "executablepath is not null" get executablepath',
         )
         .toString();
       const runningProcesses = output.split('\r\n');
@@ -260,14 +260,14 @@ function guessEditor() {
 function printInstructions(fileName, errorMessage) {
   console.log();
   console.log(
-    chalk.red('Could not open ' + path.basename(fileName) + ' in the editor.')
+    chalk.red('Could not open ' + path.basename(fileName) + ' in the editor.'),
   );
   if (errorMessage) {
     if (errorMessage[errorMessage.length - 1] !== '.') {
       errorMessage += '.';
     }
     console.log(
-      chalk.red('The editor process exited with an error: ' + errorMessage)
+      chalk.red('The editor process exited with an error: ' + errorMessage),
     );
   }
   console.log();
@@ -278,7 +278,7 @@ function printInstructions(fileName, errorMessage) {
       chalk.green('.env.local') +
       ' file in your project folder ' +
       'and restart the development server. Learn more: ' +
-      chalk.green('https://goo.gl/MMTaZt')
+      chalk.green('https://goo.gl/MMTaZt'),
   );
   console.log();
 }
@@ -337,14 +337,16 @@ function launchEditor(fileName, lineNumber, colNumber) {
   ) {
     console.log();
     console.log(
-      chalk.red('Could not open ' + path.basename(fileName) + ' in the editor.')
+      chalk.red(
+        'Could not open ' + path.basename(fileName) + ' in the editor.',
+      ),
     );
     console.log();
     console.log(
       'When running on Windows, file names are checked against a whitelist ' +
         'to protect against remote code execution attacks. File names may ' +
         'consist only of alphanumeric characters (all languages), periods, ' +
-        'dashes, slashes, and underscores.'
+        'dashes, slashes, and underscores.',
     );
     console.log();
     return;
@@ -358,8 +360,8 @@ function launchEditor(fileName, lineNumber, colNumber) {
         fileName,
         lineNumber,
         colNumber,
-        workspace
-      )
+        workspace,
+      ),
     );
   } else {
     args.push(fileName);
@@ -378,7 +380,7 @@ function launchEditor(fileName, lineNumber, colNumber) {
     _childProcess = child_process.spawn(
       'cmd.exe',
       ['/C', editor].concat(args),
-      { stdio: 'inherit' }
+      { stdio: 'inherit' },
     );
   } else {
     _childProcess = child_process.spawn(editor, args, { stdio: 'inherit' });

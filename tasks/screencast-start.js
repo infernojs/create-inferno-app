@@ -7,10 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import {execa} from "execa";
-import meow from "meow";
-import multimatch from "multimatch";
+import { execa } from 'execa';
+import meow from 'meow';
+import multimatch from 'multimatch';
 
 main(meow());
 

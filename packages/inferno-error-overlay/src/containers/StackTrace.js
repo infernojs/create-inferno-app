@@ -73,7 +73,7 @@ class StackTrace extends Component<Props> {
           renderedFrames.push(
             <Collapsible key={'bundle-' + bundleCount}>
               {currentBundle}
-            </Collapsible>
+            </Collapsible>,
           );
         }
         currentBundle = [];

@@ -10,23 +10,22 @@
 // Do this as the first thing so that any code reading it knows the right env.
 
 // Ensure environment variables are read.
-import "./utils/process-env-test.js";
-import "../config/env.js";
-import jest from "jest";
-import { execSync } from "child_process";
+import './utils/process-env-test.js';
+import '../config/env.js';
+import jest from 'jest';
+import { execSync } from 'child_process';
 
 // @remove-on-eject-begin
 // This is not necessary after eject because we embed config into package.json.
-import createJestConfig from "./utils/createJestConfig.js";
-import path, { dirname } from "path";
-import {paths} from "../config/paths.js";
+import createJestConfig from './utils/createJestConfig.js';
+import path, { dirname } from 'path';
+import { paths } from '../config/paths.js';
 
 // This is a very dirty workaround for https://github.com/facebook/jest/issues/5913.
 // We're trying to resolve the environment ourselves because Jest does it incorrectly.
 // TODO: remove this as soon as it's fixed in Jest.
-import resolve from "resolve";
-import { fileURLToPath } from "url";
-
+import resolve from 'resolve';
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -72,26 +71,26 @@ argv.push(
     createJestConfig(
       relativePath => path.resolve(__dirname, '..', relativePath),
       path.resolve(paths.appSrc, '..'),
-      false
-    )
-  )
+      false,
+    ),
+  ),
 );
 
 function resolveJestDefaultEnvironment(name) {
   const jestDir = path.dirname(
     resolve.sync('jest', {
       basedir: __dirname,
-    })
+    }),
   );
   const jestCLIDir = path.dirname(
     resolve.sync('jest-cli', {
       basedir: jestDir,
-    })
+    }),
   );
   const jestConfigDir = path.dirname(
     resolve.sync('jest-config', {
       basedir: jestCLIDir,
-    })
+    }),
   );
   return resolve.sync(name, {
     basedir: jestConfigDir,

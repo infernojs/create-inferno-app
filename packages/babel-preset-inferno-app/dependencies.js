@@ -56,7 +56,7 @@ module.exports = function (api, opts) {
         '`BABEL_ENV` environment variables. Valid values are "development", ' +
         '"test", and "production". Instead, received: ' +
         JSON.stringify(env) +
-        '.'
+        '.',
     );
   }
 

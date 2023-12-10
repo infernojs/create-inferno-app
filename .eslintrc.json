@@ -5,10 +5,7 @@
     "plugin:import/recommended",
     "plugin:ft-flow/recommended"
   ],
-  "plugins": [
-    "import",
-    "ft-flow"
-  ],
+  "plugins": ["import", "ft-flow"],
   "parser": "hermes-eslint",
   "env": {
     "browser": true,

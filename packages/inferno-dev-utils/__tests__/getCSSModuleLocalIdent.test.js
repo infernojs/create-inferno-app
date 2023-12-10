@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import getCSSModuleLocalIdent from "../getCSSModuleLocalIdent";
+import getCSSModuleLocalIdent from '../getCSSModuleLocalIdent';
 
 const rootContext = '/path';
 const defaultClassName = 'class';
@@ -42,7 +41,7 @@ describe('getCSSModuleLocalIdent', () => {
         },
         '[hash:base64]',
         className,
-        options
+        options,
       );
       expect(ident).toBe(expected);
     });

@@ -16,12 +16,12 @@ const EMPTY_EXPORT = 'module.exports = {};';
 export default {
   process() {
     return {
-      code: EMPTY_EXPORT
+      code: EMPTY_EXPORT,
     };
   },
   processAsync() {
     return Promise.resolve({
-      code: EMPTY_EXPORT
+      code: EMPTY_EXPORT,
     });
   },
   getCacheKey() {

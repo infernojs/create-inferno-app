@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 const friendlySyntaxErrorLabel = 'Syntax error:';
 
 function isLikelyASyntaxError(message) {
@@ -36,7 +35,7 @@ function formatMessage(message) {
   // TODO: move this to our ESLint formatter?
   lines = lines.map(line => {
     const parsingError = /Line (\d+):(?:(\d+):)?\s*Parsing error: (.+)$/.exec(
-      line
+      line,
     );
     if (!parsingError) {
       return line;
@@ -49,20 +48,20 @@ function formatMessage(message) {
   // Smoosh syntax errors (commonly found in CSS)
   message = message.replace(
     /SyntaxError\s+\((\d+):(\d+)\)\s*(.+?)\n/g,
-    `${friendlySyntaxErrorLabel} $3 ($1:$2)\n`
+    `${friendlySyntaxErrorLabel} $3 ($1:$2)\n`,
   );
   // Clean up export errors
   message = message.replace(
     /^.*export '(.+?)' was not found in '(.+?)'.*$/gm,
-    `Attempted import error: '$1' is not exported from '$2'.`
+    `Attempted import error: '$1' is not exported from '$2'.`,
   );
   message = message.replace(
     /^.*export 'default' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm,
-    `Attempted import error: '$2' does not contain a default export (imported as '$1').`
+    `Attempted import error: '$2' does not contain a default export (imported as '$1').`,
   );
   message = message.replace(
     /^.*export '(.+?)' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm,
-    `Attempted import error: '$1' is not exported from '$3' (imported as '$2').`
+    `Attempted import error: '$1' is not exported from '$3' (imported as '$2').`,
   );
   lines = message.split('\n');
 
@@ -97,7 +96,7 @@ function formatMessage(message) {
   // https://github.com/facebook/create-react-app/pull/1050
   message = message.replace(
     /^\s*at\s((?!webpack:).)*:\d+:\d+[\s)]*(\n|$)/gm,
-    ''
+    '',
   ); // at ... ...:x:y
   message = message.replace(/^\s*at\s<anonymous>(\n|$)/gm, ''); // at <anonymous>
   lines = message.split('\n');
@@ -105,7 +104,9 @@ function formatMessage(message) {
   // Remove duplicated newlines
   lines = lines.filter(
     (line, index, arr) =>
-      index === 0 || line.trim() !== '' || line.trim() !== arr[index - 1].trim()
+      index === 0 ||
+      line.trim() !== '' ||
+      line.trim() !== arr[index - 1].trim(),
   );
 
   // Reassemble the message

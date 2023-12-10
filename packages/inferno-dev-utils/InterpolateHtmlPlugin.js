@@ -13,7 +13,7 @@
 // Learn more about creating plugins like this:
 // https://github.com/ampedandwired/html-webpack-plugin#events
 
-import escapeStringRegexp from "escape-string-regexp";
+import escapeStringRegexp from 'escape-string-regexp';
 
 class InterpolateHtmlPlugin {
   constructor(htmlWebpackPlugin, replacements) {
@@ -31,7 +31,7 @@ class InterpolateHtmlPlugin {
             const value = this.replacements[key];
             data.html = data.html.replace(
               new RegExp('%' + escapeStringRegexp(key) + '%', 'g'),
-              value
+              value,
             );
           });
         });

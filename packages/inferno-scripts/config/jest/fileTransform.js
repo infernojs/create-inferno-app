@@ -1,6 +1,5 @@
-
-import path from "path";
-import camelcase from "camelcase";
+import path from 'path';
+import camelcase from 'camelcase';
 // This is a custom Jest transformer turning file imports into filenames.
 // http://facebook.github.io/jest/docs/en/webpack.html
 

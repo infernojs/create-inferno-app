@@ -1,4 +1,4 @@
-import { readJsonFile } from "./readJsonFile.js";
+import { readJsonFile } from './readJsonFile.js';
 
 /**
  * Copyright (c) 2015-present, Facebook, Inc.

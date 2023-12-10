@@ -6,10 +6,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import fs from "fs";
-import path from "path";
-import cp from "child_process";
+import fs from 'fs';
+import path from 'path';
+import cp from 'child_process';
 
 const cleanup = () => {
   console.log('Cleaning up.');
@@ -89,7 +88,7 @@ Object.keys(packagePathsByName).forEach(name => {
 
   fs.writeFileSync(packageJson, JSON.stringify(json, null, 2), 'utf8');
   console.log(
-    'Replaced local dependencies in packages/' + name + '/package.json'
+    'Replaced local dependencies in packages/' + name + '/package.json',
   );
 });
 console.log('Replaced all local dependencies for testing.');
@@ -112,7 +111,7 @@ cp.execSync(
   {
     cwd: rootDir,
     stdio: 'inherit',
-  }
+  },
 );
 
 // Cleanup

@@ -9,16 +9,16 @@
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-import fs from "fs-extra";
-import path from "path";
-import chalk from "inferno-dev-utils/chalk";
-import { execSync } from "child_process";
-import spawn from "inferno-dev-utils/crossSpawn";
-import { defaultBrowsers } from "inferno-dev-utils/browsersHelper";
-import os from "os";
-import verifyTypeScriptSetup from "./utils/verifyTypeScriptSetup";
-import { readJsonFile } from "inferno-dev-utils/readJsonFile";
-import { fileURLToPath } from "url";
+import fs from 'fs-extra';
+import path from 'path';
+import chalk from 'inferno-dev-utils/chalk';
+import { execSync } from 'child_process';
+import spawn from 'inferno-dev-utils/crossSpawn';
+import { defaultBrowsers } from 'inferno-dev-utils/browsersHelper';
+import os from 'os';
+import verifyTypeScriptSetup from './utils/verifyTypeScriptSetup';
+import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
+import { fileURLToPath } from 'url';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -82,12 +82,12 @@ function tryGitCommit(appPath) {
   }
 }
 
-export default function(
+export default function (
   appPath,
   appName,
   verbose,
   originalDirectory,
-  templateName
+  templateName,
 ) {
   const appPackage = readJsonFile(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
@@ -96,26 +96,28 @@ export default function(
     console.log('');
     console.error(
       `A template was not provided. This is likely because you're using an outdated version of ${chalk.cyan(
-        'create-inferno-app'
-      )}.`
+        'create-inferno-app',
+      )}.`,
     );
     console.error(
       `Please note that global installs of ${chalk.cyan(
-        'create-inferno-app'
-      )} are no longer supported.`
+        'create-inferno-app',
+      )} are no longer supported.`,
     );
     console.error(
       `You can fix this by running ${chalk.cyan(
-        'npm uninstall -g create-inferno-app'
+        'npm uninstall -g create-inferno-app',
       )} or ${chalk.cyan(
-        'yarn global remove create-inferno-app'
-      )} before using ${chalk.cyan('create-inferno-app')} again.`
+        'yarn global remove create-inferno-app',
+      )} before using ${chalk.cyan('create-inferno-app')} again.`,
     );
     return;
   }
 
   const templatePath = path.dirname(
-    fileURLToPath(import.meta.resolve(`${templateName}/package.json`, { paths: [appPath] }))
+    fileURLToPath(
+      import.meta.resolve(`${templateName}/package.json`, { paths: [appPath] }),
+    ),
   );
 
   const templateJsonPath = path.join(templatePath, 'template.json');
@@ -133,8 +135,8 @@ export default function(
     console.log(
       chalk.red(
         'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create Inferno App 5.\n' +
-          'This template needs to be updated to use the new `package` key.'
-      )
+          'This template needs to be updated to use the new `package` key.',
+      ),
     );
     console.log('For more information, visit https://cra.link/templates');
   }
@@ -190,7 +192,7 @@ export default function(
       test: 'inferno-scripts test',
       eject: 'inferno-scripts eject',
     },
-    templateScripts
+    templateScripts,
   );
 
   // Update scripts for Yarn users
@@ -200,7 +202,7 @@ export default function(
         ...acc,
         [key]: value.replace(/(npm run |npm )/, 'yarn '),
       }),
-      {}
+      {},
     );
   }
 
@@ -219,14 +221,14 @@ export default function(
 
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
-    JSON.stringify(appPackage, null, 2) + os.EOL
+    JSON.stringify(appPackage, null, 2) + os.EOL,
   );
 
   const readmeExists = fs.existsSync(path.join(appPath, 'README.md'));
   if (readmeExists) {
     fs.renameSync(
       path.join(appPath, 'README.md'),
-      path.join(appPath, 'README.old.md')
+      path.join(appPath, 'README.old.md'),
     );
   }
 
@@ -236,7 +238,7 @@ export default function(
     fs.copySync(templateDir, appPath);
   } else {
     console.error(
-      `Could not locate supplied template: ${chalk.green(templateDir)}`
+      `Could not locate supplied template: ${chalk.green(templateDir)}`,
     );
     return;
   }
@@ -248,7 +250,7 @@ export default function(
       fs.writeFileSync(
         path.join(appPath, 'README.md'),
         readme.replace(/(npm run |npm )/g, 'yarn '),
-        'utf8'
+        'utf8',
       );
     } catch (err) {
       // Silencing the error. As it fall backs to using default npm commands.
@@ -267,7 +269,7 @@ export default function(
     fs.moveSync(
       path.join(appPath, 'gitignore'),
       path.join(appPath, '.gitignore'),
-      []
+      [],
     );
   }
 
@@ -308,7 +310,7 @@ export default function(
     args = args.concat(
       dependenciesToInstall.map(([dependency, version]) => {
         return `${dependency}@${version}`;
-      })
+      }),
     );
   }
 
@@ -374,7 +376,7 @@ export default function(
   console.log('    Starts the development server.');
   console.log();
   console.log(
-    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`)
+    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`),
   );
   console.log('    Bundles the app into static files for production.');
   console.log();
@@ -382,13 +384,13 @@ export default function(
   console.log('    Starts the test runner.');
   console.log();
   console.log(
-    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`)
+    chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}eject`),
   );
   console.log(
-    '    Removes this tool and copies build dependencies, configuration files'
+    '    Removes this tool and copies build dependencies, configuration files',
   );
   console.log(
-    '    and scripts into the app directory. If you do this, you can’t go back!'
+    '    and scripts into the app directory. If you do this, you can’t go back!',
   );
   console.log();
   console.log('We suggest that you begin by typing:');
@@ -399,8 +401,8 @@ export default function(
     console.log();
     console.log(
       chalk.yellow(
-        'You had a `README.md` file, we renamed it to `README.old.md`'
-      )
+        'You had a `README.md` file, we renamed it to `README.old.md`',
+      ),
     );
   }
   console.log();

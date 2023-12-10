@@ -6,10 +6,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fs from "fs";
-import chalk from "inferno-dev-utils/chalk";
-import { paths, moduleFileExtensions } from "../../config/paths.js";
-import modules from "../../config/modules.js";
+import fs from 'fs';
+import chalk from 'inferno-dev-utils/chalk';
+import { paths, moduleFileExtensions } from '../../config/paths.js';
+import modules from '../../config/modules.js';
 
 export default (resolve, rootDir) => {
   // Use this instead of `paths.testsSetup` to avoid putting
@@ -34,11 +34,11 @@ export default (resolve, rootDir) => {
     testEnvironment: 'jsdom',
     transform: {
       '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': resolve(
-        'config/jest/babelTransform.js'
+        'config/jest/babelTransform.js',
       ),
       '^.+\\.css$': resolve('config/jest/cssTransform.js'),
       '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': resolve(
-        'config/jest/fileTransform.js'
+        'config/jest/fileTransform.js',
       ),
     },
     transformIgnorePatterns: [
@@ -51,7 +51,7 @@ export default (resolve, rootDir) => {
       ...(modules.jestAliases || {}),
     },
     moduleFileExtensions: [...moduleFileExtensions, 'node'].filter(
-      ext => !ext.includes('mjs')
+      ext => !ext.includes('mjs'),
     ),
     watchPlugins: [
       'jest-watch-typeahead/filename',
@@ -62,7 +62,10 @@ export default (resolve, rootDir) => {
   if (rootDir) {
     config.rootDir = rootDir;
   }
-  const overrides = Object.assign({}, JSON.parse(fs.readFileSync(paths.appPackageJson)).jest);
+  const overrides = Object.assign(
+    {},
+    JSON.parse(fs.readFileSync(paths.appPackageJson)).jest,
+  );
   const supportedKeys = [
     'clearMocks',
     'collectCoverageFrom',
@@ -110,8 +113,8 @@ export default (resolve, rootDir) => {
               ' in your package.json.\n\n' +
               'Remove it from Jest configuration, and put the initialization code in ' +
               chalk.bold('src/setupTests.js') +
-              '.\nThis file will be loaded automatically.\n'
-          )
+              '.\nThis file will be loaded automatically.\n',
+          ),
         );
       } else {
         console.error(
@@ -132,8 +135,8 @@ export default (resolve, rootDir) => {
               chalk.bold('npm run eject') +
               ' but remember that this is a one-way operation. ' +
               'You may also file an issue with Create Inferno App to discuss ' +
-              'supporting more options out of the box.\n'
-          )
+              'supporting more options out of the box.\n',
+          ),
         );
       }
 
@@ -141,4 +144,4 @@ export default (resolve, rootDir) => {
     }
   }
   return config;
-}
+};

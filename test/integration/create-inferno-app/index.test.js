@@ -1,15 +1,19 @@
-
-import { execa } from "execa";
-import { mkdirp } from "fs-extra";
-import { join, resolve } from "path";
-import { rmSync, existsSync, readdirSync, writeFileSync } from "fs";
-
+import { execa } from 'execa';
+import { mkdirp } from 'fs-extra';
+import { join, resolve } from 'path';
+import { rmSync, existsSync, readdirSync, writeFileSync } from 'fs';
 
 const createInfernoAppRoot = resolve('./');
-const cli = resolve(createInfernoAppRoot, 'packages/create-inferno-app/index.js');
+const cli = resolve(
+  createInfernoAppRoot,
+  'packages/create-inferno-app/index.js',
+);
 
 const projectName = 'test-app';
-const __dirname = resolve(createInfernoAppRoot, 'test/integration/create-inferno-app')
+const __dirname = resolve(
+  createInfernoAppRoot,
+  'test/integration/create-inferno-app',
+);
 const genPath = join(__dirname, projectName);
 
 const generatedFiles = [
@@ -40,11 +44,11 @@ const run = async (args, options) => {
   process.stdout.write(
     `::group::Test "${
       expect.getState().currentTestName
-    }" - "create-inferno-app ${args.join(' ')}" output:\n`
+    }" - "create-inferno-app ${args.join(' ')}" output:\n`,
   );
   const result = execa('node', [cli].concat(args), options);
   result.stdout.on('data', chunk =>
-    process.stdout.write(chunk.toString('utf8'))
+    process.stdout.write(chunk.toString('utf8')),
   );
   const childProcessResult = await result;
   process.stdout.write(`ExitCode: ${childProcessResult.exitCode}\n`);
@@ -106,7 +110,7 @@ describe('create-inferno-app', () => {
 
     // Assert for the expected message
     expect(stdout).toContain(
-      `The directory ${projectName} contains files that could conflict`
+      `The directory ${projectName} contains files that could conflict`,
     );
 
     // Existing file is still there
@@ -138,7 +142,7 @@ describe('create-inferno-app', () => {
 
     // Assert for the generated files
     const generatedFilesWithYarn = generatedFiles.map(file =>
-      file === 'package-lock.json' ? 'yarn.lock' : file
+      file === 'package-lock.json' ? 'yarn.lock' : file,
     );
 
     expectAllFiles(files, generatedFilesWithYarn);
@@ -149,7 +153,7 @@ describe('create-inferno-app', () => {
       [projectName, '--template', 'typescript'],
       {
         cwd: __dirname,
-      }
+      },
     );
 
     // Assert for exit code

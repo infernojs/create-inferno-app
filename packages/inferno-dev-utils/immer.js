@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import * as immer from "immer";
+import * as immer from 'immer';
 
 export default immer;

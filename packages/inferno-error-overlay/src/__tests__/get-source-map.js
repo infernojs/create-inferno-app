@@ -18,7 +18,7 @@ test('finds an external source map', async () => {
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle.mjs.map'))
-      .toString('utf8')
+      .toString('utf8'),
   );
 
   const sm = await getSourceMap('/', file);
@@ -62,6 +62,6 @@ test('error on a source map with unsupported encoding', async () => {
   }
   expect(error instanceof Error).toBe(true);
   expect(error.message).toBe(
-    'Sorry, non-base64 inline source-map encoding is not supported.'
+    'Sorry, non-base64 inline source-map encoding is not supported.',
   );
 });

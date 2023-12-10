@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 // This alternative WebpackDevServer combines the functionality of:
 // https://github.com/webpack/webpack-dev-server/blob/webpack-1/client/index.js
 // https://github.com/webpack/webpack/blob/webpack-1/hot/dev-server.js
@@ -15,11 +14,11 @@
 // that looks similar to our console output. The error overlay is inspired by:
 // https://github.com/glenjamin/webpack-hot-middleware
 
-import stripAnsi from "strip-ansi";
-import url from "url";
-import launchEditorEndpoint from "./launchEditorEndpoint.js";
-import formatWebpackMessages from "./formatWebpackMessages.js";
-import ErrorOverlay from "inferno-error-overlay";
+import stripAnsi from 'strip-ansi';
+import url from 'url';
+import launchEditorEndpoint from './launchEditorEndpoint.js';
+import formatWebpackMessages from './formatWebpackMessages.js';
+import ErrorOverlay from 'inferno-error-overlay';
 
 ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {
   // Keep this sync with errorOverlayMiddleware.js
@@ -30,7 +29,7 @@ ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {
       '&lineNumber=' +
       window.encodeURIComponent(errorLocation.lineNumber || 1) +
       '&colNumber=' +
-      window.encodeURIComponent(errorLocation.colNumber || 1)
+      window.encodeURIComponent(errorLocation.colNumber || 1),
   );
 });
 
@@ -64,7 +63,7 @@ var connection = new WebSocket(
     // Hardcoded in WebpackDevServer
     pathname: process.env.WDS_SOCKET_PATH || '/ws',
     slashes: true,
-  })
+  }),
 );
 
 // Unlike WebpackDevServer client, we won't try to reconnect
@@ -73,7 +72,7 @@ var connection = new WebSocket(
 connection.onclose = function () {
   if (typeof console !== 'undefined' && typeof console.info === 'function') {
     console.info(
-      'The development server has disconnected.\nRefresh the page if necessary.'
+      'The development server has disconnected.\nRefresh the page if necessary.',
     );
   }
 };
@@ -130,7 +129,7 @@ function handleWarnings(warnings) {
         if (i === 5) {
           console.warn(
             'There were more warnings in other files.\n' +
-              'You can find a complete log in the terminal.'
+              'You can find a complete log in the terminal.',
           );
           break;
         }
@@ -287,7 +286,7 @@ function tryApplyUpdates(onHotUpdateSuccess) {
       },
       function (err) {
         handleApplyUpdates(err, null);
-      }
+      },
     );
   }
 }

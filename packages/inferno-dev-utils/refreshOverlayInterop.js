@@ -7,8 +7,10 @@
  */
 // @remove-on-eject-end
 
-import { dismissRuntimeErrors, reportRuntimeError } from "inferno-error-overlay";
-
+import {
+  dismissRuntimeErrors,
+  reportRuntimeError,
+} from 'inferno-error-overlay';
 
 export default {
   clearRuntimeErrors: dismissRuntimeErrors,

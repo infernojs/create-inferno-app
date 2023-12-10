@@ -6,37 +6,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import chalk from "inferno-dev-utils/chalk";
-import fs from "fs";
-import resolve from "resolve";
-import path from "path";
-import {paths} from "../../config/paths.js";
-import os from "os";
-import immerModule from "inferno-dev-utils/immer";
-import globby from "inferno-dev-utils/globby";
+import chalk from 'inferno-dev-utils/chalk';
+import fs from 'fs';
+import resolve from 'resolve';
+import path from 'path';
+import { paths } from '../../config/paths.js';
+import os from 'os';
+import immerModule from 'inferno-dev-utils/immer';
+import globby from 'inferno-dev-utils/globby';
 
 const immer = immerModule.produce;
 
 function writeJson(fileName, object) {
   fs.writeFileSync(
     fileName,
-    JSON.stringify(object, null, 2).replace(/\n/g, os.EOL) + os.EOL
+    JSON.stringify(object, null, 2).replace(/\n/g, os.EOL) + os.EOL,
   );
 }
 
 function verifyNoTypeScript() {
   const typescriptFiles = globby(
     ['**/*.(ts|tsx)', '!**/node_modules', '!**/*.d.ts'],
-    { cwd: paths.appSrc }
+    { cwd: paths.appSrc },
   );
   if (typescriptFiles.length > 0) {
     console.warn(
       chalk.yellow(
         `We detected TypeScript in your project (${chalk.bold(
-          `src${path.sep}${typescriptFiles[0]}`
-        )}) and created a ${chalk.bold('tsconfig.json')} file for you.`
-      )
+          `src${path.sep}${typescriptFiles[0]}`,
+        )}) and created a ${chalk.bold('tsconfig.json')} file for you.`,
+      ),
     );
     console.warn();
     return false;
@@ -64,9 +63,11 @@ function verifyTypeScriptSetup() {
     // https://github.com/jsdom/jsdom/issues/2961
     const globalThisWasDefined = !!global.globalThis;
 
-    ts = require(resolve.sync('typescript', {
-      basedir: paths.appNodeModules,
-    }));
+    ts = require(
+      resolve.sync('typescript', {
+        basedir: paths.appNodeModules,
+      }),
+    );
 
     if (!globalThisWasDefined && !!global.globalThis) {
       delete global.globalThis;
@@ -75,9 +76,9 @@ function verifyTypeScriptSetup() {
     console.error(
       chalk.bold.red(
         `It looks like you're trying to use TypeScript but do not have ${chalk.bold(
-          'typescript'
-        )} installed.`
-      )
+          'typescript',
+        )} installed.`,
+      ),
     );
     console.error(
       chalk.bold(
@@ -85,16 +86,16 @@ function verifyTypeScriptSetup() {
         chalk.cyan.bold('typescript'),
         'by running',
         chalk.cyan.bold(
-          isYarn ? 'yarn add typescript' : 'npm install typescript'
-        ) + '.'
-      )
+          isYarn ? 'yarn add typescript' : 'npm install typescript',
+        ) + '.',
+      ),
     );
     console.error(
       chalk.bold(
         'If you are not trying to use TypeScript, please remove the ' +
           chalk.cyan('tsconfig.json') +
-          ' file from your package root (and any TypeScript files).'
-      )
+          ' file from your package root (and any TypeScript files).',
+      ),
     );
     console.error();
     process.exit(1);
@@ -148,7 +149,7 @@ function verifyTypeScriptSetup() {
   try {
     const { config: readTsConfig, error } = ts.readConfigFile(
       paths.appTsConfig,
-      ts.sys.readFile
+      ts.sys.readFile,
     );
 
     if (error) {
@@ -165,13 +166,13 @@ function verifyTypeScriptSetup() {
       result = ts.parseJsonConfigFileContent(
         config,
         ts.sys,
-        path.dirname(paths.appTsConfig)
+        path.dirname(paths.appTsConfig),
       );
     });
 
     if (result.errors && result.errors.length) {
       throw new Error(
-        ts.formatDiagnostic(result.errors[0], formatDiagnosticHost)
+        ts.formatDiagnostic(result.errors[0], formatDiagnosticHost),
       );
     }
 
@@ -182,8 +183,8 @@ function verifyTypeScriptSetup() {
         chalk.red.bold(
           'Could not parse',
           chalk.cyan('tsconfig.json') + '.',
-          'Please make sure it contains syntactically correct JSON.'
-        )
+          'Please make sure it contains syntactically correct JSON.',
+        ),
       );
     }
 
@@ -209,8 +210,8 @@ function verifyTypeScriptSetup() {
         });
         messages.push(
           `${coloredOption} to be ${chalk.bold(
-            'suggested'
-          )} value: ${chalk.cyan.bold(suggested)} (this can be changed)`
+            'suggested',
+          )} value: ${chalk.cyan.bold(suggested)} (this can be changed)`,
         );
       }
     } else if (parsedCompilerOptions[option] !== valueToCheck) {
@@ -219,9 +220,9 @@ function verifyTypeScriptSetup() {
       });
       messages.push(
         `${coloredOption} ${chalk.bold(
-          valueToCheck == null ? 'must not' : 'must'
+          valueToCheck == null ? 'must not' : 'must',
         )} be ${valueToCheck == null ? 'set' : chalk.cyan.bold(value)}` +
-          (reason != null ? ` (${reason})` : '')
+          (reason != null ? ` (${reason})` : ''),
       );
     }
   }
@@ -232,7 +233,7 @@ function verifyTypeScriptSetup() {
       config.include = ['src'];
     });
     messages.push(
-      `${chalk.cyan('include')} should be ${chalk.cyan.bold('src')}`
+      `${chalk.cyan('include')} should be ${chalk.cyan.bold('src')}`,
     );
   }
 
@@ -242,8 +243,8 @@ function verifyTypeScriptSetup() {
         chalk.bold(
           'Your',
           chalk.cyan('tsconfig.json'),
-          'has been populated with default values.'
-        )
+          'has been populated with default values.',
+        ),
       );
       console.log();
     } else {
@@ -251,8 +252,8 @@ function verifyTypeScriptSetup() {
         chalk.bold(
           'The following changes are being made to your',
           chalk.cyan('tsconfig.json'),
-          'file:'
-        )
+          'file:',
+        ),
       );
       messages.forEach(message => {
         console.warn('  - ' + message);
@@ -266,7 +267,7 @@ function verifyTypeScriptSetup() {
   if (!fs.existsSync(paths.appTypeDeclarations)) {
     fs.writeFileSync(
       paths.appTypeDeclarations,
-      `/// <reference types="inferno-scripts" />${os.EOL}`
+      `/// <reference types="inferno-scripts" />${os.EOL}`,
     );
   }
 }

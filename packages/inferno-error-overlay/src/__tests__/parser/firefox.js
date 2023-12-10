@@ -12,8 +12,8 @@ test('eval 1', () => {
     parse(
       `test1@file:///C:/example.html line 7 > eval line 1 > eval:1:1
 test2@file:///C:/example.html line 7 > eval:1:1
-test3@file:///C:/example.html:7:6`.split('\n')
-    )
+test3@file:///C:/example.html:7:6`.split('\n'),
+    ),
   ).toMatchSnapshot();
 });
 
@@ -22,7 +22,7 @@ test('eval 2', () => {
     parse({
       stack: `anonymous@file:///C:/example.html line 7 > Function:1:1
 @file:///C:/example.html:7:6`,
-    })
+    }),
   ).toMatchSnapshot();
 });
 
@@ -32,8 +32,8 @@ test('stack with eval', () => {
       `e@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:25:9
 @file:///Users/joe/Documents/Development/OSS/stack-frame/index.html line 17 > eval:1:1
 a@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:8:9
-@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:32:7`
-    )
+@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:32:7`,
+    ),
   ).toMatchSnapshot();
 });
 
@@ -43,8 +43,8 @@ test('v14 to v29', () => {
       `trace@file:///C:/example.html:9
 b@file:///C:/example.html:16
 a@file:///C:/example.html:19
-@file:///C:/example.html:21`
-    )
+@file:///C:/example.html:21`,
+    ),
   ).toMatchSnapshot();
 });
 
@@ -54,7 +54,7 @@ test('v30+', () => {
       `trace@file:///C:/example.html:9:17
 b@file:///C:/example.html:16:13
 a@file:///C:/example.html:19:13
-@file:///C:/example.html:21:9`
-    )
+@file:///C:/example.html:21:9`,
+    ),
   ).toMatchSnapshot();
 });

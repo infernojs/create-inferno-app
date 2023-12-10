@@ -5,19 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import loaderUtils from "loader-utils";
-import path from "path";
+import loaderUtils from 'loader-utils';
+import path from 'path';
 
 export default function getLocalIdent(
   context,
   localIdentName,
   localName,
-  options
+  options,
 ) {
   // Use the filename or folder name, based on some uses the index.js / index.module.(css|scss|sass) project style
   const fileNameOrFolder = context.resourcePath.match(
-    /index\.module\.(css|scss|sass)$/
+    /index\.module\.(css|scss|sass)$/,
   )
     ? '[folder]'
     : '[name]';
@@ -26,13 +25,13 @@ export default function getLocalIdent(
     path.posix.relative(context.rootContext, context.resourcePath) + localName,
     'md5',
     'base64',
-    5
+    5,
   );
   // Use loaderUtils to find the file or folder name
   const className = loaderUtils.interpolateName(
     context,
     fileNameOrFolder + '_' + localName + '__' + hash,
-    options
+    options,
   );
   // Remove the .module that appears in every classname when based on the file and replace all "." with "_".
   return className.replace('.module_', '_').replace(/\./g, '_');

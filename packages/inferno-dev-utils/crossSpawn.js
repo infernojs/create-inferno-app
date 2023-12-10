@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import crossSpawn from "cross-spawn";
+import crossSpawn from 'cross-spawn';
 
 export default crossSpawn;

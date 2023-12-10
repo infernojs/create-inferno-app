@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import getPublicUrlOrPath from "../getPublicUrlOrPath";
+import getPublicUrlOrPath from '../getPublicUrlOrPath';
 
 const tests = [
   // DEVELOPMENT with homepage
@@ -122,6 +121,6 @@ describe('getPublicUrlOrPath', () => {
     it(JSON.stringify(t), () => {
       const actual = getPublicUrlOrPath(t.dev, t.homepage, t.publicUrl);
       expect(actual).toBe(t.expect);
-    })
+    }),
   );
 });

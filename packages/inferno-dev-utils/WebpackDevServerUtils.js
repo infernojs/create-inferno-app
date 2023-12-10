@@ -5,18 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {address} from "address";
-import fs from "fs";
-import path from "path";
-import url from "url";
-import chalk from "chalk";
-import detect from "detect-port-alt";
-import isRoot from "is-root";
-import prompts from "prompts";
-import clearConsole from "./clearConsole.js";
-import formatWebpackMessages from "./formatWebpackMessages.js";
-import getProcessForPort from "./getProcessForPort.js";
-import forkTsCheckerWebpackPlugin from "./ForkTsCheckerWebpackPlugin.js";
+import { address } from 'address';
+import fs from 'fs';
+import path from 'path';
+import url from 'url';
+import chalk from 'chalk';
+import detect from 'detect-port-alt';
+import isRoot from 'is-root';
+import prompts from 'prompts';
+import clearConsole from './clearConsole.js';
+import formatWebpackMessages from './formatWebpackMessages.js';
+import getProcessForPort from './getProcessForPort.js';
+import forkTsCheckerWebpackPlugin from './ForkTsCheckerWebpackPlugin.js';
 
 const isInteractive = process.stdout.isTTY;
 
@@ -48,7 +48,7 @@ export function prepareUrls(protocol, host, port, pathname = '/') {
         // https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
         if (
           /^10[.]|^172[.](1[6-9]|2[0-9]|3[0-1])[.]|^192[.]168[.]/.test(
-            lanUrlForConfig
+            lanUrlForConfig,
           )
         ) {
           // Address is private, format it for later use
@@ -81,10 +81,10 @@ function printInstructions(appName, urls, useYarn) {
 
   if (urls.lanUrlForTerminal) {
     console.log(
-      `  ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}`
+      `  ${chalk.bold('Local:')}            ${urls.localUrlForTerminal}`,
     );
     console.log(
-      `  ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}`
+      `  ${chalk.bold('On Your Network:')}  ${urls.lanUrlForTerminal}`,
     );
   } else {
     console.log(`  ${urls.localUrlForTerminal}`);
@@ -94,7 +94,7 @@ function printInstructions(appName, urls, useYarn) {
   console.log('Note that the development build is not optimized.');
   console.log(
     `To create a production build, use ` +
-      `${chalk.cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`
+      `${chalk.cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`,
   );
   console.log();
 }
@@ -140,8 +140,8 @@ export function createCompiler({
       .waiting.tap('awaitingTypeScriptCheck', () => {
         console.log(
           chalk.yellow(
-            'Files successfully emitted, waiting for typecheck results...'
-          )
+            'Files successfully emitted, waiting for typecheck results...',
+          ),
         );
       });
   }
@@ -195,12 +195,12 @@ export function createCompiler({
       console.log(
         '\nSearch for the ' +
           chalk.underline(chalk.yellow('keywords')) +
-          ' to learn more about each warning.'
+          ' to learn more about each warning.',
       );
       console.log(
         'To ignore, add ' +
           chalk.cyan('// eslint-disable-next-line') +
-          ' to the line before.\n'
+          ' to the line before.\n',
       );
     }
   });
@@ -208,7 +208,7 @@ export function createCompiler({
   // You can safely remove this after ejecting.
   // We only use this block for testing of Create Inferno App itself:
   const isSmokeTest = process.argv.some(
-    arg => arg.indexOf('--smoke-test') > -1
+    arg => arg.indexOf('--smoke-test') > -1,
   );
   if (isSmokeTest) {
     compiler.hooks.failed.tap('smokeTest', async () => {
@@ -270,12 +270,12 @@ function onProxyError(proxy) {
         chalk.cyan(host) +
         ' to ' +
         chalk.cyan(proxy) +
-        '.'
+        '.',
     );
     console.log(
       'See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (' +
         chalk.cyan(err.code) +
-        ').'
+        ').',
     );
     console.log();
 
@@ -293,7 +293,7 @@ function onProxyError(proxy) {
         proxy +
         ' (' +
         err.code +
-        ').'
+        ').',
     );
   };
 }
@@ -305,13 +305,15 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   }
   if (typeof proxy !== 'string') {
     console.log(
-      chalk.red('When specified, "proxy" in package.json must be a string.')
+      chalk.red('When specified, "proxy" in package.json must be a string.'),
     );
     console.log(
-      chalk.red('Instead, the type of "proxy" was "' + typeof proxy + '".')
+      chalk.red('Instead, the type of "proxy" was "' + typeof proxy + '".'),
     );
     console.log(
-      chalk.red('Either remove "proxy" from package.json, or make it a string.')
+      chalk.red(
+        'Either remove "proxy" from package.json, or make it a string.',
+      ),
     );
     process.exit(1);
   }
@@ -324,7 +326,7 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   function mayProxy(pathname) {
     const maybePublicPath = path.resolve(
       appPublicFolder,
-      pathname.replace(new RegExp('^' + servedPathname), '')
+      pathname.replace(new RegExp('^' + servedPathname), ''),
     );
     const isPublicFileRequest = fs.existsSync(maybePublicPath);
     // used by webpackHotDevClient
@@ -336,8 +338,8 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   if (!/^http(s)?:\/\//.test(proxy)) {
     console.log(
       chalk.red(
-        'When "proxy" is specified in package.json it must start with either http:// or https://'
-      )
+        'When "proxy" is specified in package.json it must start with either http:// or https://',
+      ),
     );
     process.exit(1);
   }
@@ -407,7 +409,9 @@ export function choosePort(host, defaultPort) {
             message:
               chalk.yellow(
                 message +
-                  `${existingProcess ? ` Probably:\n  ${existingProcess}` : ''}`
+                  `${
+                    existingProcess ? ` Probably:\n  ${existingProcess}` : ''
+                  }`,
               ) + '\n\nWould you like to run the app on another port instead?',
             initial: true,
           };
@@ -428,9 +432,9 @@ export function choosePort(host, defaultPort) {
         chalk.red(`Could not find an open port at ${chalk.bold(host)}.`) +
           '\n' +
           ('Network error message: ' + err.message || err) +
-          '\n'
+          '\n',
       );
-    }
+    },
   );
 }
 

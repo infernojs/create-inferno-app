@@ -1,7 +1,6 @@
-
-import path from "path";
-import fs from "fs-extra";
-import TestSetup from "./util/setup";
+import path from 'path';
+import fs from 'fs-extra';
+import TestSetup from './util/setup';
 
 const fixturePath = path.dirname(module.parent.filename);
 const fixtureName = path.basename(fixturePath);
@@ -10,9 +9,12 @@ const testSetup = new TestSetup(fixtureName, fixturePath, {
   pnp: !disablePnp,
 });
 
-beforeAll(async () => {
-  await testSetup.setup();
-}, 1000 * 60 * 5);
+beforeAll(
+  async () => {
+    await testSetup.setup();
+  },
+  1000 * 60 * 5,
+);
 afterAll(async () => {
   await testSetup.teardown();
 });

@@ -7,14 +7,14 @@
 
 function base64SourceMap(source) {
   const base64 = Buffer.from(JSON.stringify(source.map()), 'utf8').toString(
-    'base64'
+    'base64',
   );
   return `data:application/json;charset=utf-8;base64,${base64}`;
 }
 
 function getSourceById(server, id) {
   const module = Array.from(server._stats.compilation.modules).find(
-    m => server._stats.compilation.chunkGraph.getModuleId(m) == id
+    m => server._stats.compilation.chunkGraph.getModuleId(m) == id,
   );
   return module.originalSource();
 }

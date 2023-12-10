@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import path from "path";
+import path from 'path';
 
 export default function createRedirectServedPathMiddleware(servedPath) {
   // remove end slash so user can land on `/test` instead of `/test/`
@@ -20,7 +20,7 @@ export default function createRedirectServedPathMiddleware(servedPath) {
     } else {
       const newPath = path.posix.join(
         servedPath,
-        req.path !== '/' ? req.path : ''
+        req.path !== '/' ? req.path : '',
       );
       res.redirect(newPath);
     }

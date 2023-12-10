@@ -120,7 +120,7 @@ class StackFrame extends Component<StackFramePropsType, { compiled: boolean }> {
       fileName,
       lineNumber,
       columnNumber,
-      compiled
+      compiled,
     );
 
     let codeBlockProps = null;

@@ -14,7 +14,7 @@ test('15.y.z', () => {
      in div (at FileA.js:9)
      in FileA (at App.js:9)
      in div (at App.js:8)
-     in App (at index.js:7)`
-    )
+     in App (at index.js:7)`,
+    ),
   ).toMatchSnapshot();
 });

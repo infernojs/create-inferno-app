@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import fs from "fs";
-import path from "path";
-import chalk from "chalk";
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
 
 function checkRequiredFiles(files) {
   var currentFilePath;

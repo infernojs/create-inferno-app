@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import browserslist from "browserslist";
-import chalk from "chalk";
-import os from "os";
-import prompts from "prompts";
-import {pkgUp} from "pkg-up";
-import fs from "fs";
+import browserslist from 'browserslist';
+import chalk from 'chalk';
+import os from 'os';
+import prompts from 'prompts';
+import { pkgUp } from 'pkg-up';
+import fs from 'fs';
 
 export const defaultBrowsers = {
   production: ['>0.2%', 'not dead', 'not op_mini all'],
@@ -32,7 +32,7 @@ function shouldSetBrowsers(isInteractive) {
     message:
       chalk.yellow("We're unable to detect target browsers.") +
       `\n\nWould you like to add the defaults to your ${chalk.bold(
-        'package.json'
+        'package.json',
       )}?`,
     initial: true,
   };
@@ -50,13 +50,13 @@ export function checkBrowsers(dir, isInteractive, retry = true) {
     return Promise.reject(
       new Error(
         chalk.red(
-          'As of inferno-scripts >=2 you must specify targeted browsers.'
+          'As of inferno-scripts >=2 you must specify targeted browsers.',
         ) +
           os.EOL +
           `Please add a ${chalk.underline(
-            'browserslist'
-          )} key to your ${chalk.bold('package.json')}.`
-      )
+            'browserslist',
+          )} key to your ${chalk.bold('package.json')}.`,
+      ),
     );
   }
 
@@ -79,8 +79,8 @@ export function checkBrowsers(dir, isInteractive, retry = true) {
           console.log();
           console.log(
             `${chalk.green('Set target browsers:')} ${chalk.cyan(
-              defaultBrowsers.join(', ')
-            )}`
+              defaultBrowsers.join(', '),
+            )}`,
           );
           console.log();
         })

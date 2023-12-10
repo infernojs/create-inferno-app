@@ -22,31 +22,31 @@ test('basic warning', async () => {
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs.map'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   const frames = await unmap('/static/js/bundle.js', parse(error), 0);
 
   const expected = JSON.parse(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle2.json'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   expect(frames).toEqual(expected);
 
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs.map'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   expect(await unmap('/static/js/bundle.js', expected)).toEqual(expected);
 });
@@ -60,12 +60,12 @@ test('default context & unfound source', async () => {
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   fetch.mockResponseOnce(
     fs
       .readFileSync(resolve(__dirname, '../../fixtures/bundle_u.mjs.map'))
-      .toString('utf8')
+      .toString('utf8'),
   );
   const frames = await unmap('/static/js/bundle.js', parse(error));
   expect(frames).toMatchSnapshot();

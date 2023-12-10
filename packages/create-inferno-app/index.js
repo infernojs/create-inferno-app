@@ -34,8 +34,7 @@
 //   /!\ DO NOT MODIFY THIS FILE /!\
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-import { init } from "./createInfernoApp.js";
+import { init } from './createInfernoApp.js';
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
@@ -47,11 +46,9 @@ if (major < 20) {
       currentNodeVersion +
       '.\n' +
       'Create Inferno App requires Node 18 or higher. \n' +
-      'Please update your version of Node.'
+      'Please update your version of Node.',
   );
   process.exit(1);
 }
-
-
 
 init();

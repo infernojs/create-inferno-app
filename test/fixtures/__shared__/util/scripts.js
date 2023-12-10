@@ -1,8 +1,7 @@
-
-import execa from "execa";
-import getPort from "get-port";
-import stripAnsi from "strip-ansi";
-import waitForLocalhost from "wait-for-localhost";
+import execa from 'execa';
+import getPort from 'get-port';
+import stripAnsi from 'strip-ansi';
+import waitForLocalhost from 'wait-for-localhost';
 
 function execaSafe(...args) {
   return execa(...args)
@@ -39,7 +38,7 @@ export default class InfernoScripts {
           BROWSER: 'none',
           PORT: port,
         },
-        env
+        env,
       ),
     };
 
@@ -70,7 +69,7 @@ export default class InfernoScripts {
       ['run', 'serve', '--', '-p', port, '-s', 'build/'],
       {
         cwd: this.root,
-      }
+      },
     );
     await waitForLocalhost({ port });
     return {

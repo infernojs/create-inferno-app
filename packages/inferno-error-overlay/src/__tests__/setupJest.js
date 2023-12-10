@@ -5,6 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import jest_fetch_mock from "jest-fetch-mock";
+import jest_fetch_mock from 'jest-fetch-mock';
 
 global.fetch = jest_fetch_mock;

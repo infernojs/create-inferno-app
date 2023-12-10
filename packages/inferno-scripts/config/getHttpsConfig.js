@@ -7,11 +7,11 @@
  */
 // @remove-on-eject-end
 
-import fs from "fs";
-import path from "path";
-import crypto from "crypto";
-import chalk from "inferno-dev-utils/chalk";
-import {paths} from "./paths.js";
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import chalk from 'inferno-dev-utils/chalk';
+import { paths } from './paths.js';
 // Ensure the certificate and key provided are valid and if not
 // throw an easy to debug error
 function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
@@ -21,7 +21,7 @@ function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
     encrypted = crypto.publicEncrypt(cert, Buffer.from('test'));
   } catch (err) {
     throw new Error(
-      `The certificate "${chalk.yellow(crtFile)}" is invalid.\n${err.message}`
+      `The certificate "${chalk.yellow(crtFile)}" is invalid.\n${err.message}`,
     );
   }
 
@@ -32,7 +32,7 @@ function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
     throw new Error(
       `The certificate key "${chalk.yellow(keyFile)}" is invalid.\n${
         err.message
-      }`
+      }`,
     );
   }
 }
@@ -42,8 +42,8 @@ function readEnvFile(file, type) {
   if (!fs.existsSync(file)) {
     throw new Error(
       `You specified ${chalk.cyan(
-        type
-      )} in your env, but the file "${chalk.yellow(file)}" can't be found.`
+        type,
+      )} in your env, but the file "${chalk.yellow(file)}" can't be found.`,
     );
   }
   return fs.readFileSync(file);

@@ -1,9 +1,8 @@
-
-import execa from "execa";
-import fs from "fs-extra";
-import path from "path";
-import tempy from "tempy";
-import InfernoScripts from "./scripts";
+import execa from 'execa';
+import fs from 'fs-extra';
+import path from 'path';
+import tempy from 'tempy';
+import InfernoScripts from './scripts';
 
 export default class TestSetup {
   constructor(fixtureName, templateDirectory) {
@@ -24,13 +23,13 @@ export default class TestSetup {
     this.testDirectory = tempy.directory();
     await fs.copy(
       path.resolve(__dirname, '..', 'template'),
-      this.testDirectory
+      this.testDirectory,
     );
     await fs.copy(this.templateDirectory, this.testDirectory);
     await fs.remove(path.resolve(this.testDirectory, 'test.partial.js'));
 
     const packageJson = await fs.readJson(
-      path.resolve(this.testDirectory, 'package.json')
+      path.resolve(this.testDirectory, 'package.json'),
     );
 
     const shouldInstallScripts = !this.isLocal;
@@ -47,7 +46,7 @@ export default class TestSetup {
     packageJson.license = packageJson.license || 'UNLICENSED';
     await fs.writeJson(
       path.resolve(this.testDirectory, 'package.json'),
-      packageJson
+      packageJson,
     );
 
     await execa('npm', ['install'], {
@@ -63,10 +62,15 @@ export default class TestSetup {
             'packages',
             'inferno-scripts',
             'bin',
-            'inferno-scripts.js'
-          )
+            'inferno-scripts.js',
+          ),
         ),
-        path.join(this.testDirectory, 'node_modules', '.bin', 'inferno-scripts')
+        path.join(
+          this.testDirectory,
+          'node_modules',
+          '.bin',
+          'inferno-scripts',
+        ),
       );
       await execa('npm', ['link', 'inferno-scripts'], {
         cwd: this.testDirectory,

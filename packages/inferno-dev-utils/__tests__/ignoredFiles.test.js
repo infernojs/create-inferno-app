@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import ignoredFiles from "../ignoredFiles";
+import ignoredFiles from '../ignoredFiles';
 
 describe('ignore watch files regex', () => {
   it('normal file', () => {
@@ -29,7 +28,7 @@ describe('ignore watch files regex', () => {
     const appSrc = '/root/src/';
     const isIgnored = ignoredFiles(appSrc).test('/root/src/node_modules/foo');
     const isIgnoredMoreThanOneLevel = ignoredFiles(appSrc).test(
-      '/root/src/bar/node_modules/foo'
+      '/root/src/bar/node_modules/foo',
     );
 
     expect(isIgnored).toBe(false);
@@ -39,7 +38,7 @@ describe('ignore watch files regex', () => {
   it('path contains source directory', () => {
     const appSrc = '/root/src/';
     const isIgnored = ignoredFiles(appSrc).test(
-      '/bar/root/src/node_modules/foo'
+      '/bar/root/src/node_modules/foo',
     );
 
     expect(isIgnored).toBe(true);

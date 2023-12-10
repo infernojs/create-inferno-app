@@ -25,7 +25,7 @@ type CompileErrorContainerPropsType = {|
 
 function CompileErrorContainer(
   props: CompileErrorContainerPropsType,
-  { theme }
+  { theme },
 ) {
   const { error, editorHandler } = props;
   const errLoc: ?ErrorLocation = parseCompileError(error);

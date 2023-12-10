@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import chalk from "chalk";
-import { execSync } from "child_process";
-import spawn from "cross-spawn";
-import open from "open";
+import chalk from 'chalk';
+import { execSync } from 'child_process';
+import spawn from 'cross-spawn';
+import open from 'open';
 // https://github.com/sindresorhus/open#app
 var OSX_CHROME = 'google chrome';
 
@@ -51,8 +50,8 @@ function executeNodeScript(scriptPath, url) {
       console.log();
       console.log(
         chalk.red(
-          'The script specified as BROWSER environment variable failed.'
-        )
+          'The script specified as BROWSER environment variable failed.',
+        ),
       );
       console.log(chalk.cyan(scriptPath) + ' exited with code ' + code + '.');
       console.log();
@@ -98,7 +97,7 @@ function startBrowserProcess(browser, url, args) {
           {
             cwd: __dirname,
             stdio: 'ignore',
-          }
+          },
         );
         return true;
       } catch (err) {

@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import path from "path";
-import chalk from "chalk";
-import stripAnsi from "strip-ansi";
-import table from "text-table";
+import path from 'path';
+import chalk from 'chalk';
+import stripAnsi from 'strip-ansi';
+import table from 'text-table';
 
 const cwd = process.cwd();
 

@@ -1,6 +1,5 @@
-
-import testSetup from "../__shared__/test-setup";
-import puppeteer from "puppeteer";
+import testSetup from '../__shared__/test-setup';
+import puppeteer from 'puppeteer';
 
 test('can use mjs library in development', async () => {
   const { port, done } = await testSetup.scripts.start();

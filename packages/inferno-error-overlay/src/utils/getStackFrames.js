@@ -14,7 +14,7 @@ import { unmap } from './unmapper.js';
 function getStackFrames(
   error: Error,
   unhandledRejection: boolean = false,
-  contextSize: number = 3
+  contextSize: number = 3,
 ): Promise<StackFrame[] | null> {
   const parsedFrames = parse(error);
   let enhancedFramesPromise;
@@ -24,7 +24,7 @@ function getStackFrames(
       // $FlowFixMe
       error.__unmap_source,
       parsedFrames,
-      contextSize
+      contextSize,
     );
   } else {
     enhancedFramesPromise = map(parsedFrames, contextSize);
@@ -40,7 +40,7 @@ function getStackFrames(
     return enhancedFrames.filter(
       ({ functionName }) =>
         functionName == null ||
-        functionName.indexOf('__stack_frame_overlay_proxy_console__') === -1
+        functionName.indexOf('__stack_frame_overlay_proxy_console__') === -1,
     );
   });
 }

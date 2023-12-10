@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import path from "path";
+import path from 'path';
 
 export default function createNoopServiceWorkerMiddleware(servedPath) {
   return function noopServiceWorkerMiddleware(req, res, next) {
@@ -30,7 +29,7 @@ self.addEventListener('activate', () => {
     }
   });
 });
-`
+`,
       );
     } else {
       next();

@@ -17,7 +17,7 @@ import { ScriptLine } from './stack-frame.js';
 function getLinesAround(
   line: number,
   count: number,
-  lines: string[] | string
+  lines: string[] | string,
 ): ScriptLine[] {
   if (typeof lines === 'string') {
     lines = lines.split('\n');

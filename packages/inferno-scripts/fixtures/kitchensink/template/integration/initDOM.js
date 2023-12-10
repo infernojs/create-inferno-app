@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import fs from "fs";
-import { JSDOM, ResourceLoader } from "jsdom";
+import fs from 'fs';
+import { JSDOM, ResourceLoader } from 'jsdom';
 
-
-import path from "path";
-import url from "url";
+import path from 'path';
+import url from 'url';
 
 const file =
   process.env.E2E_FILE &&
@@ -22,7 +21,7 @@ export const fetchFile = url => {
   const pathPrefix = process.env.PUBLIC_URL.replace(/^https?:\/\/[^/]+\/?/, '');
   return fs.readFileSync(
     path.join(path.dirname(file), url.pathname.replace(pathPrefix, '')),
-    'utf8'
+    'utf8',
   );
 };
 
@@ -36,7 +35,7 @@ const fileResourceLoader =
 if (!process.env.E2E_FILE && !process.env.E2E_URL) {
   it.only('can run jsdom (at least one of "E2E_FILE" or "E2E_URL" environment variables must be provided)', () => {
     expect(
-      new Error("This isn't the error you are looking for.")
+      new Error("This isn't the error you are looking for."),
     ).toBeUndefined();
   });
 }
@@ -88,7 +87,7 @@ const initDOM = async feature =>
       document.addEventListener(
         'InfernoFeatureDidMount',
         () => resolve(document),
-        { capture: true, once: true }
+        { capture: true, once: true },
       );
       document.addEventListener(
         'InfernoFeatureError',
@@ -100,7 +99,7 @@ const initDOM = async feature =>
 
           reject(`Error loading feature: ${feature}`);
         },
-        { capture: true, once: true }
+        { capture: true, once: true },
       );
     } catch (e) {
       reject(e);

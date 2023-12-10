@@ -32,13 +32,13 @@ module.exports = function (api, opts, env) {
   var useESModules = validateBoolOption(
     'useESModules',
     opts.useESModules,
-    isEnvDevelopment || isEnvProduction
+    isEnvDevelopment || isEnvProduction,
   );
   var isFlowEnabled = validateBoolOption('flow', opts.flow, true);
   var isTypeScriptEnabled = validateBoolOption(
     'typescript',
     opts.typescript,
-    true
+    true,
   );
   // var areHelpersEnabled = validateBoolOption('helpers', opts.helpers, true);
   // var useAbsoluteRuntime = validateBoolOption(
@@ -60,7 +60,7 @@ module.exports = function (api, opts, env) {
         '`BABEL_ENV` environment variables. Valid values are "development", ' +
         '"test", and "production". Instead, received: ' +
         JSON.stringify(env) +
-        '.'
+        '.',
     );
   }
 

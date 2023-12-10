@@ -27,6 +27,6 @@ test('throws on unparsable', () => {
   }
   expect(error instanceof Error).toBe(true);
   expect(error.message).toBe(
-    'The error you provided does not contain a stack trace.'
+    'The error you provided does not contain a stack trace.',
   );
 });

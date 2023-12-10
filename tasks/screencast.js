@@ -7,12 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import fs from "fs";
-import path from "path";
-import {execaSync} from "execa";
-import {temporaryDirectory} from "tempy";
-import { readJsonFile } from "inferno-dev-utils/readJsonFile";
+import fs from 'fs';
+import path from 'path';
+import { execaSync } from 'execa';
+import { temporaryDirectory } from 'tempy';
+import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
 
 main();
 

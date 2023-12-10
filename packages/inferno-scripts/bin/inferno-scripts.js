@@ -6,12 +6,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
-import spawn from "inferno-dev-utils/crossSpawn";
-import {fileURLToPath} from 'url'
+import spawn from 'inferno-dev-utils/crossSpawn';
+import { fileURLToPath } from 'url';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -19,33 +18,33 @@ process.on('unhandledRejection', err => {
 const args = process.argv.slice(2);
 
 const scriptIndex = args.findIndex(
-  x => x === 'build' || x === 'eject' || x === 'start' || x === 'test'
+  x => x === 'build' || x === 'eject' || x === 'start' || x === 'test',
 );
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 const nodeArgs = scriptIndex > 0 ? args.slice(0, scriptIndex) : [];
 
 if (['build', 'eject', 'start', 'test'].includes(script)) {
-  const modulePath = fileURLToPath(import.meta.resolve('inferno-scripts/scripts/' + script));
+  const modulePath = fileURLToPath(
+    import.meta.resolve('inferno-scripts/scripts/' + script),
+  );
 
   const result = spawn.sync(
     process.execPath,
-    nodeArgs
-      .concat(modulePath)
-      .concat(args.slice(scriptIndex + 1)),
-    { stdio: 'inherit' }
+    nodeArgs.concat(modulePath).concat(args.slice(scriptIndex + 1)),
+    { stdio: 'inherit' },
   );
   if (result.signal) {
     if (result.signal === 'SIGKILL') {
       console.log(
         'The build failed because the process exited too early. ' +
           'This probably means the system ran out of memory or someone called ' +
-          '`kill -9` on the process.'
+          '`kill -9` on the process.',
       );
     } else if (result.signal === 'SIGTERM') {
       console.log(
         'The build failed because the process exited too early. ' +
           'Someone might have called `kill` or `killall`, or the system could ' +
-          'be shutting down.'
+          'be shutting down.',
       );
     }
     process.exit(1);
@@ -55,6 +54,6 @@ if (['build', 'eject', 'start', 'test'].includes(script)) {
   console.log('Unknown script "' + script + '".');
   console.log('Perhaps you need to update inferno-scripts?');
   console.log(
-    'See: https://facebook.github.io/create-react-app/docs/updating-to-new-releases'
+    'See: https://facebook.github.io/create-react-app/docs/updating-to-new-releases',
   );
 }

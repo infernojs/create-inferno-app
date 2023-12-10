@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import chalk from "chalk";
+import chalk from 'chalk';
 
 export default function printBuildError(err) {
   const message = err != null && err.message;
@@ -29,9 +28,9 @@ export default function printBuildError(err) {
       console.log(
         'Failed to minify the code from this file: \n\n',
         chalk.yellow(
-          `\t${problemPath}:${line}${column !== '0' ? ':' + column : ''}`
+          `\t${problemPath}:${line}${column !== '0' ? ':' + column : ''}`,
         ),
-        '\n'
+        '\n',
       );
     } catch (ignored) {
       console.log('Failed to minify the bundle.', err);

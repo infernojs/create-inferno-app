@@ -26,7 +26,7 @@ test('proper full shape', () => {
     'apple',
     'test.js',
     37,
-    13
+    13,
   );
   expect(empty).toMatchSnapshot();
 

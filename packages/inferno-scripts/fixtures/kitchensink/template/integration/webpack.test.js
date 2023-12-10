@@ -25,7 +25,7 @@ const matchCSS = (doc, regexes) => {
   } else {
     for (let i = 0; i < regexes.length; ++i) {
       expect(
-        doc.getElementsByTagName('style')[i].textContent.replace(/\s/g, '')
+        doc.getElementsByTagName('style')[i].textContent.replace(/\s/g, ''),
       ).toMatch(regexes[i]);
     }
   }
@@ -86,7 +86,7 @@ describe('Integration', () => {
       doc = await initDOM('image-inclusion');
 
       expect(doc.getElementById('feature-image-inclusion').src).toMatch(
-        /^data:image\/jpeg;base64.+=$/
+        /^data:image\/jpeg;base64.+=$/,
       );
     });
 
@@ -95,7 +95,7 @@ describe('Integration', () => {
 
       // Webpack 4 added a default extension ".bin" seems like webpack 5 asset modules do not
       expect(
-        doc.getElementById('feature-no-ext-inclusion').getAttribute('href')
+        doc.getElementById('feature-no-ext-inclusion').getAttribute('href'),
       ).toMatch(/\/static\/media\/aFileWithoutExt\.[a-f0-9]+$/);
     });
 
@@ -103,7 +103,7 @@ describe('Integration', () => {
       doc = await initDOM('json-inclusion');
 
       expect(doc.getElementById('feature-json-inclusion').textContent).toBe(
-        'This is an abstract.'
+        'This is an abstract.',
       );
     });
 
@@ -111,14 +111,14 @@ describe('Integration', () => {
       doc = await initDOM('linked-modules');
 
       expect(doc.getElementById('feature-linked-modules').textContent).toBe(
-        '2.0.0'
+        '2.0.0',
       );
     });
 
     it('svg inclusion', async () => {
       doc = await initDOM('svg-inclusion');
       expect(doc.getElementById('feature-svg-inclusion').src).toMatch(
-        /\/static\/media\/logo\..+\.svg$/
+        /\/static\/media\/logo\..+\.svg$/,
       );
     });
 
@@ -137,7 +137,9 @@ describe('Integration', () => {
       doc = await initDOM('unknown-ext-inclusion');
 
       expect(
-        doc.getElementById('feature-unknown-ext-inclusion').getAttribute('href')
+        doc
+          .getElementById('feature-unknown-ext-inclusion')
+          .getAttribute('href'),
       ).toMatch(/\/static\/media\/aFileWithExt\.[a-f0-9]+\.unknown$/);
     });
   });

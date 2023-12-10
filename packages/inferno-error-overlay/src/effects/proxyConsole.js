@@ -37,7 +37,7 @@ const unregisterInfernoStack = () => {
 type ConsoleProxyCallback = (message: string, frames: InfernoFrame[]) => void;
 const permanentRegister = function proxyConsole(
   type: string,
-  callback: ConsoleProxyCallback
+  callback: ConsoleProxyCallback,
 ) {
   if (typeof console !== 'undefined') {
     const orig = console[type];

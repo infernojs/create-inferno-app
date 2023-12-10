@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import webpack from "webpack";
-import TerserPlugin from "terser-webpack-plugin";
+import webpack from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 

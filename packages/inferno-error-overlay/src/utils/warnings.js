@@ -17,7 +17,7 @@ function stripInlineStacktrace(message: string): string {
 
 function massage(
   warning: string,
-  frames: InfernoFrame[]
+  frames: InfernoFrame[],
 ): { message: string, stack: string } {
   let message = stripInlineStacktrace(warning);
 

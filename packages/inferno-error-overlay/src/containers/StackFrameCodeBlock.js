@@ -27,7 +27,7 @@ type Exact<T> = $Shape<T>;
 
 function StackFrameCodeBlock(
   props: Exact<StackFrameCodeBlockPropsType>,
-  { theme }
+  { theme },
 ) {
   const { lines, lineNum, columnNum, contextSize, main } = props;
   const sourceCode = [];
@@ -68,7 +68,7 @@ function StackFrameCodeBlock(
       forceColor: true,
       linesAbove: contextSize,
       linesBelow: contextSize,
-    }
+    },
   );
   const htmlHighlight = generateAnsiHTML(ansiHighlight, theme);
   const code = document.createElement('code');

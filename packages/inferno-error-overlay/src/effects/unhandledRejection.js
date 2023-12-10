@@ -12,7 +12,7 @@ type ErrorCallback = (error: Error) => void;
 
 function rejectionHandler(
   callback: ErrorCallback,
-  e: PromiseRejectionEvent
+  e: PromiseRejectionEvent,
 ): void {
   if (e == null || e.reason == null) {
     return callback(new Error('Unknown'));
@@ -28,7 +28,7 @@ function rejectionHandler(
 
 function registerUnhandledRejection(
   target: EventTarget,
-  callback: ErrorCallback
+  callback: ErrorCallback,
 ) {
   if (boundRejectionHandler !== null) {
     return;

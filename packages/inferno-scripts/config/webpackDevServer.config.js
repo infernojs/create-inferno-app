@@ -7,20 +7,20 @@
  */
 // @remove-on-eject-end
 
-import fs from "fs";
-import evalSourceMapMiddleware from "inferno-dev-utils/evalSourceMapMiddleware";
-import noopServiceWorkerMiddleware from "inferno-dev-utils/noopServiceWorkerMiddleware";
-import ignoredFiles from "inferno-dev-utils/ignoredFiles";
-import redirectServedPath from "inferno-dev-utils/redirectServedPathMiddleware";
-import {paths} from "./paths.js";
-import getHttpsConfig from "./getHttpsConfig.js";
+import fs from 'fs';
+import evalSourceMapMiddleware from 'inferno-dev-utils/evalSourceMapMiddleware';
+import noopServiceWorkerMiddleware from 'inferno-dev-utils/noopServiceWorkerMiddleware';
+import ignoredFiles from 'inferno-dev-utils/ignoredFiles';
+import redirectServedPath from 'inferno-dev-utils/redirectServedPathMiddleware';
+import { paths } from './paths.js';
+import getHttpsConfig from './getHttpsConfig.js';
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
 const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
 const sockPort = process.env.WDS_SOCKET_PORT;
 
-export default function(proxy, allowedHost) {
+export default function (proxy, allowedHost) {
   const disableFirewall =
     !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true';
   return {

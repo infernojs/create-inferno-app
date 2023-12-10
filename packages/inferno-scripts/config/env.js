@@ -7,19 +7,19 @@
  */
 // @remove-on-eject-end
 
-import fs from "fs";
-import path from "path";
-import {paths} from "./paths.js";
+import fs from 'fs';
+import path from 'path';
+import { paths } from './paths.js';
 // Make sure that including paths.js after env.js will read .env variables.
-import { expand } from "dotenv-expand";
-import { config } from "dotenv";
+import { expand } from 'dotenv-expand';
+import { config } from 'dotenv';
 
 // delete require.cache[import.meta.resolve('./paths.js')];
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
   throw new Error(
-    'The NODE_ENV environment variable is required but was not specified.'
+    'The NODE_ENV environment variable is required but was not specified.',
   );
 }
 
@@ -41,9 +41,11 @@ const dotenvFiles = [
 // https://github.com/motdotla/dotenv-expand
 for (const dotenvFile of dotenvFiles) {
   if (fs.existsSync(dotenvFile)) {
-    expand(config({
-      path: dotenvFile,
-    }));
+    expand(
+      config({
+        path: dotenvFile,
+      }),
+    );
   }
 }
 
@@ -95,7 +97,7 @@ function getClientEnvironment(publicUrl) {
         // Whether or not react-refresh is enabled.
         // It is defined here so it is available in the webpackHotDevClient.
         FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
-      }
+      },
     );
   // Stringify all values so we can feed into webpack DefinePlugin
   const stringified = {

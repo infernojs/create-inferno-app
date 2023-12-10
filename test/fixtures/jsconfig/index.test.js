@@ -1,5 +1,4 @@
-
-import testSetup from "../__shared__/test-setup";
+import testSetup from '../__shared__/test-setup';
 
 test('builds in development', async () => {
   const { fulfilled } = await testSetup.scripts.start({ smoke: true });

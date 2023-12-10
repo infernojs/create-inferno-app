@@ -20,17 +20,17 @@ describe('Integration', () => {
       doc = await initDOM('file-env-variables');
 
       expect(
-        doc.getElementById('feature-file-env-original-1').textContent
+        doc.getElementById('feature-file-env-original-1').textContent,
       ).toBe('from-original-env-1');
       expect(
-        doc.getElementById('feature-file-env-original-2').textContent
+        doc.getElementById('feature-file-env-original-2').textContent,
       ).toBe('override-from-original-local-env-2');
 
       expect(doc.getElementById('feature-file-env').textContent).toBe(
-        process.env.NODE_ENV === 'production' ? 'production' : 'development'
+        process.env.NODE_ENV === 'production' ? 'production' : 'development',
       );
       expect(doc.getElementById('feature-file-env-x').textContent).toBe(
-        'x-from-original-local-env'
+        'x-from-original-local-env',
       );
     });
 
@@ -42,10 +42,10 @@ describe('Integration', () => {
           ? ''
           : 'http://www.example.org/spa';
       expect(doc.getElementById('feature-public-url').textContent).toBe(
-        `${prefix}.`
+        `${prefix}.`,
       );
       expect(
-        doc.querySelector('head link[rel="icon"]').getAttribute('href')
+        doc.querySelector('head link[rel="icon"]').getAttribute('href'),
       ).toBe(`${prefix}/favicon.ico`);
     });
 
@@ -53,7 +53,7 @@ describe('Integration', () => {
       doc = await initDOM('shell-env-variables');
 
       expect(
-        doc.getElementById('feature-shell-env-variables').textContent
+        doc.getElementById('feature-shell-env-variables').textContent,
       ).toBe('fromtheshell.');
     });
 
@@ -61,16 +61,16 @@ describe('Integration', () => {
       doc = await initDOM('expand-env-variables');
 
       expect(doc.getElementById('feature-expand-env-1').textContent).toBe(
-        'basic'
+        'basic',
       );
       expect(doc.getElementById('feature-expand-env-2').textContent).toBe(
-        'basic'
+        'basic',
       );
       expect(doc.getElementById('feature-expand-env-3').textContent).toBe(
-        'basic'
+        'basic',
       );
       expect(
-        doc.getElementById('feature-expand-env-existing').textContent
+        doc.getElementById('feature-expand-env-existing').textContent,
       ).toBe('fromtheshell');
     });
   });

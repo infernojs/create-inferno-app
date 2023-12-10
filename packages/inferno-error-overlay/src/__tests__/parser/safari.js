@@ -14,7 +14,7 @@ test('stack with eval', () => {
 eval code
 eval@[native code]
 a@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:8:10
-global code@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:32:8`
-    )
+global code@file:///Users/joe/Documents/Development/OSS/stack-frame/index.html:32:8`,
+    ),
   ).toMatchSnapshot();
 });

@@ -7,35 +7,35 @@
  */
 // @remove-on-eject-end
 
-import fs from "fs";
-import {fileURLToPath} from "url";
-import path, { dirname } from "path";
-import webpack from "webpack";
-import resolve from "resolve";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import CaseSensitivePathsPlugin from "case-sensitive-paths-webpack-plugin";
-import InlineChunkHtmlPlugin from "inferno-dev-utils/InlineChunkHtmlPlugin";
-import TerserPlugin from "terser-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
-import { WebpackManifestPlugin } from "webpack-manifest-plugin";
-import InterpolateHtmlPlugin from "inferno-dev-utils/InterpolateHtmlPlugin";
-import WorkboxWebpackPlugin from "workbox-webpack-plugin";
-import ModuleScopePlugin from "inferno-dev-utils/ModuleScopePlugin";
-import getCSSModuleLocalIdent from "inferno-dev-utils/getCSSModuleLocalIdent";
-import ESLintPlugin from "eslint-webpack-plugin";
-import { paths, moduleFileExtensions } from "./paths.js";
-import modules from "./modules.js";
-import getClientEnvironment from "./env.js";
-import ModuleNotFoundPlugin from "inferno-dev-utils/ModuleNotFoundPlugin";
-import forkTsCheckerWarningPlugin from "inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin";
-import forkTsCheckerPlugin from "inferno-dev-utils/ForkTsCheckerWebpackPlugin";
+import fs from 'fs';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+import webpack from 'webpack';
+import resolve from 'resolve';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import InlineChunkHtmlPlugin from 'inferno-dev-utils/InlineChunkHtmlPlugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import InterpolateHtmlPlugin from 'inferno-dev-utils/InterpolateHtmlPlugin';
+import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
+import ModuleScopePlugin from 'inferno-dev-utils/ModuleScopePlugin';
+import getCSSModuleLocalIdent from 'inferno-dev-utils/getCSSModuleLocalIdent';
+import ESLintPlugin from 'eslint-webpack-plugin';
+import { paths, moduleFileExtensions } from './paths.js';
+import modules from './modules.js';
+import getClientEnvironment from './env.js';
+import ModuleNotFoundPlugin from 'inferno-dev-utils/ModuleNotFoundPlugin';
+import forkTsCheckerWarningPlugin from 'inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin';
+import forkTsCheckerPlugin from 'inferno-dev-utils/ForkTsCheckerWebpackPlugin';
 
 // @remove-on-eject-begin
-import getCacheIdentifier from "inferno-dev-utils/getCacheIdentifier";
+import getCacheIdentifier from 'inferno-dev-utils/getCacheIdentifier';
 
 // @remove-on-eject-end
-import createEnvironmentHash from "./webpack/persistentCache/createEnvironmentHash.js";
+import createEnvironmentHash from './webpack/persistentCache/createEnvironmentHash.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -54,7 +54,7 @@ const emitErrorsAsWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
 const disableESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
 
 const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
+  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000',
 );
 
 // Check if TypeScript is setup
@@ -62,7 +62,7 @@ const useTypeScript = fs.existsSync(paths.appTsConfig);
 
 // Check if Tailwind config exists
 const useTailwind = fs.existsSync(
-  path.join(paths.appPath, 'tailwind.config.js')
+  path.join(paths.appPath, 'tailwind.config.js'),
 );
 
 // Get the path to the uncompiled service worker (if it exists).
@@ -76,7 +76,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
-export default function(webpackEnv) {
+export default function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
 
@@ -167,7 +167,7 @@ export default function(webpackEnv) {
           options: {
             sourceMap: true,
           },
-        }
+        },
       );
     }
     return loaders;
@@ -225,7 +225,7 @@ export default function(webpackEnv) {
         defaultWebpack: ['webpack/lib/'],
         config: [__filename],
         tsconfig: [paths.appTsConfig, paths.appJsConfig].filter(f =>
-          fs.existsSync(f)
+          fs.existsSync(f),
         ),
       },
     },
@@ -285,7 +285,7 @@ export default function(webpackEnv) {
       // if there are any conflicts. This matches Node resolution mechanism.
       // https://github.com/facebook/create-react-app/issues/253
       modules: ['node_modules', paths.appNodeModules].concat(
-        modules.additionalModulePaths || []
+        modules.additionalModulePaths || [],
       ),
       // These are the reasonable defaults supported by the Node ecosystem.
       // We also include JSX as a common component filename extension to support
@@ -380,10 +380,18 @@ export default function(webpackEnv) {
               include: paths.appSrc,
               loader: fileURLToPath(import.meta.resolve('babel-loader')),
               options: {
-                customize: fileURLToPath(import.meta.resolve(
-                  'babel-preset-inferno-app/webpack-overrides'
-                )),
-                presets: [[fileURLToPath(import.meta.resolve('babel-preset-inferno-app'))]],
+                customize: fileURLToPath(
+                  import.meta.resolve(
+                    'babel-preset-inferno-app/webpack-overrides',
+                  ),
+                ),
+                presets: [
+                  [
+                    fileURLToPath(
+                      import.meta.resolve('babel-preset-inferno-app'),
+                    ),
+                  ],
+                ],
                 // @remove-on-eject-begin
                 babelrc: false,
                 configFile: false,
@@ -400,7 +408,7 @@ export default function(webpackEnv) {
                     'babel-preset-inferno-app',
                     'inferno-dev-utils',
                     'inferno-scripts',
-                  ]
+                  ],
                 ),
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
                 // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -423,7 +431,11 @@ export default function(webpackEnv) {
                 compact: false,
                 presets: [
                   [
-                    fileURLToPath(import.meta.resolve('babel-preset-inferno-app/dependencies')),
+                    fileURLToPath(
+                      import.meta.resolve(
+                        'babel-preset-inferno-app/dependencies',
+                      ),
+                    ),
                     { helpers: true },
                   ],
                 ],
@@ -439,7 +451,7 @@ export default function(webpackEnv) {
                     'babel-preset-inferno-app',
                     'inferno-dev-utils',
                     'inferno-scripts',
-                  ]
+                  ],
                 ),
                 // @remove-on-eject-end
                 // Babel sourcemaps are needed for debugging into node_modules
@@ -505,7 +517,7 @@ export default function(webpackEnv) {
                     mode: 'icss',
                   },
                 },
-                'sass-loader'
+                'sass-loader',
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -528,7 +540,7 @@ export default function(webpackEnv) {
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
-                'sass-loader'
+                'sass-loader',
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -574,8 +586,8 @@ export default function(webpackEnv) {
                   minifyURLs: true,
                 },
               }
-            : undefined
-        )
+            : undefined,
+        ),
       ),
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
@@ -624,7 +636,7 @@ export default function(webpackEnv) {
             return manifest;
           }, seed);
           const entrypointFiles = entrypoints.main.filter(
-            fileName => !fileName.endsWith('.map')
+            fileName => !fileName.endsWith('.map'),
           );
 
           return {
@@ -707,20 +719,26 @@ export default function(webpackEnv) {
         new ESLintPlugin({
           // Plugin options
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: fileURLToPath(import.meta.resolve('inferno-dev-utils/eslintFormatter')),
+          formatter: fileURLToPath(
+            import.meta.resolve('inferno-dev-utils/eslintFormatter'),
+          ),
           eslintPath: fileURLToPath(import.meta.resolve('eslint')),
           failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(
             paths.appNodeModules,
-            '.cache/.eslintcache'
+            '.cache/.eslintcache',
           ),
           // ESLint class options
           cwd: paths.appPath,
           resolvePluginsRelativeTo: __dirname,
           baseConfig: {
-            extends: [fileURLToPath(import.meta.resolve('eslint-config-inferno-app/base'))],
+            extends: [
+              fileURLToPath(
+                import.meta.resolve('eslint-config-inferno-app/base'),
+              ),
+            ],
             rules: {},
           },
         }),

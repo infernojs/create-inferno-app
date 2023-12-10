@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import chalk from "chalk";
-import {findUpSync} from "find-up";
-import path from "path";
+import chalk from 'chalk';
+import { findUpSync } from 'find-up';
+import path from 'path';
 
 class ModuleNotFoundPlugin {
   constructor(appPath, yarnLockFile) {
@@ -48,7 +47,7 @@ class ModuleNotFoundPlugin {
       if (caseSensitivity) {
         const [, incorrectPath, actualName] = caseSensitivity;
         const actualFile = this.getRelativePath(
-          path.join(path.dirname(incorrectPath), actualName)
+          path.join(path.dirname(incorrectPath), actualName),
         );
         const incorrectName = path.basename(incorrectPath);
         err.message = `Cannot find file: '${incorrectName}' does not match the corresponding name on disk: '${actualFile}'.`;

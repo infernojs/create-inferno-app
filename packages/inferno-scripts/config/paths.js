@@ -7,13 +7,13 @@
  */
 // @remove-on-eject-end
 
-import path, { dirname } from "path";
-import fs from "fs";
+import path, { dirname } from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
-import getPublicUrlOrPath from "inferno-dev-utils/getPublicUrlOrPath";
+import getPublicUrlOrPath from 'inferno-dev-utils/getPublicUrlOrPath';
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
-import ownPackageJson from "../package.json" assert { type: 'json' };
+import ownPackageJson from '../package.json' assert { type: 'json' };
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -26,10 +26,12 @@ const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 // like /todos/42/static/js/bundle.7289d.js. We have to know the root.
 const publicUrlOrPath = getPublicUrlOrPath(
   process.env.NODE_ENV === 'development',
-  JSON.parse(fs.readFileSync(resolveApp('package.json'), {
-    encoding: "utf8",
-  })).homepage,
-  process.env.PUBLIC_URL
+  JSON.parse(
+    fs.readFileSync(resolveApp('package.json'), {
+      encoding: 'utf8',
+    }),
+  ).homepage,
+  process.env.PUBLIC_URL,
 );
 
 const buildPath = process.env.BUILD_PATH || 'build';
@@ -51,7 +53,7 @@ export const moduleFileExtensions = [
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
   const extension = moduleFileExtensions.find(extension =>
-    fs.existsSync(resolveFn(`${filePath}.${extension}`))
+    fs.existsSync(resolveFn(`${filePath}.${extension}`)),
   );
 
   if (extension) {
@@ -153,6 +155,5 @@ if (
   };
 }
 // @remove-on-eject-end
-
 
 export const paths = configPaths;
