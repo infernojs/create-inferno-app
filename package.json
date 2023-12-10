@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=20.60.0"
+    "node": ">=20.6"
   },
   "scripts": {
     "build": "cd packages/inferno-scripts && node bin/inferno-scripts.js build",

@@ -86,8 +86,8 @@
     "fsevents": "^2.3.3"
   },
   "peerDependencies": {
-    "react": ">= 16",
-    "typescript": "^3.2.1 || ^4"
+    "inferno": ">= 8",
+    "typescript": ">=5"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -98,7 +98,8 @@
     "production": [
       ">0.2%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "not ie"
     ],
     "development": [
       "last 1 chrome version",
