@@ -35,16 +35,16 @@ import {lookup} from "dns";
 import envinfo from "envinfo";
 import { execSync } from "child_process";
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "fs";
-import { ensureDirSync, removeSync } from "fs-extra";
+import fsExtra from "fs-extra";
 import hyperquest from "hyperquest";
 import prompts from "prompts";
-import os from "os";
-import path, { dirname, resolve } from "path";
+import {EOL} from "os";
+import { dirname, resolve, join, basename } from "path";
 import semver from "semver";
 import spawn from "cross-spawn";
 import tmp from "tmp";
 import tar from "tar";
-import url, { fileURLToPath, Url } from "url";
+import { fileURLToPath, URL } from "url";
 import validateProjectName from "validate-npm-package-name";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -252,11 +252,11 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
     version = 'inferno-scripts@0.9.x';
   }
 
-  const root = path.resolve(name);
-  const appName = path.basename(root);
+  const root = resolve(name);
+  const appName = basename(root);
 
   checkAppName(appName);
-  ensureDirSync(name);
+  fsExtra.ensureDirSync(name);
   if (!isSafeToCreateProjectIn(root, name)) {
     process.exit(1);
   }
@@ -271,8 +271,8 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
     private: true,
   };
   writeFileSync(
-    path.join(root, 'package.json'),
-    JSON.stringify(packageJson, null, 2) + os.EOL
+    join(root, 'package.json'),
+    JSON.stringify(packageJson, null, 2) + EOL
   );
 
   const originalDirectory = process.cwd();
@@ -479,7 +479,7 @@ function run(
         checkNodeVersion(packageName);
         setCaretRangeForRuntimeDeps(packageName);
 
-        const pnpPath = path.resolve(process.cwd(), '.pnp.js');
+        const pnpPath = resolve(process.cwd(), '.pnp.js');
 
         const nodeArgs = existsSync(pnpPath) ? ['--require', pnpPath] : [];
 
@@ -519,26 +519,26 @@ function run(
 
         // On 'exit' we will delete these files from target directory.
         const knownGeneratedFiles = ['package.json', 'node_modules'];
-        const currentFiles = readdirSync(path.join(root));
+        const currentFiles = readdirSync(join(root));
         currentFiles.forEach(file => {
           knownGeneratedFiles.forEach(fileToMatch => {
             // This removes all knownGeneratedFiles.
             if (file === fileToMatch) {
               console.log(`Deleting generated file... ${chalk.cyan(file)}`);
-              removeSync(path.join(root, file));
+              fsExtra.removeSync(join(root, file));
             }
           });
         });
-        const remainingFiles = readdirSync(path.join(root));
+        const remainingFiles = readdirSync(join(root));
         if (!remainingFiles.length) {
           // Delete target folder if empty
           console.log(
             `Deleting ${chalk.cyan(`${appName}/`)} from ${chalk.cyan(
-              path.resolve(root, '..')
+              resolve(root, '..')
             )}`
           );
-          process.chdir(path.resolve(root, '..'));
-          removeSync(path.join(root));
+          process.chdir(resolve(root, '..'));
+          fsExtra.removeSync(join(root));
         }
         console.log('Done.');
         process.exit(1);
@@ -555,7 +555,7 @@ function getInstallPackage(version, originalDirectory) {
     if (version[0] === '@' && !version.includes('/')) {
       packageToInstall += version;
     } else if (version.match(/^file:/)) {
-      packageToInstall = `file:${path.resolve(
+      packageToInstall = `file:${resolve(
         originalDirectory,
         version.match(/^file:(.*)?$/)[1]
       )}`;
@@ -600,7 +600,7 @@ export function getTemplateInstallPackage(template, originalDirectory) {
   let templateToInstall = 'cia-template';
   if (template) {
     if (template.match(/^file:/)) {
-      templateToInstall = `file:${path.resolve(
+      templateToInstall = `file:${resolve(
         originalDirectory,
         template.match(/^file:(.*)?$/)[1]
       )}`;
@@ -671,13 +671,19 @@ function extractStream(stream, dest) {
   return new Promise((resolve, reject) => {
     stream.pipe(
       tar.x({
-        c: dest
-      }).then(() => resolve(dest)).catch((err) => reject(err))
-    );
+        C: dest
+      }, er => {
+        if (er) {
+          reject(er);
+          return;
+        }
+
+        resolve(dest);
+      }))
   });
 }
 
-// Extract package name from tarball url or path.
+// Extract package name from tarball url or 
 function getPackageInfo(installPackage) {
   if (installPackage.match(/^.+\.(tgz|tar\.gz)$/)) {
     return getTemporaryDirectory()
@@ -691,7 +697,7 @@ function getPackageInfo(installPackage) {
         return extractStream(stream, obj.tmpdir).then(() => obj);
       })
       .then(obj => {
-        const { name, version } = readJsonFile(path.join(
+        const { name, version } = readJsonFile(join(
           obj.tmpdir,
           'package.json'
         ));
@@ -729,7 +735,7 @@ function getPackageInfo(installPackage) {
     });
   } else if (installPackage.match(/^file:/)) {
     const installPackagePath = installPackage.match(/^file:(.*)?$/)[1];
-    const { name, version } = readJsonFile(path.join(
+    const { name, version } = readJsonFile(join(
       installPackagePath,
       'package.json'
     ));
@@ -786,7 +792,7 @@ function checkYarnVersion() {
 }
 
 function checkNodeVersion(packageName) {
-  const packageJsonPath = path.resolve(
+  const packageJsonPath = resolve(
     process.cwd(),
     'node_modules',
     packageName,
@@ -876,7 +882,7 @@ function makeCaretRange(dependencies, name) {
 }
 
 function setCaretRangeForRuntimeDeps(packageName) {
-  const packagePath = path.join(process.cwd(), 'package.json');
+  const packagePath = join(process.cwd(), 'package.json');
   const packageJson = readJsonFile(packagePath);
 
   if (typeof packageJson.dependencies === 'undefined') {
@@ -892,7 +898,7 @@ function setCaretRangeForRuntimeDeps(packageName) {
 
   makeCaretRange(packageJson.dependencies, 'inferno');
 
-  writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + os.EOL);
+  writeFileSync(packagePath, JSON.stringify(packageJson, null, 2) + EOL);
 }
 
 // If project only contains files generated by GH, it’s safe.
@@ -944,7 +950,7 @@ function isSafeToCreateProjectIn(root, name) {
     console.log();
     for (const file of conflicts) {
       try {
-        const stats = lstatSync(path.join(root, file));
+        const stats = lstatSync(join(root, file));
         if (stats.isDirectory()) {
           console.log(`  ${chalk.blue(`${file}/`)}`);
         } else {
@@ -965,7 +971,7 @@ function isSafeToCreateProjectIn(root, name) {
   // Remove any log files from a previous installation.
   readdirSync(root).forEach(file => {
     if (isErrorLog(file)) {
-      removeSync(path.join(root, file));
+      fsExtra.removeSync(join(root, file));
     }
   });
   return true;
@@ -993,7 +999,7 @@ function checkThatNpmCanReadCwd() {
     // Note: intentionally using spawn over exec since
     // the problem doesn't reproduce otherwise.
     // `npm config list` is the only reliable way I could find
-    // to reproduce the wrong path. Just printing process.cwd()
+    // to reproduce the wrong  Just printing process.cwd()
     // in a Node process was not enough.
     childOutput = spawn.sync('npm', ['config', 'list']).output.join('');
   } catch (err) {

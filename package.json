@@ -4,6 +4,9 @@
   "workspaces": [
     "packages/*"
   ],
+  "engines": {
+    "node": ">=20.60.0"
+  },
   "scripts": {
     "build": "cd packages/inferno-scripts && node bin/inferno-scripts.js build",
     "create-inferno-app": "node tasks/cra.js",
@@ -16,14 +19,13 @@
     "screencast:error": "svg-term --cast jyu19xGl88FQ3poMY8Hbmfw8y --out screencast-error.svg --window --at 12000 --no-cursor",
     "alex": "alex .",
     "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/integration",
+    "test:integration:debug": "node --inspect-brk --experimental-vm-modules node_modules/jest/bin/jest.js test/integration",
     "test": "cd packages/inferno-scripts && node bin/inferno-scripts.js test",
     "eslint": "eslint .",
     "prettier": "prettier .",
     "format": "npm run prettier -- --write"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.5",
-    "@testing-library/user-event": "^14.5.1",
     "ajv": "^8.12.0",
     "alex": "^11.0.1",
     "eslint": "^8.55.0",
