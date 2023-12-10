@@ -90,6 +90,7 @@ module.exports = {
         '@typescript-eslint/no-useless-constructor': 'warn',
         '@typescript-eslint/space-before-function-paren': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'error'
       },
     },
   ],
@@ -256,8 +257,8 @@ module.exports = {
     'jsx-a11y/scope': 'warn',
 
     // https://github.com/gajus/eslint-plugin-flowtype
-    'flowtype/define-flow-type': 'warn',
-    'flowtype/require-valid-file-annotation': 'warn',
-    'flowtype/use-flow-type': 'warn',
+    // 'flowtype/define-flow-type': 'warn',
+    // 'flowtype/require-valid-file-annotation': 'warn',
+    // 'flowtype/use-flow-type': 'warn',
   },
 };
