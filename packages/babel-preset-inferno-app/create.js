@@ -6,8 +6,6 @@
  */
 'use strict';
 
-const path = require('path');
-
 const validateBoolOption = (name, value, defaultValue) => {
   if (typeof value === 'undefined') {
     value = defaultValue;
@@ -29,11 +27,11 @@ module.exports = function (api, opts, env) {
   var isEnvProduction = env === 'production';
   var isEnvTest = env === 'test';
 
-  var useESModules = validateBoolOption(
-    'useESModules',
-    opts.useESModules,
-    isEnvDevelopment || isEnvProduction,
-  );
+  // var useESModules = validateBoolOption(
+  //   'useESModules',
+  //   opts.useESModules,
+  //   isEnvDevelopment || isEnvProduction,
+  // );
   var isFlowEnabled = validateBoolOption('flow', opts.flow, true);
   var isTypeScriptEnabled = validateBoolOption(
     'typescript',

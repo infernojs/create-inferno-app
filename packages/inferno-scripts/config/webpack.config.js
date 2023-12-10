@@ -30,6 +30,7 @@ import getClientEnvironment from './env.js';
 import ModuleNotFoundPlugin from 'inferno-dev-utils/ModuleNotFoundPlugin';
 import forkTsCheckerWarningPlugin from 'inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin';
 import forkTsCheckerPlugin from 'inferno-dev-utils/ForkTsCheckerWebpackPlugin';
+import eslintFormatter from 'inferno-dev-utils/eslintFormatter';
 
 // @remove-on-eject-begin
 import getCacheIdentifier from 'inferno-dev-utils/getCacheIdentifier';
@@ -719,9 +720,7 @@ export default function (webpackEnv) {
         new ESLintPlugin({
           // Plugin options
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-          formatter: fileURLToPath(
-            import.meta.resolve('inferno-dev-utils/eslintFormatter'),
-          ),
+          formatter: eslintFormatter,
           eslintPath: fileURLToPath(import.meta.resolve('eslint')),
           failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
           context: paths.appSrc,
