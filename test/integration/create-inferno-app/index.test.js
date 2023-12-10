@@ -1,20 +1,15 @@
 
 import { execa } from "execa";
-import { existsSync, mkdirp, readdirSync, writeFileSync } from "fs-extra";
+import { mkdirp } from "fs-extra";
+import { join, resolve } from "path";
+import { rmSync, existsSync, readdirSync, writeFileSync } from "fs";
 
 
-import { join } from "path";
-
-import { rmSync } from "fs";
-import { fileURLToPath } from "url";
-
-
-const cli = fileURLToPath(import.meta.resolve('create-inferno-app/index.js'));
-
-// Increase the timeout for GitHub macOS runner
-jest.setTimeout(1000 * 60 * (process.env.RUNNER_OS === 'macOS' ? 10 : 5));
+const createInfernoAppRoot = resolve('./');
+const cli = resolve(createInfernoAppRoot, 'packages/create-inferno-app/index.js');
 
 const projectName = 'test-app';
+const __dirname = resolve(createInfernoAppRoot, 'test/integration/create-inferno-app')
 const genPath = join(__dirname, projectName);
 
 const generatedFiles = [

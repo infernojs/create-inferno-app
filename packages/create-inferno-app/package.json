@@ -1,5 +1,6 @@
 {
   "name": "create-inferno-app",
+  "type": "module",
   "version": "8.0.0",
   "keywords": [
     "inferno"
@@ -38,7 +39,7 @@
     "envinfo": "^7.11.0",
     "fs-extra": "^11.2.0",
     "hyperquest": "^2.1.3",
-    "node-tar": "^1.0.0",
+    "tar": "^6.2.0",
     "prompts": "^2.4.2",
     "semver": "^7.5.4",
     "tmp": "^0.2.1",

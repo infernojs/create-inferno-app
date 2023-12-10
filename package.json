@@ -15,7 +15,7 @@
     "screencast": "node ./tasks/screencast.js",
     "screencast:error": "svg-term --cast jyu19xGl88FQ3poMY8Hbmfw8y --out screencast-error.svg --window --at 12000 --no-cursor",
     "alex": "alex .",
-    "test:integration": "jest test/integration",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/integration",
     "test": "cd packages/inferno-scripts && node bin/inferno-scripts.js test",
     "eslint": "eslint .",
     "prettier": "prettier .",
