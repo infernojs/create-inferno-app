@@ -13,7 +13,7 @@ import { pkgUp } from 'pkg-up';
 import fs from 'fs';
 
 export const defaultBrowsers = {
-  production: ['>0.2%', 'not dead', 'not op_mini all'],
+  production: ['>0.2%', 'not dead', 'not op_mini all', 'not ie <= 11'],
   development: [
     'last 1 chrome version',
     'last 1 firefox version',

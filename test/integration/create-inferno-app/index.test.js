@@ -1,7 +1,8 @@
 import { execa } from 'execa';
-import { mkdirp } from 'fs-extra';
+import fsExtra from 'fs-extra';
 import { join, resolve } from 'path';
-import { rmSync, existsSync, readdirSync, writeFileSync } from 'fs';
+import { existsSync, readdirSync, writeFileSync } from 'fs';
+import {expect, beforeEach, afterAll, it, describe } from '@jest/globals';
 
 const createInfernoAppRoot = resolve('./');
 const cli = resolve(
@@ -27,10 +28,7 @@ const generatedFiles = [
 ];
 
 const removeGenPath = () => {
-  rmSync(genPath, {
-    recursive: true,
-    force: true,
-  });
+  fsExtra.removeSync(genPath);
 };
 
 beforeEach(removeGenPath);
@@ -94,7 +92,7 @@ describe('create-inferno-app', () => {
 
   it('warns about conflicting files in path', async () => {
     // Create the temporary directory
-    await mkdirp(genPath);
+    await fsExtra.mkdirp(genPath);
 
     // Create a package.json file
     const pkgJson = join(genPath, 'package.json');
@@ -119,7 +117,7 @@ describe('create-inferno-app', () => {
 
   it('creates a project in the current directory', async () => {
     // Create temporary directory
-    await mkdirp(genPath);
+    await fsExtra.mkdirp(genPath);
 
     // Create a project in the current directory
     const { exitCode, files } = await run(['.'], { cwd: genPath });
