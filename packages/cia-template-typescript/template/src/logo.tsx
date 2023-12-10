@@ -1,8 +1,8 @@
 import type { InfernoNode } from 'inferno'
 
 interface LogoProps {
-  height?: number;
-  width?: number;
+  height?: number
+  width?: number
 }
 
 export default ({ width, height }: LogoProps): InfernoNode => {
@@ -26,5 +26,5 @@ export default ({ width, height }: LogoProps): InfernoNode => {
         />
       </g>
     </svg>
-  );
-};
+  )
+}

@@ -88,6 +88,8 @@ module.exports = {
         ],
         'no-useless-constructor': 'off',
         '@typescript-eslint/no-useless-constructor': 'warn',
+        '@typescript-eslint/space-before-function-paren': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
       },
     },
   ],
