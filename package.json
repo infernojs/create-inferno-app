@@ -35,10 +35,8 @@
     "get-port": "^7.0.0",
     "globby": "^14.0.0",
     "hermes-eslint": "^0.16.0",
-    "husky": "^8.0.3",
     "jest": "^29.7.0",
     "lerna": "^8.0.0",
-    "lint-staged": "^15.2.0",
     "meow": "^12.1.1",
     "multimatch": "^7.0.0",
     "prettier": "^3.1.0",
@@ -47,15 +45,5 @@
     "tempy": "^3.1.0",
     "wait-for-localhost": "^4.0.1",
     "web-vitals": "^3.5.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,json,yml,yaml,css,scss,ts,tsx,md}": [
-      "prettier --write"
-    ]
   }
 }
