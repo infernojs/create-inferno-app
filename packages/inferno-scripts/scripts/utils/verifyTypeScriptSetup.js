@@ -8,7 +8,6 @@
 
 import chalk from 'inferno-dev-utils/chalk';
 import fs from 'fs';
-import resolve from 'resolve';
 import path from 'path';
 import { paths } from '../../config/paths.js';
 import os from 'os';
@@ -24,8 +23,8 @@ function writeJson(fileName, object) {
   );
 }
 
-function verifyNoTypeScript() {
-  const typescriptFiles = globby(
+async function verifyNoTypeScript() {
+  const typescriptFiles = await globby(
     ['**/*.(ts|tsx)', '!**/node_modules', '!**/*.d.ts'],
     { cwd: paths.appSrc },
   );
@@ -47,7 +46,7 @@ async function verifyTypeScriptSetup() {
   let firstTimeSetup = false;
 
   if (!fs.existsSync(paths.appTsConfig)) {
-    if (verifyNoTypeScript()) {
+    if (await verifyNoTypeScript()) {
       return;
     }
     writeJson(paths.appTsConfig, {});
@@ -59,7 +58,7 @@ async function verifyTypeScriptSetup() {
   // Ensure typescript is installed
   let ts;
   try {
-    ts = await import('typescript');
+    ts = (await import('typescript')).default;
   } catch (_) {
     console.error(
       chalk.bold.red(
