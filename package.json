@@ -10,6 +10,7 @@
   "scripts": {
     "build": "cd packages/inferno-scripts && node bin/inferno-scripts.js build",
     "create-inferno-app": "node tasks/cra.js",
+    "create-inferno-app-ts": "node tasks/cra-ts.js",
     "e2e": "tasks/e2e-simple.sh",
     "e2e:docker": "tasks/local-test.sh",
     "postinstall": "npm run build:prod -w inferno-error-overlay",
