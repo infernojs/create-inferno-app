@@ -10,6 +10,7 @@
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 import fs from 'fs-extra';
+import {renameSync, appendFileSync, unlinkSync, existsSync, readFileSync, writeFileSync} from 'fs';
 import path from 'path';
 import chalk from 'inferno-dev-utils/chalk';
 import { execSync } from 'child_process';
@@ -82,7 +83,7 @@ function tryGitCommit(appPath) {
   }
 }
 
-export default function (
+export default async function(
   appPath,
   appName,
   verbose,
@@ -90,7 +91,7 @@ export default function (
   templateName,
 ) {
   const appPackage = readJsonFile(path.join(appPath, 'package.json'));
-  const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
+  const useYarn = existsSync(path.join(appPath, 'yarn.lock'));
 
   if (!templateName) {
     console.log('');
@@ -123,7 +124,7 @@ export default function (
   const templateJsonPath = path.join(templatePath, 'template.json');
 
   let templateJson = {};
-  if (fs.existsSync(templateJsonPath)) {
+  if (existsSync(templateJsonPath)) {
     templateJson = readJsonFile(templateJsonPath);
   }
 
@@ -135,7 +136,7 @@ export default function (
     console.log(
       chalk.red(
         'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create Inferno App 5.\n' +
-          'This template needs to be updated to use the new `package` key.',
+        'This template needs to be updated to use the new `package` key.',
       ),
     );
     console.log('For more information, visit https://cra.link/templates');
@@ -219,14 +220,14 @@ export default function (
     appPackage[key] = templatePackage[key];
   });
 
-  fs.writeFileSync(
+  await fs.write(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2) + os.EOL,
   );
 
-  const readmeExists = fs.existsSync(path.join(appPath, 'README.md'));
+  const readmeExists = existsSync(path.join(appPath, 'README.md'));
   if (readmeExists) {
-    fs.renameSync(
+    renameSync(
       path.join(appPath, 'README.md'),
       path.join(appPath, 'README.old.md'),
     );
@@ -234,7 +235,7 @@ export default function (
 
   // Copy the files for the user
   const templateDir = path.join(templatePath, 'template');
-  if (fs.existsSync(templateDir)) {
+  if (existsSync(templateDir)) {
     fs.copySync(templateDir, appPath);
   } else {
     console.error(
@@ -246,8 +247,8 @@ export default function (
   // modifies README.md commands based on user used package manager.
   if (useYarn) {
     try {
-      const readme = fs.readFileSync(path.join(appPath, 'README.md'), 'utf8');
-      fs.writeFileSync(
+      const readme = readFileSync(path.join(appPath, 'README.md'), 'utf8');
+      writeFileSync(
         path.join(appPath, 'README.md'),
         readme.replace(/(npm run |npm )/g, 'yarn '),
         'utf8',
@@ -257,12 +258,12 @@ export default function (
     }
   }
 
-  const gitignoreExists = fs.existsSync(path.join(appPath, '.gitignore'));
+  const gitignoreExists = existsSync(path.join(appPath, '.gitignore'));
   if (gitignoreExists) {
     // Append if there's already a `.gitignore` file there
-    const data = fs.readFileSync(path.join(appPath, 'gitignore'));
-    fs.appendFileSync(path.join(appPath, '.gitignore'), data);
-    fs.unlinkSync(path.join(appPath, 'gitignore'));
+    const data = readFileSync(path.join(appPath, 'gitignore'));
+    appendFileSync(path.join(appPath, '.gitignore'), data);
+    unlinkSync(path.join(appPath, 'gitignore'));
   } else {
     // Rename gitignore after the fact to prevent npm from renaming it to .npmignore
     // See: https://github.com/npm/npm/issues/1862
@@ -334,7 +335,7 @@ export default function (
 
   if (args.find(arg => arg.includes('typescript'))) {
     console.log();
-    verifyTypeScriptSetup();
+    await verifyTypeScriptSetup();
   }
 
   // Remove template

@@ -43,7 +43,7 @@ function verifyNoTypeScript() {
   return true;
 }
 
-function verifyTypeScriptSetup() {
+async function verifyTypeScriptSetup() {
   let firstTimeSetup = false;
 
   if (!fs.existsSync(paths.appTsConfig)) {
@@ -59,19 +59,7 @@ function verifyTypeScriptSetup() {
   // Ensure typescript is installed
   let ts;
   try {
-    // TODO: Remove this hack once `globalThis` issue is resolved
-    // https://github.com/jsdom/jsdom/issues/2961
-    const globalThisWasDefined = !!global.globalThis;
-
-    ts = require(
-      resolve.sync('typescript', {
-        basedir: paths.appNodeModules,
-      }),
-    );
-
-    if (!globalThisWasDefined && !!global.globalThis) {
-      delete global.globalThis;
-    }
+    ts = await import('typescript');
   } catch (_) {
     console.error(
       chalk.bold.red(
@@ -93,8 +81,8 @@ function verifyTypeScriptSetup() {
     console.error(
       chalk.bold(
         'If you are not trying to use TypeScript, please remove the ' +
-          chalk.cyan('tsconfig.json') +
-          ' file from your package root (and any TypeScript files).',
+        chalk.cyan('tsconfig.json') +
+        ' file from your package root (and any TypeScript files).',
       ),
     );
     console.error();
@@ -106,8 +94,8 @@ function verifyTypeScriptSetup() {
     // tsconfig.json
     // 'parsedValue' matches the output value from ts.parseJsonConfigFileContent()
     target: {
-      parsedValue: ts.ScriptTarget.ES5,
-      suggested: 'es5',
+      parsedValue: ts.ScriptTarget.ES2018,
+      suggested: 'ES2018',
     },
     lib: { suggested: ['dom', 'dom.iterable', 'esnext'] },
     allowJs: { suggested: true },
@@ -222,7 +210,7 @@ function verifyTypeScriptSetup() {
         `${coloredOption} ${chalk.bold(
           valueToCheck == null ? 'must not' : 'must',
         )} be ${valueToCheck == null ? 'set' : chalk.cyan.bold(value)}` +
-          (reason != null ? ` (${reason})` : ''),
+        (reason != null ? ` (${reason})` : ''),
       );
     }
   }

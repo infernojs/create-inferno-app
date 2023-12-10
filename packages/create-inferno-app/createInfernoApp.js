@@ -492,7 +492,7 @@ function run(
           `
         import init from '${packageName}/scripts/init';
 
-        init.apply(null, JSON.parse(process.argv[1]));
+        await init.apply(null, JSON.parse(process.argv[1]));
       `,
         );
 

@@ -143,9 +143,9 @@ prompts({
   console.log();
   console.log(cyan(`Copying files into ${appPath}`));
 
-  folders.forEach(folder => {
+  for (const folder of folders) {
     fs.mkdirSync(path.join(appPath, folder), { recursive: true });
-  });
+  }
 
   files.forEach(file => {
     let content = fs.readFileSync(file, 'utf8');
