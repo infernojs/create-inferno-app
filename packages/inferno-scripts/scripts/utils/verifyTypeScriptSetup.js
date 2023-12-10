@@ -104,6 +104,11 @@ async function verifyTypeScriptSetup() {
     strict: { suggested: true },
     forceConsistentCasingInFileNames: { suggested: true },
     noFallthroughCasesInSwitch: { suggested: true },
+    jsx: {
+      parsedValue: ts.JsxEmit.Preserve,
+      value: 'preserve',
+      reason: 'required for Inferno JSX transform',
+    },
 
     // These values are required and cannot be changed by the user
     // Keep this in sync with the webpack config

@@ -14,5 +14,6 @@ export default class App extends Component {
           </p>
         </header>
       </div>
-  );
+    );
+  }
 }

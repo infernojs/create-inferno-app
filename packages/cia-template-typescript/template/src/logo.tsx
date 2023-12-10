@@ -1,4 +1,11 @@
-export default ({ width, height }) => {
+import type { InfernoNode } from 'inferno'
+
+interface LogoProps {
+  height?: number;
+  width?: number;
+}
+
+export default ({ width, height }: LogoProps): InfernoNode => {
   return (
     <svg
       version="1.0"

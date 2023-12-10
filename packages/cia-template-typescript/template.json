@@ -3,11 +3,19 @@
     "dependencies": {
       "@types/jest": "^29.5.11",
       "@types/node": "^20.10.4",
+      "@typescript-eslint/eslint-plugin": "^6.13.2",
+      "eslint": "^8.55.0",
+      "eslint-config-standard-with-typescript": "^42.0.0",
       "typescript": "^5.3.3",
       "web-vitals": "^3.5.0"
     },
     "eslintConfig": {
-      "extends": ["eslint:recommended", "plugin:inferno/recommended"]
+      "extends": [
+        "standard-with-typescript",
+        "plugin:import/typescript",
+        "eslint:recommended",
+        "plugin:inferno/recommended"
+      ]
     }
   }
 }
