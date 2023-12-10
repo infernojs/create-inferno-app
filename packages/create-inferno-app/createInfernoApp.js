@@ -266,6 +266,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
 
   const packageJson = {
     name: appName,
+    type: "module",
     version: '0.1.0',
     private: true,
   };
@@ -518,7 +519,7 @@ function run(
         console.log();
 
         // On 'exit' we will delete these files from target directory.
-        const knownGeneratedFiles = ['package.json', 'node_modules'];
+        const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
         const currentFiles = readdirSync(join(root));
         currentFiles.forEach(file => {
           knownGeneratedFiles.forEach(fileToMatch => {
