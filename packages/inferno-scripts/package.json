@@ -1,6 +1,6 @@
 {
   "name": "inferno-scripts",
-  "version": "8.0.11",
+  "version": "8.0.12",
   "type": "module",
   "description": "Configuration and scripts for Create Inferno App.",
   "repository": {
@@ -53,7 +53,7 @@
     "fs-extra": "^11.2.0",
     "html-webpack-plugin": "^5.5.4",
     "identity-obj-proxy": "^3.0.0",
-    "inferno-dev-utils": "^12.0.8",
+    "inferno-dev-utils": "^12.0.9",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-resolve": "^29.7.0",
