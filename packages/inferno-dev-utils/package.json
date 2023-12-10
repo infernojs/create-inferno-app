@@ -1,7 +1,7 @@
 {
   "name": "inferno-dev-utils",
   "type": "module",
-  "version": "12.0.6",
+  "version": "12.0.7",
   "description": "webpack utilities used by Create Inferno App",
   "repository": {
     "type": "git",
