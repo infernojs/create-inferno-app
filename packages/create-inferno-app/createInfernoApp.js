@@ -244,7 +244,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
     console.log(
       chalk.yellow(
         `You are using Node ${process.version} so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
-          `Please update to Node 14 or higher for a better, fully supported experience.\n`,
+          `Please update to Node 20 or higher for a better, fully supported experience.\n`,
       ),
     );
     // Fall back to latest supported inferno-scripts on Node 4
@@ -489,7 +489,8 @@ function run(
           },
           [root, appName, verbose, originalDirectory, templateName],
           `
-        const init = require('${packageName}/scripts/init.js');
+        import init from '${packageName}/scripts/init';
+
         init.apply(null, JSON.parse(process.argv[1]));
       `,
         );
@@ -498,7 +499,7 @@ function run(
           console.log(
             chalk.yellow(
               `\nNote: the project was bootstrapped with an old unsupported version of tools.\n` +
-                `Please update to Node >=14 and npm >=6 to get supported tools in new projects.\n`,
+                `Please update to Node >=20 and npm >=8 to get supported tools in new projects.\n`,
             ),
           );
         }
