@@ -1,7 +1,7 @@
 {
   "name": "inferno-dev-utils",
   "type": "module",
-  "version": "12.0.1",
+  "version": "12.0.2",
   "description": "webpack utilities used by Create Inferno App",
   "repository": {
     "type": "git",
@@ -105,12 +105,12 @@
     "globby": "^14.0.0",
     "gzip-size": "^7.0.0",
     "immer": "^10.0.3",
+    "inferno-error-overlay": "^6.0.12",
     "is-root": "^3.0.0",
     "loader-utils": "^3.2.1",
     "open": "^9.1.0",
     "pkg-up": "^4.0.0",
     "prompts": "^2.4.2",
-    "inferno-error-overlay": "^6.0.11",
     "recursive-readdir": "^2.2.3",
     "shell-quote": "^1.8.1",
     "strip-ansi": "^7.1.0",
