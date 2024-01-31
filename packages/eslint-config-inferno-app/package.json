@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-inferno-app",
   "type": "commonjs",
-  "version": "8.0.10",
+  "version": "8.0.11",
   "description": "ESLint configuration used by Create Inferno App",
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "@rushstack/eslint-patch": "^1.7.2",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
-    "babel-preset-inferno-app": "^10.0.6",
+    "babel-preset-inferno-app": "^10.0.7",
     "confusing-browser-globals": "^1.0.11",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-flowtype": "^8.0.3",
