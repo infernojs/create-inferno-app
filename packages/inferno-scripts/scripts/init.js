@@ -209,7 +209,7 @@ export default async function(
 
   // Setup the eslint config
   appPackage.eslintConfig = {
-    extends: 'react-app',
+    extends: 'inferno-app',
   };
 
   // Setup the browsers list

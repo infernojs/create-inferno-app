@@ -28,6 +28,7 @@ import resolve from 'resolve';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+// @remove-on-eject-end
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
@@ -65,6 +66,8 @@ if (
   const hasSourceControl = isInGitRepository() || isInMercurialRepository();
   argv.push(hasSourceControl ? '--watch' : '--watchAll');
 }
+
+// @remove-on-eject-begin
 argv.push(
   '--config',
   JSON.stringify(

@@ -240,14 +240,14 @@ prompts({
   // Add Babel config
   console.log(`  Adding ${cyan('Babel')} preset`);
   appPackage.babel = {
-    presets: ['react-app'],
+    presets: ['inferno-app'],
   };
 
   // Add ESlint config
   if (!appPackage.eslintConfig) {
     console.log(`  Adding ${cyan('ESLint')} configuration`);
     appPackage.eslintConfig = {
-      extends: 'react-app',
+      extends: 'inferno-app',
     };
   }
 

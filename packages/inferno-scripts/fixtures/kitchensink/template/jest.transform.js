@@ -1,4 +1,4 @@
 import babelJest from 'babel-jest';
 
-const babelOptions = { presets: ['react-app'] };
+const babelOptions = { presets: ['inferno-app'] };
 export default babelJest.createTransformer(babelOptions);
