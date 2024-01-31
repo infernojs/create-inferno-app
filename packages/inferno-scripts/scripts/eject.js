@@ -113,6 +113,7 @@ prompts({
   const folders = [
     'config',
     'config/jest',
+    'scripts/utils',
     'scripts',
     'config/webpack/persistentCache',
   ];

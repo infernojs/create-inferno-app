@@ -94,7 +94,7 @@
   "dependencies": {
     "@babel/code-frame": "^7.23.5",
     "address": "^2.0.1",
-    "browserslist": "^4.22.2",
+    "browserslist": "^4.22.3",
     "chalk": "^5.3.0",
     "cross-spawn": "^7.0.3",
     "detect-port-alt": "^1.1.6",
@@ -110,7 +110,7 @@
     "is-root": "^3.0.0",
     "json5": "^2.2.3",
     "loader-utils": "^3.2.1",
-    "open": "^9.1.0",
+    "open": "^10.0.3",
     "pkg-up": "^4.0.0",
     "prompts": "^2.4.2",
     "recursive-readdir": "^2.2.3",
