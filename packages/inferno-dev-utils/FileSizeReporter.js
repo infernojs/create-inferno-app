@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
-import filesize from 'filesize';
+import {filesize} from 'filesize';
 import recursive from 'recursive-readdir';
 import stripAnsi from 'strip-ansi';
 import { gzipSizeSync } from 'gzip-size';
