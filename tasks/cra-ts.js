@@ -7,9 +7,9 @@
  */
 
 import fs from 'fs';
-import path, { dirname } from "path";
+import path, { dirname } from 'path';
 import cp from 'child_process';
-import { fileURLToPath } from "url";
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

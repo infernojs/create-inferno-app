@@ -271,7 +271,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
 
   const packageJson = {
     name: appName,
-    type: "module",
+    type: 'module',
     version: '0.1.0',
     private: true,
   };
@@ -486,7 +486,9 @@ function run(
 
         const pnpPath = resolve(process.cwd(), '.pnp.js');
 
-        const nodeArgs = existsSync(pnpPath) ? ['--input-type=module', '--require', pnpPath] : ['--input-type=module'];
+        const nodeArgs = existsSync(pnpPath)
+          ? ['--input-type=module', '--require', pnpPath]
+          : ['--input-type=module'];
 
         await executeNodeScript(
           {
@@ -524,7 +526,11 @@ function run(
         console.log();
 
         // On 'exit' we will delete these files from target directory.
-        const knownGeneratedFiles = ['package.json', 'package-lock.json', 'node_modules'];
+        const knownGeneratedFiles = [
+          'package.json',
+          'package-lock.json',
+          'node_modules',
+        ];
         const currentFiles = readdirSync(join(root));
         currentFiles.forEach(file => {
           knownGeneratedFiles.forEach(fileToMatch => {
@@ -648,7 +654,7 @@ export function getTemplateInstallPackage(template, originalDirectory) {
     }
   }
 
-  console.log("WAT" + templateToInstall + " asddas " + template)
+  console.log('WAT' + templateToInstall + ' asddas ' + template);
 
   return Promise.resolve(templateToInstall);
 }

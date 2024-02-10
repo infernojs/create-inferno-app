@@ -1,9 +1,9 @@
-import { version, Component, type InfernoNode } from 'inferno'
-import Logo from './logo'
-import './App.css'
+import { version, Component, type InfernoNode } from 'inferno';
+import Logo from './logo';
+import './App.css';
 
 export default class App extends Component {
-  render (): InfernoNode {
+  render(): InfernoNode {
     return (
       <div className="App">
         <header className="App-header">
@@ -14,6 +14,6 @@ export default class App extends Component {
           </p>
         </header>
       </div>
-    )
+    );
   }
 }

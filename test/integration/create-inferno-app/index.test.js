@@ -2,7 +2,7 @@ import { execa } from 'execa';
 import fsExtra from 'fs-extra';
 import { join, resolve } from 'path';
 import { existsSync, readdirSync, writeFileSync } from 'fs';
-import {expect, beforeEach, afterAll, it, describe } from '@jest/globals';
+import { expect, beforeEach, afterAll, it, describe } from '@jest/globals';
 
 const createInfernoAppRoot = resolve('./');
 const cli = resolve(

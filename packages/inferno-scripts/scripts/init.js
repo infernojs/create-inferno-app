@@ -10,7 +10,14 @@
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
 import fs from 'fs-extra';
-import {renameSync, appendFileSync, unlinkSync, existsSync, readFileSync, writeFileSync} from 'fs';
+import {
+  renameSync,
+  appendFileSync,
+  unlinkSync,
+  existsSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs';
 import path from 'path';
 import chalk from 'inferno-dev-utils/chalk';
 import { execSync } from 'child_process';
@@ -83,7 +90,7 @@ function tryGitCommit(appPath) {
   }
 }
 
-export default async function(
+export default async function (
   appPath,
   appName,
   verbose,
@@ -136,7 +143,7 @@ export default async function(
     console.log(
       chalk.red(
         'Root-level `dependencies` and `scripts` keys in `template.json` were deprecated for Create Inferno App 5.\n' +
-        'This template needs to be updated to use the new `package` key.',
+          'This template needs to be updated to use the new `package` key.',
       ),
     );
     console.log('For more information, visit https://cra.link/templates');

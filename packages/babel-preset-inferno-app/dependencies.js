@@ -6,19 +6,19 @@
  */
 'use strict';
 
-const path = require('path');
-
-const validateBoolOption = (name, value, defaultValue) => {
-  if (typeof value === 'undefined') {
-    value = defaultValue;
-  }
-
-  if (typeof value !== 'boolean') {
-    throw new Error(`Preset inferno-app: '${name}' option must be a boolean.`);
-  }
-
-  return value;
-};
+// const path = require('path');
+//
+// const validateBoolOption = (name, value, defaultValue) => {
+//   if (typeof value === 'undefined') {
+//     value = defaultValue;
+//   }
+//
+//   if (typeof value !== 'boolean') {
+//     throw new Error(`Preset inferno-app: '${name}' option must be a boolean.`);
+//   }
+//
+//   return value;
+// };
 
 module.exports = function (api, opts) {
   if (!opts) {

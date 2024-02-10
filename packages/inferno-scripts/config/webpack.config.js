@@ -711,7 +711,7 @@ export default function (webpackEnv) {
               { file: '**/src/setupProxy.*' },
               { file: '**/src/setupTests.*' },
             ],
-          }
+          },
         }),
       !disableESLintPlugin &&
         new ESLintPlugin({

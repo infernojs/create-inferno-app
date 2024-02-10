@@ -11,7 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { paths } from './paths.js';
 import chalk from 'inferno-dev-utils/chalk';
-import { readJsonFile } from "inferno-dev-utils/readJsonFile";
+import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
