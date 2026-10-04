@@ -1,5 +1,16 @@
 {
   "arrowParens": "avoid",
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "overrides": [
+    {
+      "files": [
+        "packages/inferno-error-overlay/src/**/*.js",
+        "test/fixtures/issue-5176-flow-class-properties/src/App.js"
+      ],
+      "options": {
+        "parser": "flow"
+      }
+    }
+  ]
 }

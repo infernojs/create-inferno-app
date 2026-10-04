@@ -77,17 +77,28 @@ module.exports = function (api, opts, env) {
         // Latest stable ECMAScript features
         require('@babel/preset-env').default,
         {
-          // Allow importing core-js in entrypoint and use browserlist to select polyfills
-          useBuiltIns: 'entry',
-          // Set the corejs version we are using to avoid warnings in console
-          corejs: 3,
           // Exclude transforms that make all code slower
           exclude: ['transform-typeof-symbol'],
         },
       ],
       isTypeScriptEnabled && [require('@babel/preset-typescript').default],
     ].filter(Boolean),
+    // class { handleClick = () => { } }
+    // Use assignment instead of defineProperty for class fields, and plain
+    // properties for private fields. These replace the `loose: true` option of
+    // the class features plugins, which is deprecated in Babel 8.
+    // See discussion in https://github.com/facebook/create-react-app/issues/4263
+    assumptions: {
+      setPublicClassFields: true,
+      privateFieldsAsProperties: true,
+    },
     plugins: [
+      // Allow importing core-js in entrypoint and use browserlist to select polyfills.
+      // Babel 8 moved this out of `@babel/preset-env`'s `useBuiltIns: 'entry'` option.
+      (isEnvProduction || isEnvDevelopment) && [
+        require('babel-plugin-polyfill-corejs3').default,
+        { method: 'entry-global' },
+      ],
       [require('babel-plugin-inferno'), { imports: true }],
       // Strip flow types before any other transform, emulating the behavior
       // order as-if the browser supported all of the succeeding features
@@ -131,32 +142,10 @@ module.exports = function (api, opts, env) {
         false,
       ],
       // class { handleClick = () => { } }
-      // Enable loose mode to use assignment instead of defineProperty
-      // See discussion in https://github.com/facebook/create-react-app/issues/4263
-      // Note:
-      // 'loose' mode configuration must be the same for
-      // * @babel/plugin-transform-class-properties
-      // * @babel/plugin-transform-private-methods
-      // * @babel/plugin-transform-private-property-in-object
-      // (when they are enabled)
-      [
-        require('@babel/plugin-transform-class-properties').default,
-        {
-          loose: true,
-        },
-      ],
-      [
-        require('@babel/plugin-transform-private-methods').default,
-        {
-          loose: true,
-        },
-      ],
-      [
-        require('@babel/plugin-transform-private-property-in-object').default,
-        {
-          loose: true,
-        },
-      ],
+      // Loose behaviour comes from the `assumptions` above.
+      require('@babel/plugin-transform-class-properties').default,
+      require('@babel/plugin-transform-private-methods').default,
+      require('@babel/plugin-transform-private-property-in-object').default,
       // Adds Numeric Separators
       require('@babel/plugin-transform-numeric-separator').default,
       // Polyfills the runtime needed for async/await, generators, and friends
@@ -198,7 +187,7 @@ module.exports = function (api, opts, env) {
         plugins: [
           [
             require('@babel/plugin-proposal-decorators').default,
-            { legacy: true },
+            { version: 'legacy' },
           ],
         ],
       },

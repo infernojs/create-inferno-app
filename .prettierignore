@@ -2,6 +2,8 @@ build/
 package-lock.json
 test/fixtures/webpack-message-formatting/src/AppBabel.js
 test/fixtures/webpack-message-formatting/src/AppCss.css
+# Regression test for a missing trailing comma in Flow typed async arrow params
+packages/inferno-scripts/fixtures/kitchensink/template/src/features/syntax/AsyncAwait.js
 packages/inferno-error-overlay/fixtures/bundle*
 packages/inferno-error-overlay/fixtures/inline*
 packages/inferno-error-overlay/fixtures/junk*

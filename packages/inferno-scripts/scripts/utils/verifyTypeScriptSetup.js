@@ -13,6 +13,7 @@ import { paths } from '../../config/paths.js';
 import os from 'os';
 import immerModule from 'inferno-dev-utils/immer';
 import globby from 'inferno-dev-utils/globby';
+import resolve from 'resolve';
 
 const immer = immerModule.produce;
 
@@ -88,6 +89,18 @@ async function verifyTypeScriptSetup() {
     process.exit(1);
   }
 
+  const isTypeScript6 = parseInt(ts.version, 10) >= 6;
+
+  // TypeScript 6 no longer includes every installed @types package by default
+  const installedTypes = ['node', 'jest'].filter(name => {
+    try {
+      resolve.sync(`@types/${name}/package.json`, { basedir: paths.appPath });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  });
+
   const compilerOptions = {
     // These are suggested values and will be set when not present in the
     // tsconfig.json
@@ -97,6 +110,9 @@ async function verifyTypeScriptSetup() {
       suggested: 'ES2018',
     },
     lib: { suggested: ['dom', 'dom.iterable', 'esnext'] },
+    ...(isTypeScript6 && installedTypes.length > 0
+      ? { types: { suggested: installedTypes } }
+      : {}),
     allowJs: { suggested: true },
     skipLibCheck: { suggested: true },
     esModuleInterop: { suggested: true },
@@ -118,8 +134,8 @@ async function verifyTypeScriptSetup() {
       reason: 'for import() and import/export',
     },
     moduleResolution: {
-      parsedValue: ts.ModuleResolutionKind.NodeJs,
-      value: 'node',
+      parsedValue: ts.ModuleResolutionKind.Bundler,
+      value: 'bundler',
       reason: 'to match webpack resolution',
     },
     resolveJsonModule: { value: true, reason: 'to match webpack loader' },
@@ -217,6 +233,22 @@ async function verifyTypeScriptSetup() {
           (reason != null ? ` (${reason})` : ''),
       );
     }
+  }
+
+  // TypeScript 6 deprecates `baseUrl`, which configures absolute imports
+  if (
+    isTypeScript6 &&
+    parsedCompilerOptions.baseUrl != null &&
+    parsedCompilerOptions.ignoreDeprecations == null
+  ) {
+    appTsConfig = immer(appTsConfig, config => {
+      config.compilerOptions.ignoreDeprecations = '6.0';
+    });
+    messages.push(
+      `${chalk.cyan('compilerOptions.ignoreDeprecations')} ${chalk.bold(
+        'must',
+      )} be ${chalk.cyan.bold('6.0')} (to use baseUrl for absolute imports)`,
+    );
   }
 
   // tsconfig will have the merged "include" and "exclude" by this point

@@ -44,6 +44,7 @@ for (const dotenvFile of dotenvFiles) {
     expand(
       config({
         path: dotenvFile,
+        quiet: true,
       }),
     );
   }

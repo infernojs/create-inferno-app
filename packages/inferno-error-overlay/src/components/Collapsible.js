@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Component } from 'inferno';
 import type { Element as InfernoElement } from 'inferno';
 import type { Theme } from '../styles.js';
 
@@ -38,29 +39,31 @@ type CollapsiblePropsType = {|
   children: InfernoElement<any>[],
 |};
 
-class Collapsible {
-  constructor(props: CollapsiblePropsType, context: any) {
+class Collapsible extends Component<
+  CollapsiblePropsType,
+  { collapsed: boolean },
+> {
+  constructor(props: CollapsiblePropsType) {
+    super(props);
+
     this.state = {
       collapsed: true,
     };
-
-    this.toggleCollapsed = this.toggleCollapsed.bind(this);
   }
 
-  toggleCollapsed(val) {
-    this.setState({
-      collapsed: val,
-    });
-  }
+  toggleCollapsed = () => {
+    this.setState(prevState => ({ collapsed: !prevState.collapsed }));
+  };
 
-  render(props: CollapsiblePropsType, { theme }) {
+  render() {
     const { collapsed } = this.state;
-    const count = props.children.length;
+    const theme = this.context.theme;
+    const count = this.props.children.length;
 
     return (
       <div>
         <button
-          onClick={toggleCollapsed}
+          onClick={this.toggleCollapsed}
           style={
             collapsed
               ? collapsibleCollapsedStyle(theme)
@@ -72,7 +75,7 @@ class Collapsible {
             (collapsed ? 'collapsed.' : 'expanded.')}
         </button>
         <div style={{ display: collapsed ? 'none' : 'block' }}>
-          {props.children}
+          {this.props.children}
           <button
             onClick={this.toggleCollapsed}
             style={collapsibleExpandedStyle(theme)}

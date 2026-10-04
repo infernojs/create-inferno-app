@@ -13,7 +13,7 @@ import { fileURLToPath } from 'url';
 import getPublicUrlOrPath from 'inferno-dev-utils/getPublicUrlOrPath';
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
-import ownPackageJson from '../package.json' assert { type: 'json' };
+import ownPackageJson from '../package.json' with { type: 'json' };
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
@@ -50,6 +50,16 @@ export const moduleFileExtensions = [
   'jsx',
 ];
 
+// ESLint flat config files, in the order ESLint looks them up
+export const eslintConfigFiles = [
+  'eslint.config.js',
+  'eslint.config.mjs',
+  'eslint.config.cjs',
+  'eslint.config.ts',
+  'eslint.config.mts',
+  'eslint.config.cts',
+];
+
 // Resolve file paths in the same order as webpack
 const resolveModule = (resolveFn, filePath) => {
   const extension = moduleFileExtensions.find(extension =>
@@ -77,6 +87,7 @@ configPaths = {
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
+  appESLintConfigs: eslintConfigFiles.map(resolveApp),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
@@ -102,6 +113,7 @@ configPaths = {
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
   appJsConfig: resolveApp('jsconfig.json'),
+  appESLintConfigs: eslintConfigFiles.map(resolveApp),
   yarnLockFile: resolveApp('yarn.lock'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
@@ -139,6 +151,9 @@ if (
     appSrc: resolveOwn(`${templatePath}/src`),
     appTsConfig: resolveOwn(`${templatePath}/tsconfig.json`),
     appJsConfig: resolveOwn(`${templatePath}/jsconfig.json`),
+    appESLintConfigs: eslintConfigFiles.map(file =>
+      resolveOwn(`${templatePath}/${file}`),
+    ),
     yarnLockFile: resolveOwn(`${templatePath}/yarn.lock`),
     testsSetup: resolveModule(resolveOwn, `${templatePath}/src/setupTests`),
     proxySetup: resolveOwn(`${templatePath}/src/setupProxy.js`),

@@ -1,5 +1,4 @@
-import 'inferno';
-import 'node';
+/// <reference types="node" />
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -44,9 +43,9 @@ declare module '*.webp' {
 }
 
 declare module '*.svg' {
-  import type * as Inferno from 'inferno';
+  import type { Inferno } from 'inferno';
 
-  export const InfernoComponent: Inferno.FunctionComponent<
+  export const InfernoComponent: Inferno.SFC<
     Inferno.SVGProps<SVGSVGElement> & { title?: string }
   >;
 
@@ -68,3 +67,10 @@ declare module '*.module.sass' {
   const classes: Readonly<Record<string, string>>;
   export default classes;
 }
+
+// Plain stylesheets are imported for their side effects only
+declare module '*.css' {}
+
+declare module '*.scss' {}
+
+declare module '*.sass' {}

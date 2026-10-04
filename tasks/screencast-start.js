@@ -11,14 +11,14 @@ import { execa } from 'execa';
 import meow from 'meow';
 import multimatch from 'multimatch';
 
-main(meow());
+main(meow({ importMeta: import.meta }));
 
 function main(cli) {
   let count = 0;
 
   const start = Date.now();
   const duration = parseInt(cli.flags.timeout, 10) * 1000;
-  const cp = execa(cli.flags.command, { shell: true });
+  const cp = execa(cli.flags.command, { shell: true, reject: false });
 
   const target = parseInt(cli.flags.patternCount || '1', 10);
 
@@ -42,7 +42,7 @@ function main(cli) {
     }
   });
 
-  cp.on('exit', e => {
+  cp.then(({ exitCode }) => {
     const elapsed = Date.now() - start;
 
     if (elapsed >= duration) {
@@ -50,7 +50,7 @@ function main(cli) {
     }
 
     setTimeout(() => {
-      process.exit(e.exitCode);
+      process.exit(exitCode);
     }, duration - elapsed);
   });
 }

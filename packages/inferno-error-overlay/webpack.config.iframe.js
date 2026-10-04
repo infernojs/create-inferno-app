@@ -52,6 +52,8 @@ export default {
     ],
   },
   optimization: {
+    // `process.env.NODE_ENV` is defined below
+    nodeEnv: false,
     minimizer: [
       // This code is embedded as a string, so it would never be optimized
       // elsewhere.

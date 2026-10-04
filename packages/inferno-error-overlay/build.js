@@ -11,7 +11,7 @@ import webpackConfig from './webpack.config.js';
 import iframeWebpackConfig from './webpack.config.iframe.js';
 import { rimraf } from 'rimraf';
 
-import chokidar from 'chokidar';
+import { watch } from 'chokidar';
 
 const args = process.argv.slice(2);
 const watchMode = args[0] === '--watch' || args[0] === '-w';
@@ -68,7 +68,7 @@ function runBuildSteps() {
 }
 
 function setupWatch() {
-  const watcher = chokidar.watch('./src', {
+  const watcher = watch('./src', {
     ignoreInitial: true,
   });
 

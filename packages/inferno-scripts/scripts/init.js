@@ -27,6 +27,7 @@ import os from 'os';
 import verifyTypeScriptSetup from './utils/verifyTypeScriptSetup.js';
 import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
 import { fileURLToPath } from 'url';
+import { eslintConfigFiles } from '../config/paths.js';
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -214,11 +215,6 @@ export default async function (
     );
   }
 
-  // Setup the eslint config
-  appPackage.eslintConfig = {
-    extends: 'inferno-app',
-  };
-
   // Setup the browsers list
   appPackage.browserslist = defaultBrowsers;
 
@@ -249,6 +245,11 @@ export default async function (
       `Could not locate supplied template: ${chalk.green(templateDir)}`,
     );
     return;
+  }
+
+  // Setup the ESLint config, unless the template provides its own
+  if (!eslintConfigFiles.some(file => existsSync(path.join(appPath, file)))) {
+    writeFileSync(path.join(appPath, 'eslint.config.js'), defaultESLintConfig);
   }
 
   // modifies README.md commands based on user used package manager.
@@ -416,6 +417,11 @@ export default async function (
   console.log();
   console.log('Happy hacking!');
 }
+
+const defaultESLintConfig = `import infernoApp from 'eslint-config-inferno-app';
+
+export default [...infernoApp];
+`;
 
 function isInfernoInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};

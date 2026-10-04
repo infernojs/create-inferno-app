@@ -58,7 +58,7 @@ export const crashWithFrames =
 
 export function listenToRuntimeErrors(
   crash: ErrorRecord => void,
-  filename: string = '/static/js/bundle.js'
+  filename: string = '/static/js/bundle.js',
 ) {
   const crashWithFramesRunTime = crashWithFrames(crash);
 
@@ -75,7 +75,7 @@ export function listenToRuntimeErrors(
         stack: data.stack,
         __unmap_source: filename,
       },
-      false
+      false,
     );
   });
 

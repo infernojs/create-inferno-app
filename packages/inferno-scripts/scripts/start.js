@@ -126,18 +126,12 @@ checkBrowsers(paths.appPath, isInteractive)
       openBrowser(urls.localUrlForBrowser);
     });
 
-    ['SIGINT', 'SIGTERM'].forEach(function (sig) {
-      process.on(sig, function () {
-        devServer.close();
-        process.exit();
-      });
-    });
+    // webpack-dev-server shuts down gracefully on SIGINT and SIGTERM by itself
 
     if (process.env.CI !== 'true') {
       // Gracefully exit when stdin ends
       process.stdin.on('end', function () {
-        devServer.close();
-        process.exit();
+        devServer.stopCallback(() => process.exit());
       });
     }
   })

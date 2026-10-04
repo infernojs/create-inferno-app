@@ -4,7 +4,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-node_version=20
+node_version=24
 current_git_branch=`git rev-parse --abbrev-ref HEAD`
 git_branch=${current_git_branch}
 test_suite=all

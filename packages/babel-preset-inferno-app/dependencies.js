@@ -20,11 +20,7 @@
 //   return value;
 // };
 
-module.exports = function (api, opts) {
-  if (!opts) {
-    opts = {};
-  }
-
+module.exports = function () {
   // This is similar to how `env` works in Babel:
   // https://babeljs.io/docs/usage/babelrc/#env-option
   // We are not using `env` because it’s ignored in versions > babel-core@6.10.4:
@@ -77,17 +73,18 @@ module.exports = function (api, opts) {
         // Latest stable ECMAScript features
         require('@babel/preset-env').default,
         {
-          // Allow importing core-js in entrypoint and use browserlist to select polyfills
-          useBuiltIns: 'entry',
-          // Set the corejs version we are using to avoid warnings in console
-          // This will need to change once we upgrade to corejs@3
-          corejs: 3,
           // Exclude transforms that make all code slower
           exclude: ['transform-typeof-symbol'],
         },
       ],
     ].filter(Boolean),
     plugins: [
+      // Allow importing core-js in entrypoint and use browserlist to select polyfills.
+      // Babel 8 moved this out of `@babel/preset-env`'s `useBuiltIns: 'entry'` option.
+      (isEnvProduction || isEnvDevelopment) && [
+        require('babel-plugin-polyfill-corejs3').default,
+        { method: 'entry-global' },
+      ],
       [require('babel-plugin-inferno'), { imports: true }],
       // Disabled as it's handled automatically by preset-env, and `selectiveLoose` isn't
       // yet merged into babel: https://github.com/babel/babel/pull/9486

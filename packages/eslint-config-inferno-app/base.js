@@ -5,35 +5,48 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import { createRequire } from 'module';
+import babelParser from '@babel/eslint-parser';
+import infernoPlugin from 'eslint-plugin-inferno';
+import globals from 'globals';
 
-// Fix eslint shareable config (https://github.com/eslint/eslint/issues/3458)
-require('@rushstack/eslint-patch/modern-module-resolution');
+const require = createRequire(import.meta.url);
 
 // This file contains the minimum ESLint configuration required for Create
-// Inferno App support, and is used as the `baseConfig` for `eslint-loader`
+// Inferno App support, and is used as the `baseConfig` for `eslint-webpack-plugin`
 // to ensure that user-provided configs don't need this boilerplate.
 
-module.exports = {
-  root: true,
+export const files = ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'];
 
-  parser: '@babel/eslint-parser',
+export default [
+  {
+    files,
 
-  plugins: ['inferno'],
+    plugins: {
+      inferno: infernoPlugin,
+    },
 
-  env: {
-    browser: true,
-    commonjs: true,
-    es6: true,
-    jest: true,
-    node: true,
-  },
+    linterOptions: {
+      // Not reported before ESLint 9
+      reportUnusedDisableDirectives: 'off',
+    },
 
-  parserOptions: {
-    sourceType: 'module',
-    requireConfigFile: false,
-    babelOptions: {
-      presets: [require.resolve('babel-preset-inferno-app/prod')],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      parser: babelParser,
+      parserOptions: {
+        requireConfigFile: false,
+        babelOptions: {
+          presets: [require.resolve('babel-preset-inferno-app/prod')],
+        },
+      },
+      globals: {
+        ...globals.browser,
+        ...globals.commonjs,
+        ...globals.node,
+        ...globals.jest,
+      },
     },
   },
-};
+];

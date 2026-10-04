@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=20.6"
+    "node": ">=24.15"
   },
   "bugs": {
     "url": "https://github.com/facebook/create-inferno-app/issues"

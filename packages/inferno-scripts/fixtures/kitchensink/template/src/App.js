@@ -6,7 +6,7 @@
  */
 
 import { Component, createComponentVNode } from 'inferno';
-import { VNodeFlags } from 'inferno-vnode-flags'
+import { VNodeFlags } from 'inferno-vnode-flags';
 
 class BuiltEmitter extends Component {
   componentDidMount() {

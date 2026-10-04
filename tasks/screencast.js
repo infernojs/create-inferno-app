@@ -9,9 +9,12 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { execaSync } from 'execa';
 import { temporaryDirectory } from 'tempy';
 import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 main();
 

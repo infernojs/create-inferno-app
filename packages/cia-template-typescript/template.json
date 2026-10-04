@@ -1,21 +1,13 @@
 {
   "package": {
     "dependencies": {
-      "@types/jest": "^29.5.11",
-      "@types/node": "^20.10.4",
-      "@typescript-eslint/eslint-plugin": "^6.13.2",
-      "eslint": "^8.55.0",
-      "eslint-config-standard-with-typescript": "^42.0.0",
-      "typescript": "^5.3.3",
-      "web-vitals": "^3.5.0"
-    },
-    "eslintConfig": {
-      "extends": [
-        "standard-with-typescript",
-        "plugin:import/typescript",
-        "eslint:recommended",
-        "eslint-config-inferno-app/index"
-      ]
+      "@eslint/js": "^10.0.1",
+      "@types/jest": "^30.0.0",
+      "@types/node": "^24.19.1",
+      "eslint": "^10.12.0",
+      "eslint-config-love": "^158.0.0",
+      "typescript": "^6.0.3",
+      "web-vitals": "^6.2.2"
     }
   }
 }

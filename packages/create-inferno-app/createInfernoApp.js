@@ -33,7 +33,14 @@ import { Command } from 'commander';
 import { lookup } from 'dns';
 import envinfo from 'envinfo';
 import { execSync } from 'child_process';
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
+import {
+  createReadStream,
+  existsSync,
+  lstatSync,
+  readdirSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs';
 import fsExtra from 'fs-extra';
 import hyperquest from 'hyperquest';
 import prompts from 'prompts';
@@ -42,7 +49,7 @@ import { dirname, resolve, join, basename } from 'path';
 import semver from 'semver';
 import spawn from 'cross-spawn';
 import tmp from 'tmp';
-import tar from 'tar';
+import { x as extractTar } from 'tar';
 import { fileURLToPath, URL } from 'url';
 import validateProjectName from 'validate-npm-package-name';
 
@@ -64,7 +71,7 @@ export function init() {
 
   program
     .version(packageJson.version)
-    .arguments('<project-directory>')
+    .arguments('[project-directory]')
     .usage(`${chalk.green('<project-directory>')} [options]`)
     .action(name => {
       projectName = name;
@@ -81,6 +88,7 @@ export function init() {
     )
     .option('--use-pnp')
     .allowUnknownOption()
+    .allowExcessArguments()
     .on('--help', () => {
       console.log(
         `    Only ${chalk.green('<project-directory>')} is required.`,
@@ -184,16 +192,16 @@ export function init() {
   if (typeof projectName === 'undefined') {
     console.error('Please specify the project directory:');
     console.log(
-      `  ${chalk.cyan(options.name())} ${chalk.green('<project-directory>')}`,
+      `  ${chalk.cyan(program.name())} ${chalk.green('<project-directory>')}`,
     );
     console.log();
     console.log('For example:');
     console.log(
-      `  ${chalk.cyan(options.name())} ${chalk.green('my-inferno-app')}`,
+      `  ${chalk.cyan(program.name())} ${chalk.green('my-inferno-app')}`,
     );
     console.log();
     console.log(
-      `Run ${chalk.cyan(`${options.name()} --help`)} to see all options.`,
+      `Run ${chalk.cyan(`${program.name()} --help`)} to see all options.`,
     );
     process.exit(1);
   }
@@ -249,7 +257,7 @@ function createApp(name, verbose, version, template, useYarn, usePnp) {
     console.log(
       chalk.yellow(
         `You are using Node ${process.version} so the project will be bootstrapped with an old unsupported version of tools.\n\n` +
-          `Please update to Node 20 or higher for a better, fully supported experience.\n`,
+          `Please update to Node 24.15 or higher for a better, fully supported experience.\n`,
       ),
     );
     // Fall back to latest supported inferno-scripts on Node 4
@@ -654,8 +662,6 @@ export function getTemplateInstallPackage(template, originalDirectory) {
     }
   }
 
-  console.log('WAT' + templateToInstall + ' asddas ' + template);
-
   return Promise.resolve(templateToInstall);
 }
 
@@ -685,21 +691,17 @@ function getTemporaryDirectory() {
 
 function extractStream(stream, dest) {
   return new Promise((resolve, reject) => {
-    stream.pipe(
-      tar.x(
-        {
+    stream
+      .on('error', reject)
+      .pipe(
+        extractTar({
           C: dest,
-        },
-        er => {
-          if (er) {
-            reject(er);
-            return;
-          }
-
-          resolve(dest);
-        },
-      ),
-    );
+          // npm tarballs keep their contents in a top-level `package` folder
+          strip: 1,
+        }),
+      )
+      .on('error', reject)
+      .on('finish', () => resolve(dest));
   });
 }
 
@@ -1012,7 +1014,7 @@ function getProxy() {
 // See https://github.com/facebook/create-react-app/pull/3355
 function checkThatNpmCanReadCwd() {
   const cwd = process.cwd();
-  let childOutput = null;
+  let childOutput;
   try {
     // Note: intentionally using spawn over exec since
     // the problem doesn't reproduce otherwise.

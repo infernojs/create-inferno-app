@@ -1,1 +1,3 @@
 *.js text eol=lf
+# Recorded bundles and source maps must stay byte-for-byte identical
+fixtures/* -text

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { address } from 'address';
+import { ip } from 'address';
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
@@ -42,7 +42,7 @@ export function prepareUrls(protocol, host, port, pathname = '/') {
     prettyHost = 'localhost';
     try {
       // This can only return an IPv4 address
-      lanUrlForConfig = address.ip();
+      lanUrlForConfig = ip();
       if (lanUrlForConfig) {
         // Check if the address is a private ip
         // https://en.wikipedia.org/wiki/Private_network#Private_IPv4_address_spaces
@@ -132,7 +132,6 @@ export function createCompiler({
   });
 
   let isFirstCompile = true;
-  let tsMessagesPromise;
 
   if (useTypeScript) {
     forkTsCheckerWebpackPlugin
@@ -211,12 +210,10 @@ export function createCompiler({
     arg => arg.indexOf('--smoke-test') > -1,
   );
   if (isSmokeTest) {
-    compiler.hooks.failed.tap('smokeTest', async () => {
-      await tsMessagesPromise;
+    compiler.hooks.failed.tap('smokeTest', () => {
       process.exit(1);
     });
-    compiler.hooks.done.tap('smokeTest', async stats => {
-      await tsMessagesPromise;
+    compiler.hooks.done.tap('smokeTest', stats => {
       if (stats.hasErrors() || stats.hasWarnings()) {
         process.exit(1);
       } else {
@@ -248,7 +245,7 @@ function resolveLoopback(proxy) {
     // Check if we're on a network; if we are, chances are we can resolve
     // localhost. Otherwise, we can just be safe and assume localhost is
     // IPv4 for maximum compatibility.
-    if (!address.ip()) {
+    if (!ip()) {
       o.hostname = '127.0.0.1';
     }
   } catch (_ignored) {
@@ -353,7 +350,6 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
   return [
     {
       target,
-      logLevel: 'silent',
       // For single page apps, we generally want to fallback to /index.html.
       // However we also want to respect `proxy` for API calls.
       // So if `proxy` is specified as a string, we need to decide which fallback to use.
@@ -364,7 +360,7 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
       // Modern browsers include text/html into `accept` header when navigating.
       // However API calls like `fetch()` won’t generally accept text/html.
       // If this heuristic doesn’t work well for you, use `src/setupProxy.js`.
-      context: function (pathname, req) {
+      pathFilter: function (pathname, req) {
         return (
           req.method !== 'GET' ||
           (mayProxy(pathname) &&
@@ -372,15 +368,17 @@ export function prepareProxy(proxy, appPublicFolder, servedPathname) {
             req.headers.accept.indexOf('text/html') === -1)
         );
       },
-      onProxyReq: proxyReq => {
-        // Browsers may send Origin headers even with same-origin
-        // requests. To prevent CORS issues, we have to change
-        // the Origin to match the target URL.
-        if (proxyReq.getHeader('origin')) {
-          proxyReq.setHeader('origin', target);
-        }
+      on: {
+        proxyReq: proxyReq => {
+          // Browsers may send Origin headers even with same-origin
+          // requests. To prevent CORS issues, we have to change
+          // the Origin to match the target URL.
+          if (proxyReq.getHeader('origin')) {
+            proxyReq.setHeader('origin', target);
+          }
+        },
+        error: onProxyError(target),
       },
-      onError: onProxyError(target),
       secure: false,
       changeOrigin: true,
       ws: true,

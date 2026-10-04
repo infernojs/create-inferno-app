@@ -22,6 +22,7 @@ function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
   } catch (err) {
     throw new Error(
       `The certificate "${chalk.yellow(crtFile)}" is invalid.\n${err.message}`,
+      { cause: err },
     );
   }
 
@@ -33,6 +34,7 @@ function validateKeyAndCerts({ cert, key, keyFile, crtFile }) {
       `The certificate key "${chalk.yellow(keyFile)}" is invalid.\n${
         err.message
       }`,
+      { cause: err },
     );
   }
 }

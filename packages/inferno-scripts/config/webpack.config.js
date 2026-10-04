@@ -8,8 +8,9 @@
 // @remove-on-eject-end
 
 import fs from 'fs';
+import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import path from 'path';
 import webpack from 'webpack';
 import resolve from 'resolve';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -24,13 +25,14 @@ import WorkboxWebpackPlugin from 'workbox-webpack-plugin';
 import ModuleScopePlugin from 'inferno-dev-utils/ModuleScopePlugin';
 import getCSSModuleLocalIdent from 'inferno-dev-utils/getCSSModuleLocalIdent';
 import ESLintPlugin from 'eslint-webpack-plugin';
-import { paths, moduleFileExtensions } from './paths.js';
+import { paths, moduleFileExtensions, eslintConfigFiles } from './paths.js';
 import modules from './modules.js';
 import getClientEnvironment from './env.js';
 import ModuleNotFoundPlugin from 'inferno-dev-utils/ModuleNotFoundPlugin';
 import forkTsCheckerWarningPlugin from 'inferno-dev-utils/ForkTsCheckerWarningWebpackPlugin';
 import forkTsCheckerPlugin from 'inferno-dev-utils/ForkTsCheckerWebpackPlugin';
 import eslintFormatter from 'inferno-dev-utils/eslintFormatter';
+import chalk from 'inferno-dev-utils/chalk';
 
 // @remove-on-eject-begin
 import getCacheIdentifier from 'inferno-dev-utils/getCacheIdentifier';
@@ -39,7 +41,7 @@ import getCacheIdentifier from 'inferno-dev-utils/getCacheIdentifier';
 import createEnvironmentHash from './webpack/persistentCache/createEnvironmentHash.js';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 const ForkTsCheckerWebpackPlugin =
   process.env.TSC_COMPILE_ON_ERROR === 'true'
     ? forkTsCheckerWarningPlugin
@@ -61,10 +63,73 @@ const imageInlineSizeLimit = parseInt(
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
-// Check if Tailwind config exists
-const useTailwind = fs.existsSync(
-  path.join(paths.appPath, 'tailwind.config.js'),
-);
+// Check if the app has an ESLint flat config. Like ESLint, look for one in
+// the source folder and all of its parent folders.
+function hasESLintConfig() {
+  let dir = paths.appSrc;
+  for (;;) {
+    if (eslintConfigFiles.some(file => fs.existsSync(path.join(dir, file)))) {
+      return true;
+    }
+    const parent = path.dirname(dir);
+    if (parent === dir) {
+      return false;
+    }
+    dir = parent;
+  }
+}
+
+const appPackageJson = JSON.parse(fs.readFileSync(paths.appPackageJson));
+
+// The app's own ESLint config is used on top of the minimal base config.
+// Without one, the default Create Inferno App config is used.
+const useAppESLintConfig = !disableESLintPlugin && hasESLintConfig();
+if (
+  !disableESLintPlugin &&
+  !useAppESLintConfig &&
+  appPackageJson.eslintConfig
+) {
+  console.warn(
+    chalk.yellow(
+      'ESLint no longer reads the "eslintConfig" field in package.json, so the ' +
+        'default Create Inferno App config is used instead.\nMove your ESLint ' +
+        'configuration to an eslint.config.js file: ' +
+        'https://eslint.org/docs/latest/use/configure/migration-guide\n',
+    ),
+  );
+}
+const eslintConfig = disableESLintPlugin
+  ? undefined
+  : useAppESLintConfig
+    ? { baseConfig: require('eslint-config-inferno-app/base').default }
+    : {
+        overrideConfigFile: true,
+        baseConfig: require('eslint-config-inferno-app').default,
+      };
+
+// Check if Tailwind is used: Tailwind CSS 4 needs no config file, so also
+// look for the `tailwindcss` dependency
+const useTailwind =
+  fs.existsSync(path.join(paths.appPath, 'tailwind.config.js')) ||
+  ['dependencies', 'devDependencies'].some(
+    field => appPackageJson[field] && appPackageJson[field].tailwindcss,
+  );
+
+// Tailwind CSS 3 is a PostCSS plugin itself, Tailwind CSS 4 uses @tailwindcss/postcss
+function getTailwindPostCSSPlugin() {
+  try {
+    const tailwindPackageJson = resolve.sync('tailwindcss/package.json', {
+      basedir: paths.appPath,
+    });
+    const { version } = JSON.parse(fs.readFileSync(tailwindPackageJson));
+    if (parseInt(version, 10) < 4) {
+      return path.dirname(tailwindPackageJson);
+    }
+  } catch (e) {
+    // Use Tailwind CSS 4
+  }
+  return '@tailwindcss/postcss';
+}
 
 // Get the path to the uncompiled service worker (if it exists).
 const swSrc = paths.swSrc;
@@ -74,6 +139,14 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+
+// css-loader 7 uses named exports for CSS Modules by default. Keep exporting
+// the class names as a default export with the original class names, so
+// `import styles from './App.module.css'` keeps working.
+const cssModulesDefaultExport = {
+  namedExport: false,
+  exportLocalsConvention: 'as-is',
+};
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -137,7 +210,7 @@ export default function (webpackEnv) {
                   'postcss-normalize',
                 ]
               : [
-                  'tailwindcss',
+                  getTailwindPostCSSPlugin(),
                   'postcss-flexbugs-fixes',
                   [
                     'postcss-preset-env',
@@ -382,9 +455,8 @@ export default function (webpackEnv) {
               loader: fileURLToPath(import.meta.resolve('babel-loader')),
               options: {
                 customize: fileURLToPath(
-                  import.meta.resolve(
-                    'babel-preset-inferno-app/webpack-overrides',
-                  ),
+                  import.meta
+                    .resolve('babel-preset-inferno-app/webpack-overrides'),
                 ),
                 presets: [
                   [
@@ -433,9 +505,8 @@ export default function (webpackEnv) {
                 presets: [
                   [
                     fileURLToPath(
-                      import.meta.resolve(
-                        'babel-preset-inferno-app/dependencies',
-                      ),
+                      import.meta
+                        .resolve('babel-preset-inferno-app/dependencies'),
                     ),
                     { helpers: true },
                   ],
@@ -479,6 +550,7 @@ export default function (webpackEnv) {
                   : isEnvDevelopment,
                 modules: {
                   mode: 'icss',
+                  ...cssModulesDefaultExport,
                 },
               }),
               // Don't consider CSS imports dead code even if the
@@ -499,6 +571,7 @@ export default function (webpackEnv) {
                 modules: {
                   mode: 'local',
                   getLocalIdent: getCSSModuleLocalIdent,
+                  ...cssModulesDefaultExport,
                 },
               }),
             },
@@ -516,6 +589,7 @@ export default function (webpackEnv) {
                     : isEnvDevelopment,
                   modules: {
                     mode: 'icss',
+                    ...cssModulesDefaultExport,
                   },
                 },
                 'sass-loader',
@@ -539,6 +613,7 @@ export default function (webpackEnv) {
                   modules: {
                     mode: 'local',
                     getLocalIdent: getCSSModuleLocalIdent,
+                    ...cssModulesDefaultExport,
                   },
                 },
                 'sass-loader',
@@ -707,7 +782,7 @@ export default function (webpackEnv) {
             ],
             exclude: [
               { file: '**/src/**/__tests__/**' },
-              { file: '**/src/**/?(*.){spec|test}.*' },
+              { file: '**/src/**/?(*.){spec,test}.*' },
               { file: '**/src/setupProxy.*' },
               { file: '**/src/setupTests.*' },
             ],
@@ -719,7 +794,9 @@ export default function (webpackEnv) {
           extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
           formatter: eslintFormatter,
           eslintPath: fileURLToPath(import.meta.resolve('eslint')),
-          failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+          // Report errors as compilation errors without stopping the
+          // compilation, so the dev server keeps watching
+          failOnError: false,
           context: paths.appSrc,
           cache: true,
           cacheLocation: path.resolve(
@@ -728,16 +805,32 @@ export default function (webpackEnv) {
           ),
           // ESLint class options
           cwd: paths.appPath,
-          resolvePluginsRelativeTo: __dirname,
-          baseConfig: {
-            extends: [
-              fileURLToPath(
-                import.meta.resolve('eslint-config-inferno-app/base'),
-              ),
-            ],
-            rules: {},
-          },
+          configType: 'flat',
+          ...eslintConfig,
         }),
+      // eslint-webpack-plugin always reports ESLint errors as compilation
+      // errors, so turn them into warnings when ESLINT_NO_DEV_ERRORS is set
+      !disableESLintPlugin &&
+        isEnvDevelopment &&
+        emitErrorsAsWarnings && {
+          apply(compiler) {
+            compiler.hooks.afterCompile.tap(
+              'ESLintErrorsAsWarnings',
+              compilation => {
+                const eslintErrors = compilation.errors.filter(
+                  error => error.name === 'ESLintError',
+                );
+                for (const error of eslintErrors) {
+                  compilation.errors.splice(
+                    compilation.errors.indexOf(error),
+                    1,
+                  );
+                  compilation.warnings.push(error);
+                }
+              },
+            );
+          },
+        },
     ].filter(Boolean),
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter

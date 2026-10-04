@@ -13,7 +13,7 @@
     "url": "https://github.com/infernojs/create-inferno-app/issues"
   },
   "engines": {
-    "node": ">=20.6"
+    "node": ">=24.15"
   },
   "files": [
     "browsersHelper.js",
@@ -92,37 +92,37 @@
     "./webpackHotDevClient": "./webpackHotDevClient.js"
   },
   "dependencies": {
-    "@babel/code-frame": "^7.23.5",
-    "address": "^2.0.1",
-    "browserslist": "^4.22.3",
-    "chalk": "^5.3.0",
-    "cross-spawn": "^7.0.3",
+    "@babel/code-frame": "^8.0.6",
+    "address": "^2.0.3",
+    "browserslist": "^4.29.3",
+    "chalk": "^6.0.1",
+    "cross-spawn": "^7.0.6",
     "detect-port-alt": "^1.1.6",
     "escape-string-regexp": "^5.0.0",
-    "filesize": "^10.1.0",
-    "find-up": "^7.0.0",
-    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "filesize": "^11.0.25",
+    "find-up": "^8.0.0",
+    "fork-ts-checker-webpack-plugin": "^9.1.0",
     "global-modules": "^2.0.0",
-    "globby": "^14.0.0",
+    "globby": "^16.2.4",
     "gzip-size": "^7.0.0",
-    "immer": "^10.0.3",
+    "immer": "^11.1.21",
     "inferno-error-overlay": "^6.0.18",
     "is-root": "^3.0.0",
     "json5": "^2.2.3",
-    "loader-utils": "^3.2.1",
-    "open": "^10.0.3",
-    "pkg-up": "^4.0.0",
+    "loader-utils": "^3.3.1",
+    "open": "^11.0.4",
+    "package-up": "^5.0.0",
     "prompts": "^2.4.2",
     "recursive-readdir": "^2.2.3",
-    "shell-quote": "^1.8.1",
-    "strip-ansi": "^7.1.0",
+    "shell-quote": "^1.12.0",
+    "strip-ansi": "^7.2.0",
     "text-table": "^0.2.0"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
-    "jest": "^29.7.0"
+    "cross-env": "^10.1.0",
+    "jest": "^30.5.2"
   },
   "scripts": {
-    "test": "cross-env FORCE_COLOR=true jest"
+    "test": "cross-env FORCE_COLOR=true NODE_OPTIONS=--experimental-vm-modules jest"
   }
 }

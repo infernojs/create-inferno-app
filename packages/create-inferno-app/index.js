@@ -38,14 +38,15 @@ import { init } from './createInfernoApp.js';
 
 const currentNodeVersion = process.versions.node;
 const semver = currentNodeVersion.split('.');
-const major = semver[0];
+const major = Number(semver[0]);
+const minor = Number(semver[1]);
 
-if (major < 20) {
+if (major < 24 || (major === 24 && minor < 15)) {
   console.error(
     'You are running Node ' +
       currentNodeVersion +
       '.\n' +
-      'Create Inferno App requires Node 18 or higher. \n' +
+      'Create Inferno App requires Node 24.15 or higher. \n' +
       'Please update your version of Node.',
   );
   process.exit(1);

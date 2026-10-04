@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=20.6"
+    "node": ">=24.15"
   },
   "scripts": {
     "build": "cd packages/inferno-scripts && node bin/inferno-scripts.js build",
@@ -20,32 +20,46 @@
     "screencast": "node ./tasks/screencast.js",
     "screencast:error": "svg-term --cast jyu19xGl88FQ3poMY8Hbmfw8y --out screencast-error.svg --window --at 12000 --no-cursor",
     "alex": "alex .",
-    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js test/integration",
-    "test:integration:debug": "node --inspect-brk --experimental-vm-modules node_modules/jest/bin/jest.js test/integration",
+    "test:integration": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testTimeout=600000 test/integration",
+    "test:integration:debug": "node --inspect-brk --experimental-vm-modules node_modules/jest/bin/jest.js --testTimeout=600000 test/integration",
     "test": "cd packages/inferno-scripts && node bin/inferno-scripts.js test",
     "eslint": "eslint .",
     "prettier": "prettier .",
     "format": "npm run prettier -- --write"
   },
   "devDependencies": {
-    "ajv": "^8.12.0",
+    "@babel/core": "^8.0.6",
+    "@eslint/compat": "^2.1.1",
+    "@eslint/js": "^10.0.1",
+    "ajv": "^8.20.0",
     "alex": "^11.0.1",
-    "eslint": "^8.56.0",
-    "eslint-plugin-ft-flow": "^3.0.3",
-    "execa": "^8.0.1",
-    "fs-extra": "^11.2.0",
-    "get-port": "^7.0.0",
-    "globby": "^14.0.0",
-    "hermes-eslint": "^0.19.1",
-    "jest": "^29.7.0",
-    "lerna": "^8.1.2",
-    "meow": "^13.2.0",
-    "multimatch": "^7.0.0",
-    "prettier": "^3.2.5",
-    "puppeteer": "^22.0.0",
-    "strip-ansi": "^7.1.0",
-    "tempy": "^3.1.0",
-    "wait-for-localhost": "^4.0.1",
-    "web-vitals": "^3.5.2"
+    "eslint": "^10.12.0",
+    "eslint-plugin-ft-flow": "^3.0.11",
+    "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-inferno": "^7.42.0",
+    "execa": "^10.0.1",
+    "fs-extra": "^11.4.1",
+    "get-port": "^7.2.0",
+    "globals": "^17.13.0",
+    "globby": "^16.2.4",
+    "hermes-eslint": "^0.37.0",
+    "jest": "^30.5.2",
+    "lerna": "^10.0.1",
+    "meow": "^14.1.0",
+    "multimatch": "^8.0.0",
+    "prettier": "^3.9.9",
+    "puppeteer": "^25.12.0",
+    "strip-ansi": "^7.2.0",
+    "tempy": "^3.2.0",
+    "wait-for-localhost": "^5.0.2",
+    "web-vitals": "^6.2.2"
+  },
+  "overrides": {
+    "eslint-plugin-ft-flow": {
+      "eslint": "$eslint"
+    },
+    "babel-preset-current-node-syntax": {
+      "@babel/core": "$@babel/core"
+    }
   }
 }

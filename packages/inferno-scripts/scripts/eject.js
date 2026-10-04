@@ -243,18 +243,20 @@ prompts({
     presets: ['inferno-app'],
   };
 
-  // Add ESlint config
-  if (!appPackage.eslintConfig) {
-    console.log(`  Adding ${cyan('ESLint')} configuration`);
-    appPackage.eslintConfig = {
-      extends: 'inferno-app',
-    };
-  }
-
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
     JSON.stringify(appPackage, null, 2) + os.EOL,
   );
+
+  // Add ESLint config
+  if (!paths.appESLintConfigs.some(file => fs.existsSync(file))) {
+    console.log(`  Adding ${cyan('ESLint')} configuration`);
+    fs.writeFileSync(
+      path.join(appPath, 'eslint.config.js'),
+      `import infernoApp from 'eslint-config-inferno-app';${os.EOL}${os.EOL}` +
+        `export default [...infernoApp];${os.EOL}`,
+    );
+  }
   console.log();
 
   if (fs.existsSync(paths.appTypeDeclarations)) {

@@ -51,7 +51,7 @@ export function reportBuildError(error: string) {
 
 export function reportRuntimeError(
   error: Error,
-  options: RuntimeReportingOptions = {}
+  options: RuntimeReportingOptions = {},
 ) {
   currentRuntimeErrorOptions = options;
   crashWithFrames(handleRuntimeError(options))(error);
@@ -70,13 +70,13 @@ export function startReportingRuntimeErrors(options: RuntimeReportingOptions) {
     console.warn(
       'Warning: `startReportingRuntimeErrors` doesn’t accept ' +
         '`launchEditorEndpoint` argument anymore. Use `listenToOpenInEditor` ' +
-        'instead with your own implementation to open errors in editor '
+        'instead with your own implementation to open errors in editor ',
     );
   }
   currentRuntimeErrorOptions = options;
   stopListeningToRuntimeErrors = listenToRuntimeErrors(
     handleRuntimeError(options),
-    options.filename
+    options.filename,
   );
 }
 
@@ -89,7 +89,7 @@ const handleRuntimeError =
     } finally {
       if (
         currentRuntimeErrorRecords.some(
-          ({ error }) => error === errorRecord.error
+          ({ error }) => error === errorRecord.error,
         )
       ) {
         // Deduplicate identical errors.
@@ -188,6 +188,6 @@ window.__INFERNO_ERROR_OVERLAY_GLOBAL_HOOK__.iframeReady =
 if (process.env.NODE_ENV === 'production') {
   console.warn(
     'inferno-error-overlay is not meant for use in production. You should ' +
-      'ensure it is not included in your build to reduce bundle size.'
+      'ensure it is not included in your build to reduce bundle size.',
   );
 }

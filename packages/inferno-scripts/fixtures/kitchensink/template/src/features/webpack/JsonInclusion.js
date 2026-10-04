@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import abstractJson from './assets/abstract.json' assert { type: 'json' };
+import abstractJson from './assets/abstract.json' with { type: 'json' };
 
 const { abstract } = abstractJson;
 

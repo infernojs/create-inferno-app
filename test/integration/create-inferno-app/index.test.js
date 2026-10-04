@@ -20,6 +20,7 @@ const genPath = join(__dirname, projectName);
 const generatedFiles = [
   '.gitignore',
   'README.md',
+  'eslint.config.js',
   'node_modules',
   'package.json',
   'public',

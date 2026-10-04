@@ -15,28 +15,37 @@ If you want to use this ESLint configuration in a project not built with Create 
 First, install this package and ESLint.
 
 ```sh
-npm install --save-dev eslint-config-inferno-app eslint@^8.0.0
+npm install --save-dev eslint-config-inferno-app eslint@^10.0.0
 ```
 
-Then create a file named `.eslintrc.json` with following contents in the root folder of your project:
+Then create a file named `eslint.config.js` with following contents in the root folder of your project:
 
-```json
-{
-  "extends": "inferno-app"
-}
+```js
+import infernoApp from 'eslint-config-inferno-app';
+
+export default [...infernoApp];
 ```
 
-That's it! You can override the settings from `eslint-config-inferno-app` by editing the `.eslintrc.json` file. Learn more about [configuring ESLint](https://eslint.org/docs/user-guide/configuring) on the ESLint website.
+That's it! You can override the settings from `eslint-config-inferno-app` by adding more configuration objects to the array in `eslint.config.js`. Learn more about [configuring ESLint](https://eslint.org/docs/latest/use/configure/) on the ESLint website.
+
+If you only want the parser setup that Create Inferno App needs, without any rules, use `eslint-config-inferno-app/base` instead.
 
 ## Jest rules
 
 This config also ships with optional Jest rules for ESLint (based on [`eslint-plugin-jest`](https://github.com/jest-community/eslint-plugin-jest)).
 
-You can enable these rules by adding the Jest config to the `extends` array in your ESLint config.
+You can enable these rules by adding the Jest config to your ESLint config:
+
+```js
+import infernoApp from 'eslint-config-inferno-app';
+import infernoAppJest from 'eslint-config-inferno-app/jest';
+
+export default [...infernoApp, ...infernoAppJest];
+```
 
 ## Accessibility Checks
 
-The following rules from the [eslint-plugin-jsx-a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y) plugin are activated:
+The following rules from the [eslint-plugin-jsx-a11y-x](https://github.com/es-tooling/eslint-plugin-jsx-a11y-x) plugin (a maintained fork of [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y), registered under the `jsx-a11y` name) are activated. The same is done for [eslint-plugin-import-x](https://github.com/un-ts/eslint-plugin-import-x), registered as `import`. Their settings use the new names, for example `import-x/resolver` and `jsx-a11y-x`.
 
 - [alt-text](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/alt-text.md)
 - [anchor-has-content](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-has-content.md)
@@ -56,17 +65,18 @@ The following rules from the [eslint-plugin-jsx-a11y](https://github.com/evcohen
 - [role-supports-aria-props](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/role-supports-aria-props.md)
 - [scope](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/scope.md)
 
-If you want to enable even more accessibility rules, you can create an `.eslintrc.json` file in the root of your project with this content:
+If you want to enable even more accessibility rules, you can add the recommended rules of the plugin to the `eslint.config.js` file in the root of your project:
 
-```json
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:inferno/recommended",
-    "plugin:jsx-a11y/recommended"
-  ],
-  "plugins": ["jsx-a11y"]
-}
+```js
+import jsxA11y from 'eslint-plugin-jsx-a11y-x';
+import infernoApp from 'eslint-config-inferno-app';
+
+// The plugin is registered as `jsx-a11y` by eslint-config-inferno-app
+const recommended = Object.entries(jsxA11y.configs.recommended.rules).map(
+  ([rule, setting]) => [rule.replace('jsx-a11y-x/', 'jsx-a11y/'), setting],
+);
+
+export default [...infernoApp, { rules: Object.fromEntries(recommended) }];
 ```
 
 However, if you are using [Create Inferno App](https://github.com/infernojs/create-inferno-app) and have not ejected, any additional rules will only be displayed in the [IDE integrations](https://facebook.github.io/create-react-app/docs/setting-up-your-editor#displaying-lint-output-in-the-editor), but not in the browser or the terminal.

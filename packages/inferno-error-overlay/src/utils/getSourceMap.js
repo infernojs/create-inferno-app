@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import { SourceMapConsumer } from 'source-map';
+import { SourceMapConsumer } from 'source-map-js';
 
 /**
  * A wrapped instance of a <code>{@link https://github.com/mozilla/source-map SourceMapConsumer}</code>.

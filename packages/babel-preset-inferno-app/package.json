@@ -22,18 +22,22 @@
     "test.js"
   ],
   "dependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/plugin-proposal-decorators": "^7.23.9",
-    "@babel/plugin-transform-class-properties": "^7.23.3",
-    "@babel/plugin-transform-flow-strip-types": "^7.23.3",
-    "@babel/plugin-transform-nullish-coalescing-operator": "^7.23.4",
-    "@babel/plugin-transform-numeric-separator": "^7.23.4",
-    "@babel/plugin-transform-optional-chaining": "^7.23.4",
-    "@babel/plugin-transform-private-methods": "^7.23.3",
-    "@babel/plugin-transform-private-property-in-object": "^7.23.4",
-    "@babel/preset-env": "^7.23.9",
-    "@babel/preset-typescript": "^7.23.3",
-    "babel-plugin-inferno": "^6.7.1",
-    "babel-plugin-macros": "^3.1.0"
+    "@babel/core": "^8.0.6",
+    "@babel/plugin-proposal-decorators": "^8.0.2",
+    "@babel/plugin-transform-class-properties": "^8.0.1",
+    "@babel/plugin-transform-flow-strip-types": "^8.0.1",
+    "@babel/plugin-transform-nullish-coalescing-operator": "^8.0.1",
+    "@babel/plugin-transform-numeric-separator": "^8.0.1",
+    "@babel/plugin-transform-optional-chaining": "^8.0.5",
+    "@babel/plugin-transform-private-methods": "^8.0.1",
+    "@babel/plugin-transform-private-property-in-object": "^8.0.5",
+    "@babel/preset-env": "^8.0.6",
+    "@babel/preset-typescript": "^8.0.1",
+    "babel-plugin-inferno": "^10.0.0",
+    "babel-plugin-macros": "^3.1.0",
+    "babel-plugin-polyfill-corejs3": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=24.15"
   }
 }

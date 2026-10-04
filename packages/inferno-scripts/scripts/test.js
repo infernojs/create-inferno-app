@@ -12,7 +12,7 @@
 // Ensure environment variables are read.
 import './utils/process-env-test.js';
 import '../config/env.js';
-import jest from 'jest';
+import * as jest from 'jest';
 import { execSync } from 'child_process';
 
 // @remove-on-eject-begin

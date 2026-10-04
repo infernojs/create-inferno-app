@@ -5,37 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import jestPlugin from 'eslint-plugin-jest';
+import testingLibraryPlugin from 'eslint-plugin-testing-library';
+import globals from 'globals';
 
-// Fix eslint shareable config (https://github.com/eslint/eslint/issues/3458)
-require('@rushstack/eslint-patch/modern-module-resolution');
-
-// We use eslint-loader so even warnings are very visible.
+// We use eslint-webpack-plugin so even warnings are very visible.
 // This is why we prefer to use "WARNING" level for potential errors,
 // and we try not to use "ERROR" level at all.
 
-module.exports = {
-  plugins: ['jest', 'testing-library'],
-  overrides: [
-    {
-      files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
-      env: {
-        'jest/globals': true,
-      },
-      // A subset of the recommended rules:
-      rules: {
-        // https://github.com/jest-community/eslint-plugin-jest
-        'jest/no-conditional-expect': 'error',
-        'jest/no-identical-title': 'error',
-        'jest/no-interpolation-in-snapshots': 'error',
-        'jest/no-jasmine-globals': 'error',
-        'jest/no-jest-import': 'error',
-        'jest/no-mocks-import': 'error',
-        'jest/valid-describe-callback': 'error',
-        'jest/valid-expect': 'error',
-        'jest/valid-expect-in-promise': 'error',
-        'jest/valid-title': 'warn',
-      },
+export default [
+  {
+    files: [
+      '**/__tests__/**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}',
+      '**/*.{spec,test}.{js,mjs,cjs,jsx,ts,tsx,mts,cts}',
+    ],
+    plugins: {
+      jest: jestPlugin,
+      'testing-library': testingLibraryPlugin,
     },
-  ],
-};
+    languageOptions: {
+      globals: globals.jest,
+    },
+    // A subset of the recommended rules:
+    rules: {
+      // https://github.com/jest-community/eslint-plugin-jest
+      'jest/no-conditional-expect': 'error',
+      'jest/no-identical-title': 'error',
+      'jest/no-interpolation-in-snapshots': 'error',
+      'jest/no-jasmine-globals': 'error',
+      'jest/no-mocks-import': 'error',
+      'jest/valid-describe-callback': 'error',
+      'jest/valid-expect': 'error',
+      'jest/valid-expect-in-promise': 'error',
+      'jest/valid-title': 'warn',
+    },
+  },
+];

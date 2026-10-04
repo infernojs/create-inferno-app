@@ -8,12 +8,16 @@
 // @remove-on-eject-end
 
 import fs from 'fs';
+import { createRequire } from 'module';
+import express from 'express';
 import evalSourceMapMiddleware from 'inferno-dev-utils/evalSourceMapMiddleware';
 import noopServiceWorkerMiddleware from 'inferno-dev-utils/noopServiceWorkerMiddleware';
 import ignoredFiles from 'inferno-dev-utils/ignoredFiles';
 import redirectServedPath from 'inferno-dev-utils/redirectServedPathMiddleware';
 import { paths } from './paths.js';
 import getHttpsConfig from './getHttpsConfig.js';
+
+const require = createRequire(import.meta.url);
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
@@ -42,7 +46,12 @@ export default function (proxy, allowedHost) {
     // really know what you're doing with a special environment variable.
     // Note: ["localhost", ".localhost"] will support subdomains - but we might
     // want to allow setting the allowedHosts manually for more complex setups
-    allowedHosts: disableFirewall ? 'all' : [allowedHost],
+    // Without a LAN address, 'auto' still allows `localhost` and the `host` option
+    allowedHosts: disableFirewall
+      ? 'all'
+      : allowedHost
+        ? [allowedHost]
+        : 'auto',
     headers: {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': '*',
@@ -98,7 +107,7 @@ export default function (proxy, allowedHost) {
       publicPath: paths.publicUrlOrPath.slice(0, -1),
     },
 
-    https: getHttpsConfig(),
+    server: getServerConfig(),
     host,
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
@@ -106,29 +115,59 @@ export default function (proxy, allowedHost) {
       disableDotRule: true,
       index: paths.publicUrlOrPath,
     },
-    // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
+    // `proxy` is run between the middlewares added before and after the
+    // `webpack-dev-server` ones in `setupMiddlewares`
     proxy,
-    onBeforeSetupMiddleware(devServer) {
+    setupMiddlewares(middlewares, devServer) {
       // Keep `evalSourceMapMiddleware`
       // middlewares before `redirectServedPath` otherwise will not have any effect
       // This lets us fetch source contents from webpack for the error overlay
-      devServer.app.use(evalSourceMapMiddleware(devServer));
+      const beforeMiddlewares = [
+        {
+          name: 'eval-source-map',
+          middleware: evalSourceMapMiddleware(devServer),
+        },
+      ];
 
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons
-        require(paths.proxySetup)(devServer.app);
+        const proxySetup = require(paths.proxySetup);
+        const proxyApp = express();
+        (proxySetup.default || proxySetup)(proxyApp);
+        beforeMiddlewares.push({ name: 'setup-proxy', middleware: proxyApp });
       }
-    },
-    onAfterSetupMiddleware(devServer) {
-      // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
-      devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
 
-      // This service worker file is effectively a 'no-op' that will reset any
-      // previous service worker registered for the same host:port combination.
-      // We do this in development to avoid hitting the production cache if
-      // it used the same host and port.
-      // https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
-      devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+      // Run them before the `webpack-dev-server` middlewares, but after its
+      // host and origin header checks
+      const lastSecurityCheck = middlewares.findLastIndex(
+        ({ name }) =>
+          name === 'host-header-check' || name === 'cross-origin-header-check',
+      );
+      middlewares.splice(lastSecurityCheck + 1, 0, ...beforeMiddlewares);
+
+      middlewares.push(
+        // Redirect to `PUBLIC_URL` or `homepage` from `package.json` if url not match
+        redirectServedPath(paths.publicUrlOrPath),
+        // This service worker file is effectively a 'no-op' that will reset any
+        // previous service worker registered for the same host:port combination.
+        // We do this in development to avoid hitting the production cache if
+        // it used the same host and port.
+        // https://github.com/facebook/create-react-app/issues/2272#issuecomment-302832432
+        noopServiceWorkerMiddleware(paths.publicUrlOrPath),
+      );
+
+      return middlewares;
     },
   };
+}
+
+function getServerConfig() {
+  const https = getHttpsConfig();
+  if (!https) {
+    return 'http';
+  }
+  // Use the provided certificate, or let webpack-dev-server generate one
+  return typeof https === 'object'
+    ? { type: 'https', options: https }
+    : 'https';
 }

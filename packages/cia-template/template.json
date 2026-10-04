@@ -1,10 +1,9 @@
 {
   "package": {
     "dependencies": {
-      "web-vitals": "^3.5.0"
-    },
-    "eslintConfig": {
-      "extends": ["eslint:recommended", "plugin:inferno/recommended"]
+      "@eslint/js": "^10.0.1",
+      "eslint-plugin-inferno": "^7.42.0",
+      "web-vitals": "^6.2.2"
     }
   }
 }

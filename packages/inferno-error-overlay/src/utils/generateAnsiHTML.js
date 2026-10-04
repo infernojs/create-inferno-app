@@ -79,7 +79,6 @@ function generateAnsiHTML(txt: string, theme: Theme): string {
   }
   if (open) {
     result += '</span>';
-    open = false;
   }
   return result;
 }

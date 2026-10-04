@@ -9,7 +9,7 @@ import browserslist from 'browserslist';
 import chalk from 'chalk';
 import os from 'os';
 import prompts from 'prompts';
-import { pkgUp } from 'pkg-up';
+import { packageUp } from 'package-up';
 import fs from 'fs';
 
 export const defaultBrowsers = {
@@ -66,7 +66,7 @@ export function checkBrowsers(dir, isInteractive, retry = true) {
     }
 
     return (
-      pkgUp({ cwd: dir })
+      packageUp({ cwd: dir })
         .then(filePath => {
           if (filePath == null) {
             return Promise.reject();
