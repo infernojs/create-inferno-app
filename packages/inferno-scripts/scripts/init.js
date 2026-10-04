@@ -28,6 +28,7 @@ import verifyTypeScriptSetup from './utils/verifyTypeScriptSetup.js';
 import { readJsonFile } from 'inferno-dev-utils/readJsonFile';
 import { fileURLToPath } from 'url';
 import { eslintConfigFiles } from '../config/paths.js';
+import ownPackageJson from '../package.json' with { type: 'json' };
 
 process.on('unhandledRejection', err => {
   throw err;
@@ -222,6 +223,17 @@ export default async function (
   templatePackageToReplace.forEach(key => {
     appPackage[key] = templatePackage[key];
   });
+
+  // Jest's babel-preset-current-node-syntax depends on Babel 7 syntax plugins
+  // whose @babel/core peer conflicts with our Babel 8, making npm print
+  // ERESOLVE warnings on every install. The preset doesn't load those plugins
+  // under Babel 8, so point their peer at our @babel/core.
+  appPackage.overrides = {
+    'babel-preset-current-node-syntax': {
+      '@babel/core': ownPackageJson.dependencies['@babel/core'],
+    },
+    ...appPackage.overrides,
+  };
 
   writeFileSync(
     path.join(appPath, 'package.json'),
