@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import StackFrame from './stack-frame.js';
+import { StackFrame } from './stack-frame.js';
 
 const regexExtractLocation = /\(?(.+?)(?::(\d+))?(?::(\d+))?\)?$/;
 

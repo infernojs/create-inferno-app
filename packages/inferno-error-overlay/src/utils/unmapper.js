@@ -6,7 +6,7 @@
  */
 
 /* @flow */
-import StackFrame from './stack-frame.js';
+import { StackFrame } from './stack-frame.js';
 import { getSourceMap } from './getSourceMap.js';
 import { getLinesAround } from './getLinesAround.js';
 import path from 'path';

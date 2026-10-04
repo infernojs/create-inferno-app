@@ -23,7 +23,7 @@ import {
   unregisterInfernoStack,
 } from './effects/proxyConsole.js';
 import { massage as massageWarning } from './utils/warnings.js';
-import getStackFrames from './utils/getStackFrames.js';
+import { getStackFrames } from './utils/getStackFrames.js';
 
 import type { StackFrame } from './utils/stack-frame.js';
 

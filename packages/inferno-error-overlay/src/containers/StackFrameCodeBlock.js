@@ -76,7 +76,6 @@ function StackFrameCodeBlock(
   absolutifyCaret(code);
 
   const ccn = code.childNodes;
-  // eslint-disable-next-line
   oLoop: for (let index = 0; index < ccn.length; ++index) {
     const node = ccn[index];
     const ccn2 = node.childNodes;
@@ -89,7 +88,6 @@ function StackFrameCodeBlock(
       if (text.indexOf(' ' + lineNum + ' |') === -1) {
         continue;
       }
-      // eslint-disable-next-line
       break oLoop;
     }
   }
