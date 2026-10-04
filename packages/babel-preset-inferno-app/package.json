@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-inferno-app",
   "type": "commonjs",
-  "version": "10.0.8",
+  "version": "11.0.0",
   "description": "Babel preset used by Create Inferno App",
   "repository": {
     "type": "git",
